@@ -4,19 +4,18 @@
  */
 package Domain;
 
-/**
- *
- * @author angie
- */
-public class Targeta extends MetodoPago {
+import jakarta.xml.bind.annotation.*;
+
+@XmlRootElement
+public class Tarjeta extends MetodoPago {
     private String tipo;
 
-    public Targeta(String tipo, double monto) {
+    public Tarjeta(String tipo, double monto) {
         super(monto);
         this.metodo = "Targeta";
         this.tipo = tipo;
     }
-
+    @XmlElement
     public String getTipo() {
         return tipo;
     }

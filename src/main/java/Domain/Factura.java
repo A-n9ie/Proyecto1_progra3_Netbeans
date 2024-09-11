@@ -4,17 +4,13 @@
  */
 package Domain;
 
-//import java.util.ArrayList;
-
 import java.util.ArrayList;
 import java.util.List;
 
-//import java.util.List;
+import jakarta.xml.bind.annotation.*;
 
-/**
- *
- * @author angie
- */
+
+@XmlRootElement
 public class Factura {
     static int contFacturas = 0; 
     private String numFactura;
@@ -22,7 +18,7 @@ public class Factura {
     private String fecha;
     private Cliente cliente;
     private Cajero cajero;
-    private Venta venta;
+    private List<DetalleVenta> detalles;
     private List<MetodoPago> pagos;
 
     public Factura() {
@@ -31,29 +27,29 @@ public class Factura {
         this.fecha = "indefinids";
         this.cliente = null;
         this.cajero = null;
-        this.venta = null;
+        this.detalles = null;
         this.pagos = null;
     }
 
-    public Factura(Cliente cliente, Cajero cajero, Venta venta, List<MetodoPago> pago) {
+    public Factura(Cliente cliente, Cajero cajero, List<DetalleVenta> detalles, List<MetodoPago> pago) {
         contFacturas++;
         this.numFactura = String.valueOf(contFacturas);
         this.hora = Fecha_Hora.horaActual();
         this.fecha = Fecha_Hora.fechaActual();
         this.cliente = cliente;
         this.cajero = cajero;
-        this.venta = venta;
-        this.pagos = pago;
+        this.detalles = detalles;
+        this.pagos = pago != null ? pago : new ArrayList<>();
     }
     
-    public Factura(Cliente cliente, Cajero cajero, Venta venta) {
+    public Factura(Cliente cliente, Cajero cajero, List<DetalleVenta> detalles) {
         contFacturas++;
         this.numFactura = String.valueOf(contFacturas);
         this.hora = Fecha_Hora.horaActual();
         this.fecha = Fecha_Hora.fechaActual();
         this.cliente = cliente;
         this.cajero = cajero;
-        this.venta = venta;
+        this.detalles = detalles;
         this.pagos = new ArrayList<>();
     }
 
@@ -64,7 +60,7 @@ public class Factura {
     public static void setContFacturas(int contFacturas) {
         Factura.contFacturas = contFacturas;
     }
-
+@XmlAttribute
     public String getNumFactura() {
         return numFactura;
     }
@@ -72,15 +68,15 @@ public class Factura {
     public void setNumFactura(String numFactura) {
         this.numFactura = numFactura;
     }
-
+@XmlElement
     public String getHora() {
         return hora;
     }
-
+    
     public void setHora(String hora) {
         this.hora = hora;
     }
-
+@XmlElement
     public String getFecha() {
         return fecha;
     }
@@ -88,7 +84,7 @@ public class Factura {
     public void setFecha(String fecha) {
         this.fecha = fecha;
     }
-
+@XmlElement(name = "cliente")
     public Cliente getCliente() {
         return cliente;
     }
@@ -96,7 +92,7 @@ public class Factura {
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
-
+@XmlElement(name = "cajero")
     public Cajero getCajero() {
         return cajero;
     }
@@ -104,15 +100,18 @@ public class Factura {
     public void setCajero(Cajero cajero) {
         this.cajero = cajero;
     }
-
-    public Venta getVenta() {
-        return venta;
+@XmlElementWrapper(name = "detalles")
+    @XmlElement(name = "venta")
+    public List<DetalleVenta> getDetalles() {
+        return detalles;
     }
 
-    public void setVenta(Venta venta) {
-        this.venta = venta;
+    public void setDetalles(List<DetalleVenta> detalles) {
+        this.detalles = detalles;
     }
-
+    
+@XmlElementWrapper(name = "pagos")
+    @XmlElement(name = "metodo")
     public List<MetodoPago> getPagos() {
         return pagos;
     }
@@ -121,14 +120,28 @@ public class Factura {
         this.pagos = pagos;
     }
     
-    public double total(){
-        double descuentoCliente = venta.getCompra().subtotal() * cliente.getDescuento();
-        double total = venta.getCompra().subtotal() - descuentoCliente;
+    public double subtotal(){
+        double sub = 0;
+        for(DetalleVenta venta: detalles)
+            sub += venta.importe();
+        return sub;
+    }
+    
+    public double montoTotal(){
+        double descuentoCliente = subtotal() * cliente.getDescuento();
+        double total = subtotal() - descuentoCliente;
         return total;
     }
     
+    public int cantidadTotal(){
+        int cant = 0;
+        for(DetalleVenta venta: detalles)
+            cant += venta.getCantidad();
+        return cant;
+    }
+    
     public boolean pagado(){
-        double totalpagado = total();
+        double totalpagado = montoTotal();
         for(MetodoPago cont: pagos){
             totalpagado -= cont.getMonto();
         }
@@ -141,7 +154,7 @@ public class Factura {
     }
     
     public String[] getDatos(){
-        String tt = String.valueOf(total());
+        String tt = String.valueOf(montoTotal());
         String[] data = {numFactura, hora, fecha};
         return data;
     }
@@ -154,9 +167,11 @@ public class Factura {
                 "\nHora: " + hora + " \t\tFecha: " + fecha + 
                 "\nCliente:" + cliente.getCedula() + 
                 "\nCajero: " + cajero.getNombre() + 
-                "\n" + venta +
+                "\n" + detalles.toString() +
+                "\n" + cantidadTotal() +
+                "\n" + subtotal() +
                 "\nDescuento del cliente: " + cliente.getDescuento() +
-                "\nTotal: " + total() + "\n" +
+                "\nTotal: " + montoTotal() + "\n" +
                  /*pagos.toString() +*/ "\n";
     }
     

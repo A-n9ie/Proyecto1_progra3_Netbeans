@@ -1,5 +1,9 @@
 package Domain;
 
+import jakarta.xml.bind.annotation.*;
+
+
+@XmlRootElement
 public class Cajero extends Persona{
 
     public Cajero() {

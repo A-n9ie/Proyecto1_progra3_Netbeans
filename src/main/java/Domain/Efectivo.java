@@ -4,10 +4,10 @@
  */
 package Domain;
 
-/**
- *
- * @author angie
- */
+import jakarta.xml.bind.annotation.*;
+
+
+@XmlRootElement
 public class Efectivo extends MetodoPago {
     private double pago;
     private double cambio;
@@ -18,7 +18,7 @@ public class Efectivo extends MetodoPago {
         this.pago = pago;
         this.cambio = pago - monto;
     }
-
+@XmlElement
     public double getPago() {
         return pago;
     }
@@ -26,7 +26,7 @@ public class Efectivo extends MetodoPago {
     public void setPago(double pago) {
         this.pago = pago;
     }
-
+@XmlElement
     public double getCambio() {
         return cambio;
     }

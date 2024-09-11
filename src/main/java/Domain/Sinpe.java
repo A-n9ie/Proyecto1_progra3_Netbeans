@@ -4,10 +4,11 @@
  */
 package Domain;
 
-/**
- *
- * @author angie
- */
+
+import jakarta.xml.bind.annotation.*;
+
+
+@XmlRootElement
 public class Sinpe extends MetodoPago {
     private String telefono;
 
@@ -16,7 +17,7 @@ public class Sinpe extends MetodoPago {
         this.metodo = "Sinpe";
         this.telefono = telefono;
     }
-
+@XmlElement
     public String getTelefono() {
         return telefono;
     }

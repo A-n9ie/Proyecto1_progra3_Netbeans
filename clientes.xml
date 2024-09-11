@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<listaclientes>
+    <cliente cedula="11111">
+        <nombre>Marta</nombre>
+        <correo>allys34@gmail.com</correo>
+        <descuento>0.15</descuento>
+        <telefono>222222222</telefono>
+    </cliente>
+    <cliente cedula="22222">
+        <nombre>Roger</nombre>
+        <correo>rogelo934@gmail.com</correo>
+        <descuento>0.15</descuento>
+        <telefono>44488884</telefono>
+    </cliente>
+</listaclientes>

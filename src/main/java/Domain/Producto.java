@@ -1,5 +1,9 @@
 package Domain;
 
+import jakarta.xml.bind.annotation.*;
+
+
+@XmlRootElement
 public class Producto {
     private String codigo;
     private String descripcion;
@@ -28,7 +32,7 @@ public class Producto {
         this.existencia = existencia;
         this.categoria = categoria;
     }
-
+@XmlAttribute
     public String getCodigo() {
         return codigo;
     }
@@ -36,7 +40,7 @@ public class Producto {
     public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
-
+@XmlElement
     public String getDescripcion() {
         return descripcion;
     }
@@ -44,7 +48,7 @@ public class Producto {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-
+@XmlElement
     public String getUnidad_m() {
         return unidad_m;
     }
@@ -52,7 +56,7 @@ public class Producto {
     public void setUnidad_m(String unidad_m) {
         this.unidad_m = unidad_m;
     }
-
+@XmlElement
     public double getPrecio() {
         return precio;
     }
@@ -60,7 +64,7 @@ public class Producto {
     public void setPrecio(double precio) {
         this.precio = precio;
     }
-
+@XmlElement
     public int getExistencia() {
         return existencia;
     }
@@ -68,7 +72,7 @@ public class Producto {
     public void setExistencia(int existencia) {
         this.existencia = existencia;
     }
-
+@XmlElement
     public String getCategoria() {
         return categoria;
     }
@@ -76,7 +80,7 @@ public class Producto {
     public void setCategoria(String categoria) {
         this.categoria = categoria;
     }
-
+@XmlElement
     public float getDescuento() {
         return descuento;
     }

@@ -5,10 +5,10 @@
 package Domain;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-/**
- *
- * @author angie
- */
+
+import jakarta.xml.bind.annotation.*;
+
+@XmlRootElement
 public class Venta {
     private String codigoVenta;
     private int contProducto;
@@ -26,7 +26,7 @@ public class Venta {
         this.compra = new Carrito();
         this.fecha = LocalDate.now();
     }
-
+@XmlElement(name = "compra")
     public Compra getCompra() {
         return compra;
     }
@@ -34,7 +34,7 @@ public class Venta {
     public void setCompra(Compra compra) {
         this.compra = compra;
     }
-
+    @XmlAttribute
     public String getCodigoVenta() {
         return codigoVenta;
     }
@@ -42,7 +42,7 @@ public class Venta {
     public void setCodigoVenta(String codigoVenta) {
         this.codigoVenta = codigoVenta;
     }
-
+@XmlElement
     public int getContProducto() {
         return contProducto;
     }
@@ -93,7 +93,7 @@ public class Venta {
         return  compra.toString() + "Subtotal: " 
                 + compra.subtotal() + "\nCantidad total: " + compra.canTotal();
     }
-    
+    @XmlElement
     public LocalDate getFecha() {
         return fecha;
     }
@@ -101,12 +101,12 @@ public class Venta {
     public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
     }
-    
+    @XmlElement
     public String getMes() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM");
         return fecha.format(formatter);
     }
-    
+    @XmlElement
     public String getCategoria(){
         return compra.getProducto().getCategoria();
     }

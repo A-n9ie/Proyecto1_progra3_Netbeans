@@ -4,17 +4,21 @@
  */
 package Domain;
 
-/**
- *
- * @author angie
- */
-public interface Compra {
-    double subtotal();
-    double iva();
-    int canTotal();
-    Producto getProducto();
-    Compra getArticulo();
-    void setArticulo(Compra ss);
+import jakarta.xml.bind.annotation.*;
+
+
+@XmlRootElement
+public abstract class Compra {
+
+    public Compra() {
+    }
+    
+    public abstract double subtotal();
+    public abstract double iva();
+    public abstract int canTotal();
+    public abstract Producto getProducto();
+    public abstract Compra getArticulo();
+    public abstract void setArticulo(Compra ss);
     @Override
-    String toString();
+    public abstract String toString();
 }

@@ -1,5 +1,8 @@
 package Domain;
 
+import jakarta.xml.bind.annotation.*;
+
+@XmlRootElement
 public class Cliente extends Persona {
     private String correo;
     private String telefono;
@@ -18,7 +21,7 @@ public class Cliente extends Persona {
         this.telefono = telefono;
         this.descuento = descuento;
     }
-
+@XmlElement
     public String getCorreo() {
         return correo;
     }
@@ -26,7 +29,7 @@ public class Cliente extends Persona {
     public void setCorreo(String correo) {
         this.correo = correo;
     }
-
+@XmlElement
     public String getTelefono() {
         return telefono;
     }
@@ -34,7 +37,7 @@ public class Cliente extends Persona {
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
-
+@XmlElement
     public double getDescuento() {
         return descuento;
     }

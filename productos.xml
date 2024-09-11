@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<listaproductos>
+    <producto codigo="3332">
+        <categoria>Conserva</categoria>
+        <descripcion>Miel</descripcion>
+        <descuento>0.0</descuento>
+        <existencia>24</existencia>
+        <precio>1100.45</precio>
+        <unidad_m>gramos</unidad_m>
+    </producto>
+    <producto codigo="1112">
+        <categoria>Embutidos</categoria>
+        <descripcion>Salchicha</descripcion>
+        <descuento>0.15</descuento>
+        <existencia>28</existencia>
+        <precio>1222.36</precio>
+        <unidad_m>gramos</unidad_m>
+    </producto>
+    <producto codigo="777">
+        <categoria>Conserva</categoria>
+        <descripcion>Pan</descripcion>
+        <descuento>0.0</descuento>
+        <existencia>28</existencia>
+        <precio>1100.45</precio>
+        <unidad_m>gramos</unidad_m>
+    </producto>
+</listaproductos>

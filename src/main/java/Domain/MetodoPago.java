@@ -4,18 +4,23 @@
  */
 package Domain;
 
-/**
- *
- * @author angie
- */
+import jakarta.xml.bind.annotation.*;
+
+
+@XmlRootElement
 public abstract class MetodoPago {
     protected String metodo;
     protected double monto;
 
+    public MetodoPago() {
+        this.metodo = "indefinido";
+        this.monto = 0.0;
+    }
+
     public MetodoPago(double monto) {
         this.monto = monto;
     }
-
+@XmlAttribute
     public String getMetodo() {
         return metodo;
     }
@@ -23,7 +28,7 @@ public abstract class MetodoPago {
     public void setMetodo(String metodo) {
         this.metodo = metodo;
     }
-
+@XmlElement
     public double getMonto() {
         return monto;
     }

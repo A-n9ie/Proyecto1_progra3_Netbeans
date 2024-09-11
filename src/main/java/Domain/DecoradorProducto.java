@@ -4,19 +4,23 @@
  */
 package Domain;
 
-/**
- *
- * @author angie
- */
+import jakarta.xml.bind.annotation.*;
+
+@XmlRootElement
 public class DecoradorProducto extends DecoradorAbstracto {
     
     private Producto producto; 
+
+    public DecoradorProducto() {
+        super();
+        this.producto = null;
+    }
 
     public DecoradorProducto(Producto producto, int cantidad, Compra article) {
         super(cantidad, article);
         this.producto = producto;
     }
-
+    @XmlElement(name = "articulo")
     @Override
     public Producto getProducto() {
         return producto;

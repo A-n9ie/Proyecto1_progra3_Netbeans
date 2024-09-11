@@ -50,7 +50,7 @@ public class LogicaFactura {
             filesXML.writeXML("facturas", "Factura", factura.getDatosFactura(), factura.getDatos());
             filesXML.writeXML("facturas", "Cliente", factura.getCliente().getDatosCliente(), factura.getCliente().getDatos());
             filesXML.writeXML("facturas", "Cajero", factura.getCajero().getDatosCajero(), factura.getCajero().getDatos());
-            filesXML.writeXML("facturas", "Venta", factura.getVenta().getDatosVenta(), factura.getVenta().getDatos());
+/*            filesXML.writeXML("facturas", "Venta", factura.getVenta().getDatosVenta(), factura.getVenta().getDatos());
             
             Compra aux = factura.getVenta().getCompra();
             for(int i = 0; i < factura.getVenta().getContProducto(); i++){
@@ -58,7 +58,7 @@ public class LogicaFactura {
             filesXML.writeXML("facturas", "DecoradorProducto", decorador.getDatosDecorador(), decorador.getDatos());
             filesXML.writeXML("facturas", "Producto", decorador.getProducto().getDatosProducto(), decorador.getProducto().getDatos());
             aux = aux.getArticulo();
-            }
+            }*/
         } catch (TransformerException e) {
             e.printStackTrace();
             return false;
@@ -106,7 +106,7 @@ public class LogicaFactura {
 
                     // Obtener y establecer Venta
                     Venta venta = obtenerVenta(document);
-                    factura.setVenta(venta);
+                    //factura.setVenta(venta);
 
                     // Agregar factura a la lista
                     listaFacturas.add(factura);
@@ -226,7 +226,7 @@ public class LogicaFactura {
                         factura.setFecha(fecha);
                         factura.setCliente(cliente);
                         factura.setCajero(cajero);
-                        factura.setVenta(venta);
+//                        factura.setVenta(venta);
                         
                         return factura;
                     }
@@ -263,7 +263,7 @@ public class LogicaFactura {
                     factura.setHora(element.getElementsByTagName("hora").item(0).getTextContent());
                     factura.setCliente(logCliente.buscarCliente(element.getElementsByTagName("cedula").item(0).getTextContent(), archivoXML));
                     factura.setCajero(logCajero.buscarCajeroPorCedula(element.getElementsByTagName("cedula").item(0).getTextContent(), archivoXML));
-                    factura.setVenta(logVenta.buscarVentaPorCodigo(element.getElementsByTagName("codigoVenta").item(0).getTextContent(), archivoXML));
+//                    factura.setVenta(logVenta.buscarVentaPorCodigo(element.getElementsByTagName("codigoVenta").item(0).getTextContent(), archivoXML));
                     
                     listaFacturas.add(factura);
                     

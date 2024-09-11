@@ -227,7 +227,7 @@ public static List<Cliente> cargarDatosClientes(String fileName) {
 					Cajero cajero = obtenerCajeroPorId(element.getElementsByTagName("cajeroId").item(0).getTextContent(), cajeros);
 					Venta venta = obtenerVentaPorCodigo(element.getElementsByTagName("codigoVenta").item(0).getTextContent(), ventas);
 
-					Factura factura = new Factura(cliente, cajero, venta);
+					Factura factura = new Factura();
 					facturas.add(factura);
 				}
 			}

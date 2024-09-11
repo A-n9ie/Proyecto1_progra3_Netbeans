@@ -1,5 +1,8 @@
 package Domain;
 
+import jakarta.xml.bind.annotation.*;
+
+@XmlRootElement
 public abstract class Persona {
     protected String cedula;
     protected String nombre;
@@ -13,7 +16,7 @@ public abstract class Persona {
         this.cedula = cedula;
         this.nombre = Nombre;
     }
-
+@XmlAttribute
     public String getCedula() {
         return cedula;
     }
@@ -21,7 +24,7 @@ public abstract class Persona {
     public void setCedula(String cedula) {
         this.cedula = cedula;
     }
-
+@XmlElement
     public String getNombre() {
         return nombre;
     }

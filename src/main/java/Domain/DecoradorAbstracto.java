@@ -4,19 +4,23 @@
  */
 package Domain;
 
-/**
- *
- * @author angie
- */
-public abstract class DecoradorAbstracto implements Compra{
+import jakarta.xml.bind.annotation.*;
+
+@XmlRootElement
+public abstract class DecoradorAbstracto extends Compra{
     protected int cantidad;
     protected Compra articulo;
+
+    public DecoradorAbstracto() {
+        this.cantidad = 0;
+        this.articulo = null;
+    }
 
     public DecoradorAbstracto(int cantidad, Compra article) {
         this.cantidad = cantidad;
         this.articulo = article;
     }
-
+@XmlElement
     public int getCantidad() {
         return cantidad;
     }
@@ -24,7 +28,7 @@ public abstract class DecoradorAbstracto implements Compra{
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }
-    
+     @XmlElement(name = "compra")
       @Override
     public Compra getArticulo() {
        return articulo;

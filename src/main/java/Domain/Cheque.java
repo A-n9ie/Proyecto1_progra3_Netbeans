@@ -4,15 +4,22 @@
  */
 package Domain;
 
-/**
- *
- * @author angie
- */
+import jakarta.xml.bind.annotation.*;
+
+@XmlRootElement
 public class Cheque extends MetodoPago {
     private String numCheque;
 
     public Cheque(String numCheque, double monto) {
         super(monto);
+        this.numCheque = numCheque;
+    }
+@XmlAttribute
+    public String getNumCheque() {
+        return numCheque;
+    }
+
+    public void setNumCheque(String numCheque) {
         this.numCheque = numCheque;
     }
 

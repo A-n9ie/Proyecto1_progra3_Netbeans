@@ -1,6 +1,10 @@
 
 package Domain;
 
+import jakarta.xml.bind.annotation.*;
+
+
+@XmlRootElement
 public class EstadisticasVenta {
     private String categoria;
     private int mes;

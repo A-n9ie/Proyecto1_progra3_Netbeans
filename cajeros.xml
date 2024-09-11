@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<listacajeros>
+    <cajero cedula="2222">
+        <nombre>Marco</nombre>
+    </cajero>
+    <cajero cedula="33333">
+        <nombre>Luisiana</nombre>
+    </cajero>
+</listacajeros>
