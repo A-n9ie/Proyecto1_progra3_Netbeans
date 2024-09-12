@@ -1,9 +1,6 @@
 package Principal;
 
-import Data.FilesXML;
-import Data.LogicaCliente;
-import Data.LogicaFactura;
-import Data.LogicaProducto;
+import Business.PDF;
 import Domain.Persona;
 import Domain.Cliente;
 import Domain.Cajero;
@@ -28,12 +25,12 @@ import jakarta.xml.bind.JAXBException;
 public class Main {
     public static void main(String[] args) throws ExcepcionExiste, ExcepcionDescuento, ExcepcionVacio, TransformerException, ExcepcionNoExiste, JAXBException {
     Producto producto1 = new Producto("1112","Salchicha","gramos",
-            1222.36,0.15f, 30,"Embutidos");
+            1222.36f,0.15f, 30,"Embutidos");
     Producto producto2 = new Producto("3332","Miel","gramos",
-            1100.45,0.0f, 28,"Conserva");
-    Cliente cliente1 = new Cliente("allys34@gmail.com","222222222", 0.15, "11111", "Marta");
+            1100.45f,0.0f, 28,"Conserva");
+    Cliente cliente1 = new Cliente("allys34@gmail.com","222222222", 0.15f, "11111", "Marta");
     Cajero cas = new Cajero("2222", "Marco");
-    Cliente cliente2 = new Cliente("rogelo934@gmail.com","44488884", 0.15, "22222", "Roger");
+    Cliente cliente2 = new Cliente("rogelo934@gmail.com","44488884", 0.35f, "22222", "Roger");
     Cajero cas2 = new Cajero("33333", "Luisiana");
     
     List<DetalleVenta> veneta1 = new ArrayList<>();
@@ -78,10 +75,13 @@ public class Main {
       System.out.println(listaCajeros);
       
       
+      PDF pdf = new PDF(listaFacturas.get(0));
+      pdf.generarPDF();
       
+      /*
     GUIFacturar gFacturar = new GUIFacturar();
     gFacturar.setVisible(true);
     gFacturar.setLocationRelativeTo(null);
-    
+    */
     }
 }

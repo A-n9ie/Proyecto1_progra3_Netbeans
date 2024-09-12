@@ -1,7 +1,8 @@
 package Business;
-
+/*
 import Data.ListaProductos;
 import Data.LogicProductoXML;
+import Data.MiniSuper;
 import Domain.Producto;
 import Presentation.GUIFacturar;
 import Presentation.VentanaBuscar;
@@ -11,6 +12,7 @@ import java.awt.event.ActionListener;
 
 public class ControllerFacturar {
     private GUIFacturar gFacturar;
+    private MiniSuper mercadito;
     private VentanaCobrar vCobrar;
     private VentanaBuscar vBuscar;
     private LogicProductoXML lProducto;
@@ -51,7 +53,7 @@ public void getControllerFacturar(){
                return;
            }
            
-           Producto descripcionEncontrada = lProducto.buscarProducto("productos.xml", descripcionBuscar);
+           Producto descripcionEncontrada = mercadito.buscarProducto_Descrip(descripcionBuscar);
          
            if(descripcionEncontrada != null){
                vBuscar.notify(descripcionEncontrada.toString());
@@ -80,7 +82,7 @@ public void getControllerFacturar(){
     });    
 }
 }
-    
+   */ 
     
     
     

@@ -5,21 +5,26 @@
 package Domain;
 
 import jakarta.xml.bind.annotation.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 
 @XmlRootElement
 public class DetalleVenta {
     private int cantidad;
     private Producto producto;
+    private LocalDate fecha;
 
     public DetalleVenta() {
         this.cantidad = 0;
         this.producto = null;
+        this.fecha = LocalDate.now();
     }
 
     public DetalleVenta(int cantidad, Producto producto) {
         this.cantidad = cantidad;
         this.producto = producto;
+        this.fecha = LocalDate.now();
     }
 @XmlElement
     public int getCantidad() {
@@ -38,12 +43,31 @@ public class DetalleVenta {
         this.producto = producto;
     }
     
-    public double importe(){
+     @XmlElement
+    public LocalDate getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(LocalDate fecha) {
+        this.fecha = fecha;
+    }
+    @XmlElement
+    public String getMes() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM");
+        return fecha.format(formatter);
+    }
+    
+    @XmlElement
+    public String getCategoria(){
+        return producto.getCategoria();
+    }
+    
+    public float importe(){
         return precioNeto() * cantidad;
     }
     
-    public double precioNeto(){
-        double neto = producto.getPrecio() - (producto.getPrecio() * producto.getDescuento());
+    public float precioNeto(){
+        float neto = producto.getPrecio() - (producto.getPrecio() * producto.getDescuento());
         return neto;
     }
 

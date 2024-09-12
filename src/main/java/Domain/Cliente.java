@@ -6,16 +6,16 @@ import jakarta.xml.bind.annotation.*;
 public class Cliente extends Persona {
     private String correo;
     private String telefono;
-    private double descuento;
+    private float descuento;
 
     public Cliente() {
         super("indefinido","indefinido");
         correo = "indefinido";
         telefono = "indefinido";
-        descuento = 0.0;
+        descuento = 0.0f;
     }
 
-    public Cliente(String correo, String telefono, double descuento, String cedula, String name) {
+    public Cliente(String correo, String telefono, float descuento, String cedula, String name) {
         super(cedula, name);
         this.correo = correo;
         this.telefono = telefono;
@@ -38,11 +38,11 @@ public class Cliente extends Persona {
         this.telefono = telefono;
     }
 @XmlElement
-    public double getDescuento() {
+    public float getDescuento() {
         return descuento;
     }
 
-    public void setDescuento(double descuento) {
+    public void setDescuento(float descuento) {
         this.descuento = descuento;
     }
     

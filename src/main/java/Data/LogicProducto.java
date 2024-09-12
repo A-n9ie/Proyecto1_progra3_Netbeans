@@ -21,7 +21,7 @@ public class LogicProducto {
             JAXBContext jaxbContext = JAXBContext.newInstance(ListaProductos.class);
             Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
             ListaProductos listaProductos = (ListaProductos) unmarshaller.unmarshal(new File(archivoXML));
-            List<Producto> productos = listaProductos.getProductos();
+            List<Producto> productos = listaProductos.getListaProductos();
             
               for (Producto producto : productos) {
                 if (producto.getDescripcion().equalsIgnoreCase(descripcion)) {
@@ -41,7 +41,7 @@ public class LogicProducto {
             JAXBContext jaxbContext = JAXBContext.newInstance(ListaProductos.class);
             Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
             ListaProductos listaProductos = (ListaProductos) unmarshaller.unmarshal(new File(fileXML));
-            return listaProductos.getProductos();
+            return listaProductos.getListaProductos();
 
         } catch (JAXBException e) {
             e.printStackTrace();

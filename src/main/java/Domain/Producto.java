@@ -8,7 +8,7 @@ public class Producto {
     private String codigo;
     private String descripcion;
     private String unidad_m; //Unit of measurement
-    private double precio;
+    private float precio;
     private float descuento;
     private int existencia;
     private String categoria;
@@ -17,13 +17,13 @@ public class Producto {
         this.codigo = "indefinido";
         this.descripcion = "indefinida";
         this.unidad_m = "indefinida";
-        this.precio = 0.0;
+        this.precio = 0.0f;
         this.descuento = 0.0f;
         this.existencia = 0;
         this.categoria = "indefinida";
     }
 
-    public Producto(String codigo, String descripcion, String unidad_m, double precio, float descuento, int existencia, String categoria) {
+    public Producto(String codigo, String descripcion, String unidad_m, float precio, float descuento, int existencia, String categoria) {
         this.codigo = codigo;
         this.descripcion = descripcion;
         this.unidad_m = unidad_m;
@@ -57,11 +57,11 @@ public class Producto {
         this.unidad_m = unidad_m;
     }
 @XmlElement
-    public double getPrecio() {
+    public float getPrecio() {
         return precio;
     }
 
-    public void setPrecio(double precio) {
+    public void setPrecio(float precio) {
         this.precio = precio;
     }
 @XmlElement

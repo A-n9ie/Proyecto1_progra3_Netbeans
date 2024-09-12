@@ -7,12 +7,15 @@
         <cliente cedula="22222">
             <nombre>Roger</nombre>
             <correo>rogelo934@gmail.com</correo>
-            <descuento>0.15</descuento>
+            <descuento>0.35</descuento>
             <telefono>44488884</telefono>
         </cliente>
         <detalles>
             <venta>
                 <cantidad>4</cantidad>
+                <categoria>Embutidos</categoria>
+                <fecha/>
+                <mes>September</mes>
                 <producto codigo="1112">
                     <categoria>Embutidos</categoria>
                     <descripcion>Salchicha</descripcion>
@@ -24,6 +27,9 @@
             </venta>
             <venta>
                 <cantidad>2</cantidad>
+                <categoria>Conserva</categoria>
+                <fecha/>
+                <mes>September</mes>
                 <producto codigo="3332">
                     <categoria>Conserva</categoria>
                     <descripcion>Miel</descripcion>
@@ -34,8 +40,8 @@
                 </producto>
             </venta>
         </detalles>
-        <fecha>11/9/2024</fecha>
-        <hora>15:52:32</hora>
+        <fecha>12/9/2024</fecha>
+        <hora>17:39:47</hora>
         <pagos/>
     </factura>
 </listafacturas>

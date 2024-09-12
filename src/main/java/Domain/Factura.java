@@ -120,16 +120,16 @@ public class Factura {
         this.pagos = pagos;
     }
     
-    public double subtotal(){
-        double sub = 0;
+    public float subtotal(){
+        float sub = 0;
         for(DetalleVenta venta: detalles)
             sub += venta.importe();
         return sub;
     }
     
-    public double montoTotal(){
-        double descuentoCliente = subtotal() * cliente.getDescuento();
-        double total = subtotal() - descuentoCliente;
+    public float montoTotal(){
+        float descuentoCliente = subtotal() * cliente.getDescuento();
+        float total = subtotal() - descuentoCliente;
         return total;
     }
     
