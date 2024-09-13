@@ -1,12 +1,13 @@
 package Business;
-/*
+
 import Data.ListaProductos;
-import Data.LogicProductoXML;
+//import Data.LogicProductoXML;
 import Data.MiniSuper;
 import Domain.Producto;
 import Presentation.GUIFacturar;
 import Presentation.VentanaBuscar;
 import Presentation.VentanaCobrar;
+import jakarta.xml.bind.JAXBException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -15,13 +16,14 @@ public class ControllerFacturar {
     private MiniSuper mercadito;
     private VentanaCobrar vCobrar;
     private VentanaBuscar vBuscar;
-    private LogicProductoXML lProducto;
+    //private LogicProductoXML lProducto;
 
-public ControllerFacturar(){
+public ControllerFacturar() throws JAXBException{
      this.gFacturar = new GUIFacturar();
      this.vCobrar = new VentanaCobrar();
      this.vBuscar = new VentanaBuscar();
-     this.lProducto = new LogicProductoXML();
+     this.mercadito = new MiniSuper();
+    // this.lProducto = new LogicProductoXML();
 }
 
 public void getControllerFacturar(){
@@ -79,10 +81,18 @@ public void getControllerFacturar(){
         public void actionPerformed(ActionEvent e) {
            vCobrar.dispose();
         }
-    });    
+    }); 
+    
+    vCobrar.addOkBtn(new ActionListener(){
+        @Override
+        public void actionPerformed(ActionEvent e) {
+       
+        }
+        
+    });
 }
 }
-   */ 
+   
     
     
     

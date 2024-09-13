@@ -141,4 +141,18 @@ public class MiniSuper {
         }
         return null;
     }
+         public List<Producto> fillObjet(String fileXML){
+        List<Producto> productos = new ArrayList<>();
+         try {
+            JAXBContext jaxbContext = JAXBContext.newInstance(ListaProductos.class);
+            Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+            ListaProductos listaProductos = (ListaProductos) unmarshaller.unmarshal(new File(fileXML));
+            return listaProductos.getListaProductos();
+
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
 }

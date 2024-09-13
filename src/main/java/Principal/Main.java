@@ -1,5 +1,6 @@
 package Principal;
 
+import Business.ControllerFacturar;
 import Business.PDF;
 import Domain.Persona;
 import Domain.Cliente;
@@ -15,7 +16,7 @@ import Exepciones.ExcepcionVacio;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.transform.TransformerException;
-import Presentation.GUIFacturar;
+
 import Data.ArchivosXML;
 import Domain.DetalleVenta;
 import Domain.MetodoPago;
@@ -78,10 +79,7 @@ public class Main {
       PDF pdf = new PDF(listaFacturas.get(0));
       pdf.generarPDF();
       
-      /*
-    GUIFacturar gFacturar = new GUIFacturar();
-    gFacturar.setVisible(true);
-    gFacturar.setLocationRelativeTo(null);
-    */
+        ControllerFacturar controller = new ControllerFacturar();
+        controller.getControllerFacturar();
     }
 }
