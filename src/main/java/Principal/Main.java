@@ -1,6 +1,7 @@
 package Principal;
 
 import Business.ControllerFacturar;
+import Business.ControllerMain;
 import Business.PDF;
 import Domain.Persona;
 import Domain.Cliente;
@@ -22,6 +23,7 @@ import Data.MiniSuper;
 import Domain.DetalleVenta;
 import Domain.MetodoPago;
 import Domain.Tarjeta;
+import Presentation.GUIFacturar;
 import jakarta.xml.bind.JAXBException;
 
 public class Main {
@@ -30,36 +32,36 @@ public class Main {
             1222.36f,0.15f, 30,"Embutidos");
     Producto producto2 = new Producto("3332","Miel","gramos",
             1100.45f,0.0f, 28,"Conserva");
-    Cliente cliente1 = new Cliente("allys34@gmail.com","222222222", 0.15f, "11111", "Marta");
+    //Cliente cliente1 = new Cliente("allys34@gmail.com","222222222", 0.15f, "11111", "Marta");
     Cajero cas = new Cajero("2222", "Marco");
-    Cliente cliente2 = new Cliente("rogelo934@gmail.com","44488884", 0.35f, "22222", "Roger");
+    //Cliente cliente2 = new Cliente("rogelo934@gmail.com","44488884", 0.35f, "22222", "Roger");
     Cajero cas2 = new Cajero("33333", "Luisiana");
     
     List<DetalleVenta> veneta1 = new ArrayList<>();
     veneta1.add(new DetalleVenta(4,producto1));
     veneta1.add(new DetalleVenta(2,producto2));
     
-    Factura fact1 = new Factura(cliente1,cas,veneta1);
+   //Factura fact1 = new Factura(cliente1,cas,veneta1);
     
     List<MetodoPago> listapagos = new ArrayList<>();
-    listapagos.add(new Tarjeta("Credito", fact1.montoTotal()));
-    fact1.setPagos(listapagos);
+    //listapagos.add(new Tarjeta("Credito", fact1.montoTotal()));
+    //fact1.setPagos(listapagos);
     //veneta1.agregarCarrito(producto2, 4);
     //producto2.venderProducto(4);
-    Factura fact2 = new Factura(cliente2,cas2,veneta1);
+    //Factura fact2 = new Factura(cliente2,cas2,veneta1);
     
     List<Producto> listaProductos = ArchivosXML.cargarProductos();
     ArchivosXML.guardarProductos(listaProductos);
     
     List<Factura> listaFacturas = new ArrayList<>();
-    listaFacturas.add(fact2);
+   // listaFacturas.add(fact2);
     ArchivosXML.guardarFacturas(listaFacturas);
     
     
-    List<Cliente> listaClientes = new ArrayList<>();
-    listaClientes.add(cliente1);
-    listaClientes.add(cliente2);
-    ArchivosXML.guardarClientes(listaClientes);
+   // List<Cliente> listaClientes = new ArrayList<>();
+    //listaClientes.add(cliente1);
+    //listaClientes.add(cliente2);
+   // ArchivosXML.guardarClientes(listaClientes);
     
     System.out.println(listaProductos);
      List<Cajero> listaCajeros = new ArrayList<>();
@@ -72,7 +74,7 @@ public class Main {
       System.out.println("------------------------------");
       System.out.println(listaFacturas);
       System.out.println("------------------------------");
-      System.out.println(listaClientes);
+      //System.out.println(listaClientes);
       System.out.println("------------------------------");
       System.out.println(listaCajeros);
       
@@ -83,7 +85,9 @@ public class Main {
       MiniSuper mercadio = new MiniSuper();
         System.out.println(mercadio.buscarCliente_Nom("Marta"));*/
       
-        ControllerFacturar controller = new ControllerFacturar();
-        controller.getControllerFacturar();
+
+        GUIFacturar gFacturar = new GUIFacturar();
+        ControllerMain controller = new ControllerMain(gFacturar);
+        controller.getControllerMain();
     }
 }

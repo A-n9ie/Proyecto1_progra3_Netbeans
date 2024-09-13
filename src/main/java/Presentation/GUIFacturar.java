@@ -48,26 +48,26 @@ public class GUIFacturar extends javax.swing.JFrame {
         panelClientes = new javax.swing.JPanel();
         clientes = new javax.swing.JPanel();
         datosClientes = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        idClientesLb = new javax.swing.JLabel();
+        nombreClientesLb = new javax.swing.JLabel();
+        telefonoClientesLb = new javax.swing.JLabel();
+        idClientesTf = new javax.swing.JTextField();
+        nombreClientesTf = new javax.swing.JTextField();
+        telefonoClientesTf = new javax.swing.JTextField();
+        emailClientesLb = new javax.swing.JLabel();
+        emailClientesTf = new javax.swing.JTextField();
+        descClientesLb = new javax.swing.JLabel();
+        descClientesTf = new javax.swing.JTextField();
+        guardarClientesBtn = new javax.swing.JButton();
+        limpiarClientesBtn = new javax.swing.JButton();
+        borrarClientesBtn = new javax.swing.JButton();
         busquedaClientes = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        nombreBudqClientesLb = new javax.swing.JLabel();
+        nombreBusqClientesTf = new javax.swing.JTextField();
+        busqClientesBtn = new javax.swing.JButton();
+        reporteClientesBtn = new javax.swing.JButton();
+        ScrollPaneClientes = new javax.swing.JScrollPane();
+        clientesTable = new javax.swing.JTable();
         panelCajeros = new javax.swing.JPanel();
         cajereos = new javax.swing.JPanel();
         datosClientes1 = new javax.swing.JPanel();
@@ -375,18 +375,18 @@ public class GUIFacturar extends javax.swing.JFrame {
 
         datosClientes.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Clientes"));
 
-        jLabel1.setText("ID");
-        jLabel1.setToolTipText("");
+        idClientesLb.setText("ID");
+        idClientesLb.setToolTipText("");
 
-        jLabel2.setText("Nombre");
-        jLabel2.setToolTipText("");
+        nombreClientesLb.setText("Nombre");
+        nombreClientesLb.setToolTipText("");
 
-        jLabel3.setText("Telefono");
-        jLabel3.setToolTipText("");
+        telefonoClientesLb.setText("Telefono");
+        telefonoClientesLb.setToolTipText("");
 
-        jLabel4.setText("Email");
+        emailClientesLb.setText("Email");
 
-        jLabel5.setText("Descuento");
+        descClientesLb.setText("Descuento");
 
         javax.swing.GroupLayout datosClientesLayout = new javax.swing.GroupLayout(datosClientes);
         datosClientes.setLayout(datosClientesLayout);
@@ -396,27 +396,27 @@ public class GUIFacturar extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(datosClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(datosClientesLayout.createSequentialGroup()
-                        .addComponent(jLabel3)
+                        .addComponent(telefonoClientesLb)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField3))
+                        .addComponent(telefonoClientesTf))
                     .addGroup(datosClientesLayout.createSequentialGroup()
-                        .addComponent(jLabel2)
+                        .addComponent(nombreClientesLb)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField2))
+                        .addComponent(nombreClientesTf))
                     .addGroup(datosClientesLayout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                        .addComponent(idClientesLb)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(idClientesTf, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(datosClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(datosClientesLayout.createSequentialGroup()
-                        .addComponent(jLabel4)
+                        .addComponent(emailClientesLb)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(emailClientesTf, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(datosClientesLayout.createSequentialGroup()
-                        .addComponent(jLabel5)
+                        .addComponent(descClientesLb)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(descClientesTf, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
         datosClientesLayout.setVerticalGroup(
@@ -424,41 +424,41 @@ public class GUIFacturar extends javax.swing.JFrame {
             .addGroup(datosClientesLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(datosClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(idClientesLb)
+                    .addComponent(idClientesTf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(emailClientesLb)
+                    .addComponent(emailClientesTf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addGroup(datosClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(nombreClientesLb)
+                    .addComponent(nombreClientesTf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(descClientesLb)
+                    .addComponent(descClientesTf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(23, 23, 23)
                 .addGroup(datosClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(telefonoClientesLb)
+                    .addComponent(telefonoClientesTf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
-        jButton1.setText("Guardar");
+        guardarClientesBtn.setText("Guardar");
 
-        jButton2.setText("Limpiar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        limpiarClientesBtn.setText("Limpiar");
+        limpiarClientesBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                limpiarClientesBtnActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Borrar ");
+        borrarClientesBtn.setText("Borrar ");
 
         busquedaClientes.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Busqueda"));
 
-        jLabel6.setText("Nombre");
+        nombreBudqClientesLb.setText("Nombre");
 
-        jButton4.setText("Buscar");
+        busqClientesBtn.setText("Buscar");
 
-        jButton5.setText("Reporte");
+        reporteClientesBtn.setText("Reporte");
 
         javax.swing.GroupLayout busquedaClientesLayout = new javax.swing.GroupLayout(busquedaClientes);
         busquedaClientes.setLayout(busquedaClientesLayout);
@@ -466,13 +466,13 @@ public class GUIFacturar extends javax.swing.JFrame {
             busquedaClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(busquedaClientesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel6)
+                .addComponent(nombreBudqClientesLb)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(nombreBusqClientesTf, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(busqClientesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(reporteClientesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(19, Short.MAX_VALUE))
         );
         busquedaClientesLayout.setVerticalGroup(
@@ -480,26 +480,27 @@ public class GUIFacturar extends javax.swing.JFrame {
             .addGroup(busquedaClientesLayout.createSequentialGroup()
                 .addGap(11, 11, 11)
                 .addGroup(busquedaClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6)
+                    .addComponent(nombreBudqClientesLb)
                     .addGroup(busquedaClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton4)
-                        .addComponent(jButton5)))
+                        .addComponent(nombreBusqClientesTf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(busqClientesBtn)
+                        .addComponent(reporteClientesBtn)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        clientesTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID", "Nombre", "Telefono", "Email", "Descuento"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        clientesTable.setColumnSelectionAllowed(true);
+        ScrollPaneClientes.setViewportView(clientesTable);
 
         javax.swing.GroupLayout clientesLayout = new javax.swing.GroupLayout(clientes);
         clientes.setLayout(clientesLayout);
@@ -510,14 +511,14 @@ public class GUIFacturar extends javax.swing.JFrame {
                 .addGroup(clientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(clientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(busquedaClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 640, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(ScrollPaneClientes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 640, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(clientesLayout.createSequentialGroup()
                         .addComponent(datosClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(clientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE))))
+                            .addComponent(guardarClientesBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(limpiarClientesBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(borrarClientesBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         clientesLayout.setVerticalGroup(
@@ -529,16 +530,16 @@ public class GUIFacturar extends javax.swing.JFrame {
                         .addComponent(datosClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(clientesLayout.createSequentialGroup()
                         .addGap(28, 28, 28)
-                        .addComponent(jButton1)
+                        .addComponent(guardarClientesBtn)
                         .addGap(39, 39, 39)
-                        .addComponent(jButton2)
+                        .addComponent(limpiarClientesBtn)
                         .addGap(44, 44, 44)
-                        .addComponent(jButton3)))
+                        .addComponent(borrarClientesBtn)))
                 .addGap(18, 18, 18)
                 .addComponent(busquedaClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(59, Short.MAX_VALUE))
+                .addComponent(ScrollPaneClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(94, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout panelClientesLayout = new javax.swing.GroupLayout(panelClientes);
@@ -1097,9 +1098,9 @@ public class GUIFacturar extends javax.swing.JFrame {
 
     }//GEN-LAST:event_cobrarBtnActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void limpiarClientesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limpiarClientesBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_limpiarClientesBtnActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
@@ -1110,10 +1111,13 @@ public class GUIFacturar extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton12ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane ScrollPaneClientes;
     private javax.swing.JPanel Totales;
     private javax.swing.JPanel agregar;
     private javax.swing.JButton agregarBtn;
+    private javax.swing.JButton borrarClientesBtn;
     private javax.swing.JButton buscar;
+    private javax.swing.JButton busqClientesBtn;
     private javax.swing.JPanel busquedaCajeros;
     private javax.swing.JPanel busquedaClientes;
     private javax.swing.JPanel busquedaClientes1;
@@ -1126,6 +1130,7 @@ public class GUIFacturar extends javax.swing.JFrame {
     private javax.swing.JButton checkBtn;
     private javax.swing.JPanel clientes;
     private javax.swing.JLabel clientesPng;
+    private javax.swing.JTable clientesTable;
     private javax.swing.JButton cobrarBtn;
     private javax.swing.JLabel codigoPng;
     private javax.swing.JTextField codigoProducto;
@@ -1136,43 +1141,39 @@ public class GUIFacturar extends javax.swing.JFrame {
     private javax.swing.JPanel datosClientes1;
     private javax.swing.JPanel datosClientes11;
     private javax.swing.JPanel datosLb;
+    private javax.swing.JLabel descClientesLb;
+    private javax.swing.JTextField descClientesTf;
     private javax.swing.JButton descuentoBtn;
     private javax.swing.JComboBox<String> desdeAnioCb;
     private javax.swing.JComboBox<String> desdeFechaCb;
     private javax.swing.JLabel desdeLb;
     private javax.swing.JButton dobleCheckBtn;
     private javax.swing.JButton eliminarBtn;
+    private javax.swing.JLabel emailClientesLb;
+    private javax.swing.JTextField emailClientesTf;
     private javax.swing.JPanel funciones;
+    private javax.swing.JButton guardarClientesBtn;
     private javax.swing.JComboBox<String> hastaAnioCb;
     private javax.swing.JComboBox<String> hastaFechaCb;
     private javax.swing.JLabel hastaLb;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel idClientesLb;
+    private javax.swing.JTextField idClientesTf;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton15;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JComboBox<String> jComboBoxcjaeros;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel58;
     private javax.swing.JLabel jLabel59;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel60;
     private javax.swing.JLabel jLabel61;
     private javax.swing.JLabel jLabel62;
@@ -1182,27 +1183,19 @@ public class GUIFacturar extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable3;
     private javax.swing.JTable jTable4;
     private javax.swing.JTable jTable5;
     private javax.swing.JTabbedPane jTableFacturar;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField11;
     private javax.swing.JTextField jTextField12;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField58;
     private javax.swing.JTextField jTextField59;
-    private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField60;
     private javax.swing.JTextField jTextField61;
     private javax.swing.JTextField jTextField62;
@@ -1210,19 +1203,27 @@ public class GUIFacturar extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;
+    private javax.swing.JButton limpiarClientesBtn;
+    private javax.swing.JLabel nombreBudqClientesLb;
+    private javax.swing.JTextField nombreBusqClientesTf;
+    private javax.swing.JLabel nombreClientesLb;
+    private javax.swing.JTextField nombreClientesTf;
     private javax.swing.JPanel panelCajeros;
     private javax.swing.JPanel panelClientes;
     private javax.swing.JPanel panelEstadistica;
     private javax.swing.JPanel panelFunciones;
     private javax.swing.JPanel panelProductos;
     private javax.swing.JPanel productos;
+    private javax.swing.JButton reporteClientesBtn;
     private javax.swing.JTable tablaArticulos;
     private javax.swing.JTable tablaProductos;
     private javax.swing.JScrollPane tableProductos;
+    private javax.swing.JLabel telefonoClientesLb;
+    private javax.swing.JTextField telefonoClientesTf;
     // End of variables declaration//GEN-END:variables
     
     
-        //MIS METODOS
+    //-------------FACTURAR----------------
     public void addCobrarBtn(ActionListener listener){
         cobrarBtn.addActionListener(listener);
     }
@@ -1259,9 +1260,63 @@ public class GUIFacturar extends javax.swing.JFrame {
         return tablaArticulos;
     }
 
+    //-----------CLIENTES---------------
+    
+    public String getIDClienteTf(){
+        return idClientesTf.getText();
+    }
+    
+    public void setIDClienteTf(String string){
+        this.idClientesTf.setText(string);
+    }
 
-
-
+    public String getNombreClienteTf(){
+        return nombreClientesTf.getText();
+    }
+    
+    public void setNombreClienteTf(String string){
+        this.nombreClientesTf.setText(string);
+    }
+    
+    public String getTelefonoClienteTf(){
+        return telefonoClientesTf.getText();
+    }
+    
+    public void setTelefonoClienteTf(String string){
+        this.telefonoClientesTf.setText(string);
+    }
+    
+    public String getEmailClienteTf(){
+        return emailClientesTf.getText();
+    }
+    
+    public void setEmailClienteTf(String string){
+        this.emailClientesTf.setText(string);
+    }
+    
+    public String getDescClienteTf(){
+        return descClientesTf.getText();
+    }
+    
+    public void setDescClienteTf(String string){
+        this.descClientesTf.setText(string);
+    }
+    
+    public void addGuardarClienteBtn(ActionListener listener){
+        guardarClientesBtn.addActionListener(listener);
+    }
+    
+    public void addLimpiarClientesBtn(ActionListener listener){
+        limpiarClientesBtn.addActionListener(listener);
+    }
+     
+    public void addEliminarClienteBtn(ActionListener listener){
+        eliminarBtn.addActionListener(listener);
+    }
+    
+    public JTable getTableClientes(){ 
+        return clientesTable;
+    }
 }   
 
 

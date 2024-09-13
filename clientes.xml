@@ -12,4 +12,16 @@
         <descuento>0.35</descuento>
         <telefono>44488884</telefono>
     </cliente>
+    <cliente cedula="33333">
+        <nombre>Zoe Martina Solis</nombre>
+        <correo>zoe@gmail.com</correo>
+        <descuento>10.0</descuento>
+        <telefono>44444444</telefono>
+    </cliente>
+    <cliente cedula="4444">
+        <nombre>PRUEBAAA 2</nombre>
+        <correo>p@gmail.com</correo>
+        <descuento>12.0</descuento>
+        <telefono>44444</telefono>
+    </cliente>
 </listaclientes>

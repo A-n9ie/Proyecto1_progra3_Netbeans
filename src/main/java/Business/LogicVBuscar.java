@@ -17,11 +17,11 @@ import javax.swing.table.TableCellEditor;
  *
  * @author angie
  */
-public class LogicBuscar {
+public class LogicVBuscar {
     private List<Producto> list;
     private VentanaBuscar vBuscar;
     
-    public LogicBuscar() throws JAXBException {
+    public LogicVBuscar() throws JAXBException {
         list = ArchivosXML.cargarProductos();
         vBuscar = new VentanaBuscar();
         EstablecerTabla();
