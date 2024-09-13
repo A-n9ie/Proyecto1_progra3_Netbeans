@@ -9,6 +9,7 @@ import Presentation.GUIFacturar;
 import Presentation.VentanaBuscar;
 import Presentation.VentanaCantidad;
 import Presentation.VentanaCobrar;
+import Presentation.VentanaDescuento;
 import jakarta.xml.bind.JAXBException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,18 +22,19 @@ public class ControllerFacturar {
     private VentanaCobrar vCobrar;
     private VentanaBuscar vBuscar;
     private VentanaCantidad vCantidad;
+    private VentanaDescuento vDesc;
     private Producto producto;
     int cant;
-    //private LogicProductoXML lProducto;
 
     public ControllerFacturar() throws JAXBException{
          this.gFacturar = new GUIFacturar();
          this.vCobrar = new VentanaCobrar();
          this.vCantidad = new VentanaCantidad();
+         this.vDesc = new VentanaDescuento();
          this.producto = new Producto();
          cant = 0;
          
-         ControllerVntBuscar ventBuscar = new ControllerVntBuscar();
+         LogicBuscar ventBuscar = new LogicBuscar();
          this.vBuscar = ventBuscar.getvBuscar();
          this.mercadito = new MiniSuper();
     }
@@ -78,7 +80,7 @@ public class ControllerFacturar {
             }
         });
         
-        //Cobrar
+        //---------------Cobrar------------------------
         gFacturar.addCobrarBtn(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -110,40 +112,50 @@ public class ControllerFacturar {
             }
 
         });
-
-    }
-
-    void ejecutarCantidad(Producto producto){
-    /*gFacturar.addCantidadBtn(new ActionListener(){
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                   vCantidad.setVisible(true);
-                   vCantidad.setLocationRelativeTo(null);
-                } 
-            });*/
+     //------------------Cantidad-------------------
+        gFacturar.addCantidadBtn(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                vCantidad.setVisible(true);
+                vCantidad.setLocationRelativeTo(null);
+            }
+            
+        }
+        );
+        
     
-    vCantidad.addOkBtn(new ActionListener(){
+        vCantidad.addOkBtn(new ActionListener(){
         @Override
-        public void actionPerformed(ActionEvent e) {
-         if(!vCantidad.getIngCantidad().isEmpty()){
-            int cant = Integer.valueOf(vCantidad.getIngCantidad());    
-            if(cant > 0){
-                if(cant <= producto.getExistencia()){
-                    producto.venderProducto(cant);
-                    vCantidad.setIngCantidad("");
+            public void actionPerformed(ActionEvent e) {
+             if(!vCantidad.getIngCantidad().isEmpty()){
+                int cant = Integer.valueOf(vCantidad.getIngCantidad());    
+                if(cant > 0){
+                    if(cant <= producto.getExistencia()){
+                        producto.venderProducto(cant);
+                        vCantidad.setIngCantidad("");
+                    }
+                    else
+                        vCantidad.notify("La cantidad sobrepasa la existencia del producto");
                 }
                 else
-                    vCantidad.notify("La cantidad sobrepasa la existencia del producto");
+                {
+                    vBuscar.notify("La cantidad debe ser mayor a 0");
+                }
+             }
             }
-            else
-            {
-                vBuscar.notify("La cantidad debe ser mayor a 0");
-            }
-         }
-        }
         
-    });
+        });
+       //-------------------descuento---------------
+        gFacturar.addDescuentoBtn(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                vDesc.setVisible(true);
+                vDesc.setLocationRelativeTo(null);
+            }
+        });
     }
+ 
+       
     
     void agregarProducto(DetalleVenta detalle){
         if(detalle != null && producto != null){
@@ -158,7 +170,10 @@ public class ControllerFacturar {
          model.addRow(datos);
         }
     }
+    
+    
 }
+
    
     
     

@@ -146,9 +146,6 @@ public class VentanaBuscar extends javax.swing.JFrame {
         return descripcionTF.getText();
     }
     
-    public Producto mostrarProductos(){
-        return new Producto();
-    } 
     public void notify(String message) {
     JOptionPane.showMessageDialog(null, message);
     }
@@ -161,9 +158,9 @@ public class VentanaBuscar extends javax.swing.JFrame {
         return CancelBtn;
     }
 
-    public JPanel getPanelBuscar() {
-        return PanelBuscar;
-    }
+    //public JPanel getPanelBuscar() {
+      // return PanelBuscar;
+    //}
 
     public JScrollPane getProductoTable() {
         return ProductoTable;

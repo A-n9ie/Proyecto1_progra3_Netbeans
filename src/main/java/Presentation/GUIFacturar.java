@@ -4,8 +4,6 @@ package Presentation;
 
 import Domain.Producto;
 import java.awt.event.ActionListener;
-import javax.swing.JButton;
-
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
@@ -340,13 +338,13 @@ public class GUIFacturar extends javax.swing.JFrame {
             panelFuncionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelFuncionesLayout.createSequentialGroup()
                 .addGap(6, 6, 6)
-                .addGroup(panelFuncionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(panelFuncionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(panelFuncionesLayout.createSequentialGroup()
                         .addComponent(comboBoxCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(49, 49, 49)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(comboBoxCajeros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(tableProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 648, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
             .addGroup(panelFuncionesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelFuncionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -1092,28 +1090,7 @@ public class GUIFacturar extends javax.swing.JFrame {
     }//GEN-LAST:event_cantidadBtnActionPerformed
 
     private void agregarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarBtnActionPerformed
-        /*String buscarProducto = codigoProducto.getText();
-        if(buscarProducto.isEmpty()){
-            notify("Ingrese un codigo");
-           return;
-        }
-        Producto encontrado = lgProducto.buscarProducto(buscarProducto, "productos" );
-        if (encontrado != null){
-            String codigo = encontrado.getCodigo();
-            String articulo = encontrado.getDescripcion();
-            String categoria = encontrado.getCategoria();
-            int cantidad = encontrado.getExistencia();
-            double precio = encontrado.getPrecio();
-            float descuento = encontrado.getDescuento();
-            double neto = precio - descuento;
-            double importe = cantidad * neto;
-            
-            DefaultTableModel model = (DefaultTableModel) jTableFacturar.getModel();
-            
-            model.addRow(new Object[] {codigo, articulo, categoria, cantidad, precio, descuento, neto, importe});
-        }*/
-        
-        
+
     }//GEN-LAST:event_agregarBtnActionPerformed
 
     private void cobrarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cobrarBtnActionPerformed
@@ -1259,7 +1236,7 @@ public class GUIFacturar extends javax.swing.JFrame {
     }
     
     public void addCantidadBtn(ActionListener listener){
-        descuentoBtn.addActionListener(listener);
+        cantidadBtn.addActionListener(listener);
     }
     
     public String getCodigoProducto(){
@@ -1269,10 +1246,6 @@ public class GUIFacturar extends javax.swing.JFrame {
     public void setCodigoProducto(String string){
         this.codigoProducto.setText(string);
     }
-    
-    public Producto mostrarProductos(){
-        return new Producto();
-    } 
     
     public void notify(String message) {
     JOptionPane.showMessageDialog(null, message);
