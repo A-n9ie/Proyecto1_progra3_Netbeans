@@ -18,6 +18,7 @@ import java.util.List;
 import javax.xml.transform.TransformerException;
 
 import Data.ArchivosXML;
+import Data.MiniSuper;
 import Domain.DetalleVenta;
 import Domain.MetodoPago;
 import Domain.Tarjeta;
@@ -75,9 +76,12 @@ public class Main {
       System.out.println("------------------------------");
       System.out.println(listaCajeros);
       
-      
+      /*
       PDF pdf = new PDF(listaFacturas.get(0));
       pdf.generarPDF();
+      
+      MiniSuper mercadio = new MiniSuper();
+        System.out.println(mercadio.buscarCliente_Nom("Marta"));*/
       
         ControllerFacturar controller = new ControllerFacturar();
         controller.getControllerFacturar();

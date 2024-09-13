@@ -83,6 +83,7 @@ public class PDF {
              
              for(MetodoPago pago : factura.getPagos()){
              document.add(new Paragraph (pago.toString()));
+              document.add(new Paragraph ("                                                       "));
              }
              document.add(new Paragraph ("                                                       "));
             

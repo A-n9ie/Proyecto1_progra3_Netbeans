@@ -4,8 +4,10 @@ package Presentation;
 
 import Domain.Producto;
 import java.awt.event.ActionListener;
+import javax.swing.JButton;
 
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 
 
 public class GUIFacturar extends javax.swing.JFrame {
@@ -40,7 +42,7 @@ public class GUIFacturar extends javax.swing.JFrame {
         comboBoxClientes = new javax.swing.JComboBox<>();
         clientesPng = new javax.swing.JLabel();
         tableProductos = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tablaArticulos = new javax.swing.JTable();
         comboBoxCajeros = new javax.swing.JPanel();
         jComboBoxcjaeros = new javax.swing.JComboBox<>();
         cajerosPng = new javax.swing.JLabel();
@@ -235,7 +237,7 @@ public class GUIFacturar extends javax.swing.JFrame {
                 .addComponent(codigoProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36)
                 .addComponent(agregarBtn)
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         agregarLayout.setVerticalGroup(
             agregarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -272,8 +274,8 @@ public class GUIFacturar extends javax.swing.JFrame {
             .addComponent(clientesPng)
         );
 
-        jTable2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tablaArticulos.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        tablaArticulos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null},
@@ -292,10 +294,10 @@ public class GUIFacturar extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jTable2.setGridColor(new java.awt.Color(204, 204, 204));
-        jTable2.setInheritsPopupMenu(true);
-        jTable2.setSelectionBackground(new java.awt.Color(204, 204, 204));
-        tableProductos.setViewportView(jTable2);
+        tablaArticulos.setGridColor(new java.awt.Color(204, 204, 204));
+        tablaArticulos.setInheritsPopupMenu(true);
+        tablaArticulos.setSelectionBackground(new java.awt.Color(204, 204, 204));
+        tableProductos.setViewportView(tablaArticulos);
 
         comboBoxCajeros.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "CAJERO"));
 
@@ -1209,7 +1211,6 @@ public class GUIFacturar extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
     private javax.swing.JTable jTable4;
     private javax.swing.JTable jTable5;
@@ -1238,6 +1239,7 @@ public class GUIFacturar extends javax.swing.JFrame {
     private javax.swing.JPanel panelFunciones;
     private javax.swing.JPanel panelProductos;
     private javax.swing.JPanel productos;
+    private javax.swing.JTable tablaArticulos;
     private javax.swing.JTable tablaProductos;
     private javax.swing.JScrollPane tableProductos;
     // End of variables declaration//GEN-END:variables
@@ -1274,6 +1276,14 @@ public class GUIFacturar extends javax.swing.JFrame {
     
     public void notify(String message) {
     JOptionPane.showMessageDialog(null, message);
+    }
+
+    public void addAgregarBtn(ActionListener listener) {
+        agregarBtn.addActionListener(listener);
+    }
+
+    public JTable getTablaArticulos() {
+        return tablaArticulos;
     }
 
 

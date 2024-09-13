@@ -42,7 +42,7 @@ public class Sinpe extends MetodoPago {
     @Override
     public String toString() {
         return "Metodo de pago -> " + metodo +
-                "\nTelefono: " + telefono + "\n" +
+                "\nTelefono: " + telefono + 
                 "\nMonto pagado: " + monto + "\n"
                 ;}
     

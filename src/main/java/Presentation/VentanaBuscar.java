@@ -6,7 +6,13 @@ package Presentation;
 
 import Domain.Producto;
 import java.awt.event.ActionListener;
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
 
 /**
  *
@@ -34,9 +40,15 @@ public class VentanaBuscar extends javax.swing.JFrame {
         okBtn = new javax.swing.JButton();
         CancelBtn = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         descripcionLb.setText("Descripcion");
+
+        descripcionTF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                descripcionTFActionPerformed(evt);
+            }
+        });
 
         ProductosTableView.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -107,6 +119,10 @@ public class VentanaBuscar extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void descripcionTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descripcionTFActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_descripcionTFActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CancelBtn;
@@ -140,4 +156,34 @@ public class VentanaBuscar extends javax.swing.JFrame {
     public void setDescripcionTf(String string) {
         this.descripcionTF.setText(string);
     }
+
+    public JButton getCancelBtn() {
+        return CancelBtn;
+    }
+
+    public JPanel getPanelBuscar() {
+        return PanelBuscar;
+    }
+
+    public JScrollPane getProductoTable() {
+        return ProductoTable;
+    }
+
+    public JTable getProductosTableView() {
+        return ProductosTableView;
+    }
+
+    public JLabel getDescripcionLb() {
+        return descripcionLb;
+    }
+
+    public JTextField getDescripcionTF() {
+        return descripcionTF;
+    }
+
+    public JButton getOkBtn() {
+        return okBtn;
+    }
+    
+    
 }

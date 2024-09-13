@@ -13,18 +13,18 @@ import java.time.format.DateTimeFormatter;
 public class DetalleVenta {
     private int cantidad;
     private Producto producto;
-    private LocalDate fecha;
+    //private LocalDate fecha;
 
     public DetalleVenta() {
         this.cantidad = 0;
         this.producto = null;
-        this.fecha = LocalDate.now();
+        //this.fecha = LocalDate.now();
     }
 
     public DetalleVenta(int cantidad, Producto producto) {
         this.cantidad = cantidad;
         this.producto = producto;
-        this.fecha = LocalDate.now();
+        //this.fecha = LocalDate.now();
     }
 @XmlElement
     public int getCantidad() {
@@ -42,7 +42,7 @@ public class DetalleVenta {
     public void setProducto(Producto producto) {
         this.producto = producto;
     }
-    
+    /*
      @XmlElement
     public LocalDate getFecha() {
         return fecha;
@@ -56,7 +56,7 @@ public class DetalleVenta {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM");
         return fecha.format(formatter);
     }
-    
+    */
     @XmlElement
     public String getCategoria(){
         return producto.getCategoria();

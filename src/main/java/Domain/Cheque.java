@@ -39,7 +39,7 @@ public class Cheque extends MetodoPago {
     @Override
     public String toString() {
         return "Metodo de pago -> " + metodo +
-                 "\nNumero de cheque: " + numCheque + "\n" +
+                 "\nNumero de cheque: " + numCheque + 
                 "\nMonto pagado: " + monto + "\n";
     }
     

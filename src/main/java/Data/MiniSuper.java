@@ -29,9 +29,9 @@ public class MiniSuper {
     
     public MiniSuper() throws JAXBException {
         this.listaClientes = ArchivosXML.cargarClientes();
-        this.listaCajeros = new ArrayList<>();
-        this.listaProductos = new ArrayList<>();
-        this.listaFacturas = new ArrayList<>();
+        this.listaCajeros = ArchivosXML.cargarCajeros();
+        this.listaProductos = ArchivosXML.cargarProductos();
+        this.listaFacturas = ArchivosXML.cargarFacturas();
     }
 
     public List<Cliente> getListaClientes() {

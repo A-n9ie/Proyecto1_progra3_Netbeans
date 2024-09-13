@@ -40,7 +40,7 @@ public class Tarjeta extends MetodoPago {
     @Override
     public String toString() {
         return "Metodo de pago -> " + metodo +
-                "\nTargeta de " + tipo + "\n" +
+                "\nTargeta de " + tipo +
                 "\nMonto pagado: " + monto + "\n";
     }
     

@@ -14,8 +14,6 @@
             <venta>
                 <cantidad>4</cantidad>
                 <categoria>Embutidos</categoria>
-                <fecha/>
-                <mes>septiembre</mes>
                 <producto codigo="1112">
                     <categoria>Embutidos</categoria>
                     <descripcion>Salchicha</descripcion>
@@ -28,8 +26,6 @@
             <venta>
                 <cantidad>2</cantidad>
                 <categoria>Conserva</categoria>
-                <fecha/>
-                <mes>septiembre</mes>
                 <producto codigo="3332">
                     <categoria>Conserva</categoria>
                     <descripcion>Miel</descripcion>
@@ -40,8 +36,8 @@
                 </producto>
             </venta>
         </detalles>
-        <fecha>12/9/2024</fecha>
-        <hora>22:43:17</hora>
+        <fecha>13/9/2024</fecha>
+        <hora>12:24:37</hora>
         <pagos/>
     </factura>
 </listafacturas>
