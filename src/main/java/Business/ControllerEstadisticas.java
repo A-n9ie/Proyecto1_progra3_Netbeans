@@ -40,11 +40,11 @@ public class ControllerEstadisticas {
             frame.pack();
             frame.setVisible(true);
         } catch (JAXBException ex) {
-            ex.printStackTrace(); // Manejo de la excepción. Puedes mostrar un mensaje de error al usuario si lo prefieres
+            ex.printStackTrace();
         }
-    }
-});
-    }
+        }
+    });
+  }
 
     
     private Set<String> obtenerCategorias() {
