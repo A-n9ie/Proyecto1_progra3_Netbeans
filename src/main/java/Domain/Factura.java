@@ -175,5 +175,8 @@ public class Factura {
                  /*pagos.toString() +*/ "\n";
     }
     
-    
+    public String getMes() {
+        String[] partesFecha = fecha.split("/"); // Divide la fecha por "/"
+        return partesFecha[1]; // Retorna el mes, que está en la posición 1 del array
+    }
 }
