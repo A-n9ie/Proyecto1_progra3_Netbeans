@@ -4,6 +4,7 @@ package Presentation;
 import javax.swing.*;
 import java.awt.event.*;
 import java.util.List;
+import java.util.*;
 
 public class VentanaEstadisticas extends JFrame{
     private JComboBox<String> comboMes;
@@ -18,7 +19,7 @@ public class VentanaEstadisticas extends JFrame{
         comboMes = new JComboBox<>(new String[]{
             "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
         });
-        comboCategorias = new JComboBox<>(categoriasDisponibles.toArray(new String[0]));
+        comboCategorias = new JComboBox<>();
         btnGenerarGrafico = new JButton("Generar grafico");
         
         JPanel panel = new JPanel();
@@ -39,6 +40,13 @@ public class VentanaEstadisticas extends JFrame{
     }
     public String getCategoriaSeleccionada() {
         return comboCategorias.getSelectedItem().toString();
+    }
+    
+    public void setCategoriasDisponibles(Set<String> categorias) {
+        comboCategorias.removeAllItems();
+        for (String categoria : categorias) {
+            comboCategorias.addItem(categoria);
+        }
     }
 }
 

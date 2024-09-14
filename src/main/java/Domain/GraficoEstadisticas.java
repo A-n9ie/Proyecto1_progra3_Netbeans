@@ -1,4 +1,4 @@
-package Business;
+package Domain;
 
 import Domain.Factura;
 import Domain.DetalleVenta;
