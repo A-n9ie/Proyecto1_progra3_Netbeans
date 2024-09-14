@@ -3,13 +3,14 @@ package Presentation;
 
 import javax.swing.*;
 import java.awt.event.*;
+import java.util.List;
 
 public class VentanaEstadisticas extends JFrame{
     private JComboBox<String> comboMes;
-    private JComboBox<String> comboCategorias;
     private JButton btnGenerarGrafico;
+    private JComboBox<String> comboCategorias;
     
-    public VentanaEstadisticas(){
+    public VentanaEstadisticas(List<String> categoriasDisponibles){
         setTitle("Estadisticas de ventas");
         setSize(400,300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -17,9 +18,7 @@ public class VentanaEstadisticas extends JFrame{
         comboMes = new JComboBox<>(new String[]{
             "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
         });
-        comboCategorias = new JComboBox<>(new String[]{
-            "Dulces", "Bebidas", "Snacks", "Lácteos", "Carnes", "Frutas", "Verduras", "Congelados", "Limpieza", "Panadería"
-        });
+        comboCategorias = new JComboBox<>(categoriasDisponibles.toArray(new String[0]));
         btnGenerarGrafico = new JButton("Generar grafico");
         
         JPanel panel = new JPanel();
@@ -35,10 +34,11 @@ public class VentanaEstadisticas extends JFrame{
     public String getMesSeleccionado(){
         return comboMes.getSelectedItem().toString();
     }
-    public String getCategoriaSeleccionada(){
-        return comboCategorias.getSelectedItem().toString();
-    }
     public JButton getButtonGenerarGrafico(){
         return btnGenerarGrafico;
     }
+    public String getCategoriaSeleccionada() {
+        return comboCategorias.getSelectedItem().toString();
+    }
 }
+
