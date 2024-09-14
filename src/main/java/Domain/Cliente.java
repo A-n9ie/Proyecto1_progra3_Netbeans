@@ -62,9 +62,7 @@ public class Cliente extends Persona {
     public String toString() {
         return """
                Cedula: """ + cedula + "\n " +
-                "Nombre:" + nombre + "\n " +
-                "Correo: " + correo + "\n " +
-                "Telefono: " + telefono + "\n " +
-                "Descuento: " + descuento + "\n ";
+                "Nombre:" + nombre + "\n " ;
     }
 }
+

@@ -17,6 +17,7 @@ public class VentanaCobrar extends javax.swing.JFrame {
      */
     public VentanaCobrar() {
         initComponents();
+        this.add(totalPagar);
     }
 
     @SuppressWarnings("unchecked")
@@ -37,6 +38,7 @@ public class VentanaCobrar extends javax.swing.JFrame {
         sinpeTf = new javax.swing.JTextField();
         totalPgar = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        totlPagar = new javax.swing.JLabel("Total: 0.00");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -185,6 +187,7 @@ public class VentanaCobrar extends javax.swing.JFrame {
     private javax.swing.JTextField tarjetaTf;
     private javax.swing.JPanel totalPagar;
     private javax.swing.JPanel totalPgar;
+    private javax.swing.JLabel totlPagar;
     // End of variables declaration//GEN-END:variables
 
     public void addOkBtn(ActionListener listener){
@@ -210,4 +213,8 @@ public class VentanaCobrar extends javax.swing.JFrame {
     public String getSINPE(){
         return sinpeTf.getText();
     }
+
+    public void setTotal(double total) {totlPagar.setText("Total: " + String.format("%.2f", total));
+    }
+
 }

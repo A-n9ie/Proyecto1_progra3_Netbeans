@@ -26,24 +26,19 @@ public class ControllerEstadisticas {
 
         Set<String> categoriasDinamicas = obtenerCategorias();
         ventana.setCategoriasDisponibles(categoriasDinamicas);
-        
+
         ventana.getButtonGenerarGrafico().addActionListener(new ActionListener() {
             @Override
-              public void actionPerformed(ActionEvent e) {
-        try {
-            List<Factura> facturas = obtenerFacturas(ventana.getMesSeleccionado(), ventana.getCategoriaSeleccionada());
-            
-            JPanel panelGrafico = grafico.crearGraficoEstadisticas(facturas);
-            
-            JFrame frame = new JFrame();
-            frame.setContentPane(panelGrafico);
-            frame.pack();
-            frame.setVisible(true);
-        } catch (JAXBException ex) {
-            ex.printStackTrace();
-        }
-        }
-    });
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    List<Factura> facturas = obtenerFacturas(ventana.getMesSeleccionado(), ventana.getCategoriaSeleccionada());
+                    JPanel panelGrafico = grafico.crearGraficoEstadisticas(facturas);
+                    ventana.mostrarGrafico(panelGrafico);
+                } catch (JAXBException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
   }
 
     
@@ -66,7 +61,7 @@ public class ControllerEstadisticas {
         List<Factura> facturasFiltradas = new ArrayList<>();
         for (Factura factura : todasLasFacturas) {
             for (DetalleVenta detalle : factura.getDetalles()) {
-                if (detalle.getProducto().getCategoria().equals(categoria) && factura.getMes().equals(mes)) { //comparar las categorías y mes para evitar repetir
+                if (detalle.getProducto().getCategoria().equals(categoria) && factura.getMes().equals(mes)) {
                     facturasFiltradas.add(factura);
                     break;
                 }

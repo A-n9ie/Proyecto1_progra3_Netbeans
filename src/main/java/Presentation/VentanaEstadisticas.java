@@ -2,6 +2,7 @@
 package Presentation;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
 import java.util.List;
 import java.util.*;
@@ -10,6 +11,7 @@ public class VentanaEstadisticas extends JFrame{
     private JComboBox<String> comboMes;
     private JButton btnGenerarGrafico;
     private JComboBox<String> comboCategorias;
+    private JPanel panelGrafico;
     
     public VentanaEstadisticas(List<String> categoriasDisponibles){
         setTitle("Estadisticas de ventas");
@@ -28,10 +30,17 @@ public class VentanaEstadisticas extends JFrame{
         panel.add(new JLabel("Categoría: "));
         panel.add(comboCategorias);
         panel.add(btnGenerarGrafico);
-        
-        add(panel);
+
+        // Panel para el gráfico
+        panelGrafico = new JPanel();
+        panelGrafico.setLayout(new BorderLayout());
+
+        // Agregar el panel al JFrame
+        setLayout(new BorderLayout());
+        add(panel, BorderLayout.NORTH);
+        add(panelGrafico, BorderLayout.CENTER);
     }
-    
+
     public String getMesSeleccionado(){
         return comboMes.getSelectedItem().toString();
     }
@@ -47,6 +56,12 @@ public class VentanaEstadisticas extends JFrame{
         for (String categoria : categorias) {
             comboCategorias.addItem(categoria);
         }
+    }
+    public void mostrarGrafico(JPanel graficoPanel) {
+        panelGrafico.removeAll();
+        panelGrafico.add(graficoPanel, BorderLayout.CENTER);
+        panelGrafico.revalidate();
+        panelGrafico.repaint();
     }
 }
 
