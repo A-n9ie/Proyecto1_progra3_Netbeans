@@ -31,7 +31,11 @@ public class ControllerEstadisticas {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    List<Factura> facturas = obtenerFacturas(ventana.getMesSeleccionado(), ventana.getCategoriaSeleccionada());
+                    // Obtener rango de fechas
+                    String fechaInicio = ventana.getAnnoInicio() + "-" + ventana.getMesInicio() + "-" + ventana.getDiaInicio();
+                    String fechaFin = ventana.getAnnoFin() + "-" + ventana.getMesFin() + "-" + ventana.getDiaFin();
+
+                    List<Factura> facturas = obtenerFacturas(fechaInicio, fechaFin, ventana.getCategoriaSeleccionada());
                     JPanel panelGrafico = grafico.crearGraficoEstadisticas(facturas);
                     ventana.mostrarGrafico(panelGrafico);
                 } catch (JAXBException ex) {
@@ -55,18 +59,24 @@ public class ControllerEstadisticas {
         return categorias; // Retorna las categorías únicas
     }
     
-    private List<Factura> obtenerFacturas(String mes, String categoria) throws JAXBException{
+    private List<Factura> obtenerFacturas(String fechaInicio, String fechaFin, String categoria) throws JAXBException{
         List<Factura> todasLasFacturas = ArchivosXML.cargarFacturas();
-        
         List<Factura> facturasFiltradas = new ArrayList<>();
+
         for (Factura factura : todasLasFacturas) {
-            for (DetalleVenta detalle : factura.getDetalles()) {
-                if (detalle.getProducto().getCategoria().equals(categoria) && factura.getMes().equals(mes)) {
-                    facturasFiltradas.add(factura);
-                    break;
+            String fechaFactura = factura.getFecha();
+            if (estaEnRango(fechaFactura, fechaInicio, fechaFin)) {
+                for (DetalleVenta detalle : factura.getDetalles()) {
+                    if (detalle.getProducto().getCategoria().equals(categoria)) {
+                        facturasFiltradas.add(factura);
+                        break;
+                    }
                 }
             }
         }
         return facturasFiltradas;
+    }
+    private boolean estaEnRango(String fechaFactura, String fechaInicio, String fechaFin) {
+        return fechaFactura.compareTo(fechaInicio) >= 0 && fechaFactura.compareTo(fechaFin) <= 0;
     }
 }
