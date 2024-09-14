@@ -31,7 +31,7 @@ public class ControllerEstadisticas {
             @Override
               public void actionPerformed(ActionEvent e) {
         try {
-            List<Factura> facturas = obtenerFacturas(ventana.getMesSeleccionado(), ventana.getCategoriaSeleccionada());
+            List<Factura> facturas = obtenerFacturas(ventana.getCategoriaSeleccionada());
             
             JPanel panelGrafico = grafico.crearGraficoEstadisticas(facturas);
             
@@ -60,7 +60,7 @@ public class ControllerEstadisticas {
         return categorias; // Retorna las categorías únicas
     }
     
-    private List<Factura> obtenerFacturas(String mes, String categoria) throws JAXBException{
+    private List<Factura> obtenerFacturas(String categoria) throws JAXBException{
         List<Factura> todasLasFacturas = ArchivosXML.cargarFacturas();
         
         List<Factura> facturasFiltradas = new ArrayList<>();
