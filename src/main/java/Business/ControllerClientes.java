@@ -5,6 +5,7 @@
 package Business;
 
 import Data.ArchivosXML;
+import Data.MiniSuper;
 import Domain.Cliente;
 import Presentation.GUIFacturar;
 import Presentation.VentanaBuscar;
@@ -23,19 +24,17 @@ import javax.swing.table.DefaultTableModel;
 public class ControllerClientes {
     private GUIFacturar gFacturar;
     private Cliente cliente;
-    private VentanaBuscar vBuscar;
     private ArchivosXML guardaXMl;
-    //List<Cliente> listaClientes = new ArrayList<>();
     private List<Cliente> listaClientes;
+    private MiniSuper mercadito;
     
     
     public ControllerClientes(GUIFacturar gFacturar) throws JAXBException{
         this.gFacturar = gFacturar;
         this.cliente = new Cliente();
-        this.vBuscar = new VentanaBuscar();
         this.guardaXMl = new ArchivosXML();
         this.listaClientes = ArchivosXML.cargarClientes();
-        
+        this.mercadito = new MiniSuper();        
     }
     
     public void getVentanaClientes(){
@@ -57,15 +56,15 @@ public class ControllerClientes {
                      
                      JTable tablaClientes = gFacturar.getTableClientes();
                      DefaultTableModel model = (DefaultTableModel) tablaClientes.getModel();
-                     
+                     tablaClientes.setRowSelectionAllowed(true);
                      Object[] datosCliente = {cliente.getCedula(), cliente.getNombre(), cliente.getTelefono(), cliente.getCorreo(), cliente.getDescuento()};
-         
-                     model.insertRow(0,datosCliente);
                      
+                     model.insertRow(0,datosCliente);
+                                          
                      if(listaClientes == null){
                          listaClientes = new ArrayList<>();
                      }
-                     listaClientes.add(cliente);
+                        listaClientes.add(cliente);
                    try {
                        ArchivosXML.guardarClientes(listaClientes);
                    } catch (JAXBException ex) {
@@ -75,5 +74,59 @@ public class ControllerClientes {
                }
             }
         });
+        
+        gFacturar.addEliminarClienteBtn(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+               int clienteSeleccionado = gFacturar.getTableClientes().getSelectedRow();
+               
+               if(clienteSeleccionado < 0){
+                gFacturar.notify("Seleccione el cliente que desea elimnar");
+            }else{
+                  JTable tablaClientes = gFacturar.getTableClientes();
+                  DefaultTableModel model = (DefaultTableModel) tablaClientes.getModel();
+                  String nombreSeleccionado = (String) model.getValueAt(clienteSeleccionado, 0);
+                  model.removeRow(clienteSeleccionado);
+                  
+                  mercadito.eliminarPorNombreCliente(nombreSeleccionado);
+               }
+            }
+            
+        });
+        
+       gFacturar.addLimpiarClientesBtn(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                gFacturar.setIDClienteTf("");
+                gFacturar.setNombreClienteTf("");
+                gFacturar.setTelefonoClienteTf("");
+                gFacturar.setEmailClienteTf("");
+                gFacturar.setDescClienteTf("");
+            } 
+       });
+       
+       gFacturar.addBuscarClienteBtn(new ActionListener(){
+           
+           public void actionPerformed(ActionEvent e) {
+            String buscarPorNombre = gFacturar.getNombreBusq();
+            
+               if(buscarPorNombre.isEmpty()){
+                   gFacturar.notify("Ingrese un Nombre");
+                   return;
+               }
+                cliente = mercadito.buscarCliente_Nom(buscarPorNombre);
+
+               if(cliente != null){
+                   gFacturar.setIDClienteTf(cliente.getCedula());
+                   gFacturar.setNombreClienteTf(cliente.getNombre());
+                   gFacturar.setTelefonoClienteTf(cliente.getTelefono());
+                   gFacturar.setEmailClienteTf(cliente.getTelefono());
+                   gFacturar.setDescClienteTf(String.valueOf(cliente.getDescuento()));
+                   return;
+               }
+           }
+           
+       });
     }
 }

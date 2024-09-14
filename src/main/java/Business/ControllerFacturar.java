@@ -1,8 +1,12 @@
 package Business;
 
+import Business.LogicVBuscar;
+import Data.ArchivosXML;
+import Data.ListaClientes;
 import Data.ListaProductos;
 //import Data.LogicProductoXML;
 import Data.MiniSuper;
+import Domain.Cliente;
 import Domain.DetalleVenta;
 import Domain.Producto;
 import Presentation.GUIFacturar;
@@ -12,6 +16,9 @@ import Presentation.VentanaCobrar;
 import jakarta.xml.bind.JAXBException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -21,25 +28,22 @@ public class ControllerFacturar {
     private VentanaCobrar vCobrar;
     private VentanaBuscar vBuscar;
     private VentanaCantidad vCantidad;
+    private int cant;
     private Producto producto;
-    int cant;
+    
 
     public ControllerFacturar(GUIFacturar gFacturar) throws JAXBException{
          this.gFacturar = gFacturar;
          this.vCobrar = new VentanaCobrar();
          this.vCantidad = new VentanaCantidad();
          this.producto = new Producto();
-         cant = 0;
-         
          LogicVBuscar ventBuscar = new LogicVBuscar();
          this.vBuscar = ventBuscar.getvBuscar();
          this.mercadito = new MiniSuper();
+         cant = 0;
     }
 
     public void getControllerFacturar(){
-        gFacturar.setVisible(true);
-        gFacturar.setLocationRelativeTo(null);
-
         //--------------------Buscar---------------------------------------------
         gFacturar.addBuscarBtn(new ActionListener(){
             @Override
@@ -64,11 +68,10 @@ public class ControllerFacturar {
                    vBuscar.notify("Ingrese una descripcion");
                    return;
                }
-
                 producto = mercadito.buscarProducto_Descrip(descripcionBuscar);
 
                if(producto != null){
-                   vBuscar.notify(producto.toString());
+                   gFacturar.notify(producto.toString());
                    vBuscar.setDescripcionTf("");
                    gFacturar.setCodigoProducto(producto.getDescripcion());
                    vBuscar.dispose();
@@ -103,6 +106,7 @@ public class ControllerFacturar {
         });
 //----------------------------AGREGAR-------------------------------------------
         gFacturar.addAgregarBtn(new ActionListener(){
+           
             @Override
             public void actionPerformed(ActionEvent e) {
                 agregarProducto(new DetalleVenta(cant, producto));
@@ -110,16 +114,6 @@ public class ControllerFacturar {
 
         });
 
-    }
-
-    void ejecutarCantidad(Producto producto){
-    /*gFacturar.addCantidadBtn(new ActionListener(){
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                   vCantidad.setVisible(true);
-                   vCantidad.setLocationRelativeTo(null);
-                } 
-            });*/
     gFacturar.addCantidadBtn(new ActionListener(){
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -132,28 +126,67 @@ public class ControllerFacturar {
     vCantidad.addOkBtn(new ActionListener(){
         @Override
         public void actionPerformed(ActionEvent e) {
-         if(!vCantidad.getIngCantidad().isEmpty()){
-            int cant = Integer.valueOf(vCantidad.getIngCantidad());    
+         if(!vCantidad.getIngCantidad().isEmpty()){   
+            int cant = Integer.parseInt(vCantidad.getIngCantidad()); 
             if(cant > 0){
                 if(cant <= producto.getExistencia()){
                     producto.venderProducto(cant);
                     vCantidad.setIngCantidad("");
+                    vCantidad.dispose();
                 }
                 else
                     vCantidad.notify("La cantidad sobrepasa la existencia del producto");
             }
             else
             {
-                vBuscar.notify("La cantidad debe ser mayor a 0");
+                vCantidad.notify("La cantidad debe ser mayor a 0");
             }
          }
         }
         
     });
+    
+    vCantidad.addCancelBtn(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               vCantidad.dispose();
+            }
+        
+    });
+    
+    //-------------Eliminar--------------
+    gFacturar.addEliminarBtn(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               JTable tablaProductos = gFacturar.getTableClientes();
+               int productoSeleccionado = gFacturar.getTablaArticulos().getSelectedRow();
+               
+               if(productoSeleccionado < 0){
+                gFacturar.notify("Seleccione el producto que desea eliminar");
+            }else{
+                  JTable tablaArticulos = gFacturar.getTablaArticulos();
+                  DefaultTableModel model = (DefaultTableModel) tablaArticulos.getModel();
+                  model.removeRow(productoSeleccionado);
+               }
+            }
+    });
+    
+    gFacturar.addCancelarBtm(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+              gFacturar.notify("Gracias por usar nuestro sistema");
+              gFacturar.dispose();
+            }
+        
+    });
     }
     
+    
+    
+    
+    
     void agregarProducto(DetalleVenta detalle){
-        if(detalle != null && producto != null){
+        if(detalle != null && detalle.getProducto() != null){
          JTable tablis = gFacturar.getTablaArticulos();
          DefaultTableModel model = (DefaultTableModel) tablis.getModel();
          
@@ -165,9 +198,7 @@ public class ControllerFacturar {
          model.insertRow(0,datos);
         }
     }
-    //------------------Cantidad-------------------
-    
-    
+   
     
 }
    

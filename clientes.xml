@@ -24,4 +24,46 @@
         <descuento>12.0</descuento>
         <telefono>44444</telefono>
     </cliente>
+    <cliente cedula="222">
+        <nombre>zoe</nombre>
+        <correo>sss</correo>
+        <descuento>20.0</descuento>
+        <telefono>4444</telefono>
+    </cliente>
+    <cliente cedula="444">
+        <nombre>zoe</nombre>
+        <correo>sss</correo>
+        <descuento>10.0</descuento>
+        <telefono>3333</telefono>
+    </cliente>
+    <cliente cedula="22222">
+        <nombre>222</nombre>
+        <correo>2222</correo>
+        <descuento>30.0</descuento>
+        <telefono>2222</telefono>
+    </cliente>
+    <cliente cedula="444">
+        <nombre>444</nombre>
+        <correo>44</correo>
+        <descuento>2.0</descuento>
+        <telefono>444</telefono>
+    </cliente>
+    <cliente cedula="222">
+        <nombre>zoe</nombre>
+        <correo>4444</correo>
+        <descuento>20.0</descuento>
+        <telefono>4444</telefono>
+    </cliente>
+    <cliente cedula="222">
+        <nombre>zoe</nombre>
+        <correo>4444</correo>
+        <descuento>20.0</descuento>
+        <telefono>4444</telefono>
+    </cliente>
+    <cliente cedula="222">
+        <nombre>zoe</nombre>
+        <correo>4444</correo>
+        <descuento>20.0</descuento>
+        <telefono>4444</telefono>
+    </cliente>
 </listaclientes>

@@ -5,10 +5,14 @@
 package Business;
 
 import Data.ArchivosXML;
+import Domain.Cliente;
 import Domain.Producto;
+import Presentation.GUIFacturar;
 import Presentation.VentanaBuscar;
 import jakarta.xml.bind.JAXBException;
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellEditor;

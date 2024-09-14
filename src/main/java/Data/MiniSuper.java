@@ -68,7 +68,7 @@ public class MiniSuper {
     
     public Producto buscarProducto_Descrip(String des){
         for(Producto producto : listaProductos){
-            if(producto.getDescripcion().equals(des))
+            if(producto.getDescripcion().equalsIgnoreCase(des))
                 return producto;
         }
         return null;
@@ -81,6 +81,34 @@ public class MiniSuper {
         }
         return null;
     }
+    
+    public Producto eliminarPorCod(String descripcion){
+            for(Producto producto : listaProductos){
+            if(producto.getDescripcion().equals(descripcion))
+                listaProductos.remove(producto);
+                return producto;
+        }
+       return null;
+    }
+    
+      public Cajero eliminarPorNombreCajero(String nombre){
+            for(Cajero cajero : listaCajeros){
+            if(cajero.getNombre().equals(nombre))
+                listaProductos.remove(cajero);
+                return cajero;
+        }
+       return null;
+    }
+      
+      public Cliente eliminarPorNombreCliente(String nombre){
+            for(Cliente cliente : listaClientes){
+            if(cliente.getNombre().equals(nombre))
+                listaProductos.remove(cliente);
+                return cliente;
+        }
+       return null;
+    }
+      
     
     public Cliente buscarCliente_Nom(String nom){
         for(Cliente cliente : listaClientes){
@@ -118,6 +146,13 @@ public class MiniSuper {
         for(Factura factura : listaFacturas){
             if(factura.getNumFactura().equals(num))
                 return factura;
+        }
+        return null;
+    }
+    
+    public Cliente recorrerListaCliente(){
+        for(Cliente cliente : listaClientes){
+            return cliente;
         }
         return null;
     }
