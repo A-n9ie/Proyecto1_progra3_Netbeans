@@ -2,21 +2,25 @@
 package Presentation;
 
 
+import Data.ListaClientes;
+import Domain.Cajero;
+import Domain.Cliente;
 import Domain.Producto;
 import java.awt.event.ActionListener;
-import javax.swing.JComboBox;
-import javax.swing.JOptionPane;
-import javax.swing.JTable;
+import java.util.List;
+import javax.swing.*;
 
+import Business.ControllerClientes;
+import Business.ControllerCajeros;
 
 public class GUIFacturar extends javax.swing.JFrame {
-  
 
     private Producto producto;
     
     public GUIFacturar() {
         initComponents();
     }
+
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -1164,7 +1168,7 @@ public class GUIFacturar extends javax.swing.JFrame {
     private javax.swing.JTextField codigoProductoTf;
     private javax.swing.JPanel comboBoxCajeros;
     private javax.swing.JPanel comboBoxCliente;
-    private javax.swing.JComboBox<String> comboBoxClientes;
+    private javax.swing.JComboBox<Cliente> comboBoxClientes;
     private javax.swing.JPanel datosClientes;
     private javax.swing.JPanel datosClientes1;
     private javax.swing.JPanel datosClientes11;
@@ -1195,7 +1199,7 @@ public class GUIFacturar extends javax.swing.JFrame {
     private javax.swing.JTextField idCajeroTf;
     private javax.swing.JLabel idClientesLb;
     private javax.swing.JTextField idClientesTf;
-    private javax.swing.JComboBox<String> jComboBoxcjaeros;
+    private javax.swing.JComboBox<Cajero> jComboBoxcjaeros;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel63;
@@ -1282,17 +1286,15 @@ public class GUIFacturar extends javax.swing.JFrame {
     public JTable getTablaArticulos() {
         return tablaArticulos;
     }
+
+    public JComboBox<Cliente> getCBClientes() { return comboBoxClientes; }
     
-    public JComboBox getCBClientes(){
-        return comboBoxClientes;
-    }
-    
-    public JComboBox getCBCajeros(){
+    public JComboBox<Cajero> getCBCajeros(){
         return jComboBoxcjaeros;
     }
 
     //-----------CLIENTES---------------
-    
+
     public String getIDClienteTf(){
         return idClientesTf.getText();
     }
@@ -1359,7 +1361,15 @@ public class GUIFacturar extends javax.swing.JFrame {
     public JTable getTableClientes(){ 
         return clientesTable;
     }
-    
+
+    public void cargarClientes(List<Cliente> listaClientes) {
+        DefaultComboBoxModel<Cliente> model = new DefaultComboBoxModel<>();
+        for (Cliente cliente : listaClientes) {
+            model.addElement(cliente);
+        }
+        comboBoxClientes.setModel(model);
+    }
+
     //-----------Cajeros-----------------
       public String getIDCajeroTf(){
         return idCajeroTf.getText();
@@ -1403,7 +1413,14 @@ public class GUIFacturar extends javax.swing.JFrame {
     public JTable getTableCajeros(){ 
         return tableCajeros;
     }
-    
+
+    public void cargarCajeros(List<Cajero> listaCajeros) {
+        DefaultComboBoxModel<Cajero> model = new DefaultComboBoxModel<>();
+        for (Cajero cajero : listaCajeros) {
+            model.addElement(cajero);
+        }
+        jComboBoxcjaeros.setModel(model);
+    }
     //----------Productos-------------
     public String getCodigoTf(){
         return codigoProductoTf.getText();
@@ -1436,7 +1453,7 @@ public class GUIFacturar extends javax.swing.JFrame {
     public void setPrecioTf(String string){
         this.precioPTf.setText(string);
     }
-    
+
     public String getDescProductoTf(){
         return descPTf.getText();
     }
@@ -1461,7 +1478,8 @@ public class GUIFacturar extends javax.swing.JFrame {
         this.categoriaTf.setText(string);
     }
 
-    
+    public void setProducto(Producto producto) {this.producto = producto; }
+
     public void addGuardarProductoBtn(ActionListener listener){
         guardarProductoBtn.addActionListener(listener);
     }
@@ -1481,15 +1499,18 @@ public class GUIFacturar extends javax.swing.JFrame {
     public void addReporteProductosBtn(ActionListener listener){
         rerporteProductoBtn.addActionListener(listener);
     }
-    
+
     public String getBusquedacCod(){
         return buscarProductoPorNombre.getText();
     }
     public JTable getTableProductosNuevos(){ 
         return tableProductosNuevos;
     }
-    
-}   
+
+    public Producto getProducto() {
+        return producto;
+    }
+}
 
 
 

@@ -66,4 +66,10 @@
         <descuento>20.0</descuento>
         <telefono>4444</telefono>
     </cliente>
+    <cliente cedula="12345678">
+        <nombre>Ana</nombre>
+        <correo>test@gmail.com</correo>
+        <descuento>10.0</descuento>
+        <telefono>12121212</telefono>
+    </cliente>
 </listaclientes>

@@ -8,16 +8,16 @@ import jakarta.xml.bind.JAXBException;
 
 public class ControllerMain {
     private GUIFacturar gFacturar;
+    private ControllerProductos controllerProductos;
     private ControllerFacturar controllerFacturar;
     private ControllerClientes controllerClientes;
     private ControllerCajeros controllerCajeros;
-    private ControllerProductos controllerProductos;
     
     public ControllerMain(GUIFacturar gFacturar) throws JAXBException{
-        this.controllerFacturar = new ControllerFacturar(gFacturar);
+        this.controllerProductos = new ControllerProductos(gFacturar);
+        this.controllerFacturar = new ControllerFacturar(gFacturar, controllerProductos);
         this.controllerClientes = new ControllerClientes(gFacturar);
         this.controllerCajeros = new ControllerCajeros(gFacturar);
-        this.controllerProductos = new ControllerProductos(gFacturar);
         this.gFacturar = gFacturar;
     }
     
@@ -25,8 +25,11 @@ public class ControllerMain {
         gFacturar.setVisible(true);
         gFacturar.setLocationRelativeTo(null);
         controllerFacturar.getControllerFacturar();
+        controllerFacturar.cargarClientesEnGUI();
+        controllerFacturar.cargarCajerosEnGUI();
         controllerClientes.getVentanaClientes();
         controllerCajeros.getVentanaCajeros();
         controllerProductos.getVentanaProductos();
+
     }
 }

@@ -37,8 +37,7 @@ public class Cajero extends Persona{
     @Override
     public String toString() {
         return """
-               -Cajero-
-               Cedula: """ + cedula + "\n" +
-                "Nombre: " + nombre + "\n";
+               Cedula: """ + cedula + "\n " +
+                "Nombre: " + nombre + "\n ";
     }
 }

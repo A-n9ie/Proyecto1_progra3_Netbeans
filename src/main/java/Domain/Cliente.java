@@ -61,11 +61,10 @@ public class Cliente extends Persona {
     @Override
     public String toString() {
         return """
-               -Cliente-
-               Cedula: """ + cedula + "\n" +
-                "Nombre:" + nombre + "\n" +
-                "Correo: " + correo + "\n" +
-                "Telefono: " + telefono + "\n" +
-                "Descuento: " + descuento + "\n";
+               Cedula: """ + cedula + "\n " +
+                "Nombre:" + nombre + "\n " +
+                "Correo: " + correo + "\n " +
+                "Telefono: " + telefono + "\n " +
+                "Descuento: " + descuento + "\n ";
     }
 }
