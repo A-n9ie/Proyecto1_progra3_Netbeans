@@ -31,7 +31,7 @@ public class ControllerEstadisticas {
             @Override
               public void actionPerformed(ActionEvent e) {
         try {
-            List<Factura> facturas = obtenerFacturas(ventana.getCategoriaSeleccionada());
+            List<Factura> facturas = obtenerFacturas(ventana.getMesSeleccionado(), ventana.getCategoriaSeleccionada());
             
             JPanel panelGrafico = grafico.crearGraficoEstadisticas(facturas);
             
@@ -60,13 +60,13 @@ public class ControllerEstadisticas {
         return categorias; // Retorna las categorías únicas
     }
     
-    private List<Factura> obtenerFacturas(String categoria) throws JAXBException{
+    private List<Factura> obtenerFacturas(String mes, String categoria) throws JAXBException{
         List<Factura> todasLasFacturas = ArchivosXML.cargarFacturas();
         
         List<Factura> facturasFiltradas = new ArrayList<>();
         for (Factura factura : todasLasFacturas) {
             for (DetalleVenta detalle : factura.getDetalles()) {
-                if (detalle.getProducto().getCategoria().equals(categoria)) { //comparar las categorías para evitar repetir
+                if (detalle.getProducto().getCategoria().equals(categoria) && factura.getMes().equals(mes)) { //comparar las categorías y mes para evitar repetir
                     facturasFiltradas.add(factura);
                     break;
                 }
