@@ -1,4 +1,3 @@
-
 package Business;
 
 import Data.ArchivosXML;
@@ -19,67 +18,60 @@ import java.util.logging.Logger;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-
-
 public class ControllerProductos {
+
     private GUIFacturar gFacturar;
+    private LogicVBuscar logvBuscar;
+    private LogicProductos logProductos;
     private Producto producto;
     private ArchivosXML guardaXMl;
     private List<Producto> listaProductos;
     private MiniSuper mercadito;
-    
-    
-    public ControllerProductos(GUIFacturar gFacturar) throws JAXBException{
+
+    public ControllerProductos(GUIFacturar gFacturar, MiniSuper m) throws JAXBException {
         this.gFacturar = gFacturar;
+        this.mercadito = m;
+        this.listaProductos = m.getListaProductos();
+        this.logProductos = new LogicProductos(gFacturar, listaProductos);
+        this.logvBuscar = new LogicVBuscar(listaProductos);
         this.producto = new Producto();
         this.guardaXMl = new ArchivosXML();
-        this.listaProductos = ArchivosXML.cargarProductos();
-        this.mercadito = new MiniSuper();        
     }
-    
-    public void getVentanaProductos(){
-        
-        gFacturar.addGuardarProductoBtn(new ActionListener(){
+
+    public void getVentanaProductos() {
+
+        gFacturar.addGuardarProductoBtn(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               String codigo = gFacturar.getCodigoTf();
-               String descripcion = gFacturar.getDescripcionTf();
-               String unidad = gFacturar.getUnidadTf();
-               String precio = gFacturar.getPrecioTf();
-               String desc = gFacturar.getDescProductoTf();
-               String existencias = gFacturar.getExistenciasTf();
-               String categoria = gFacturar.getCategoriaTf();
-               
-               if(codigo.isEmpty() || descripcion.isEmpty() || unidad.isEmpty() || precio.isEmpty() || desc.isEmpty() || existencias.isEmpty() || categoria.isEmpty()){
-                   gFacturar.notify("Ingrese toda la informacion solicitada");
-               }
-               else{
-                     producto = new Producto(codigo, descripcion, unidad , Float.parseFloat(precio), Float.parseFloat(desc), Integer.parseInt(existencias), categoria);
-                     
-                     JTable tablaProductos = gFacturar.getTableProductosNuevos();
-                     DefaultTableModel model = (DefaultTableModel) tablaProductos.getModel();
-                     tablaProductos.setRowSelectionAllowed(true);
-                     Object[] datosProducto = {producto.getCodigo(), producto.getDescripcion(), producto.getUnidad_m(), producto.getPrecio(), producto.getDescuento(), producto.getExistencia(), producto.getCategoria()};
-                     
-                     model.insertRow(0,datosProducto);
+                String codigo = gFacturar.getCodigoTf();
+                String descripcion = gFacturar.getDescripcionTf();
+                String unidad = gFacturar.getUnidadTf();
+                String precio = gFacturar.getPrecioTf();
+                String desc = gFacturar.getDescProductoTf();
+                String existencias = gFacturar.getExistenciasTf();
+                String categoria = gFacturar.getCategoriaTf();
+                
 
-                   Producto productoActualizado = gFacturar.getProducto();
-                   productoActualizado.venderProducto(Integer.parseInt(gFacturar.getProducto().getUnidad_m()));
+                if (codigo.isEmpty() || descripcion.isEmpty() || unidad.isEmpty() || precio.isEmpty() || desc.isEmpty() || existencias.isEmpty() || categoria.isEmpty()) {
+                    gFacturar.notify("Ingrese toda la informacion solicitada");
+                } else {
+                    float descNum = Float.parseFloat(desc);
+                    if(descNum >= 1)
+                    descNum/=100;
+                    
+                    if(mercadito.buscarProducto(codigo) == null){
+                    producto = new Producto(codigo, descripcion, unidad, Float.parseFloat(precio), descNum, Integer.parseInt(existencias), categoria);
+                    
 
-                   gFacturar.setExistenciasTf(String.valueOf(productoActualizado.getExistencia()));
-
-                   actualizarListaProductos(productoActualizado);
-                     if(listaProductos == null){
-                         listaProductos = new ArrayList<>();
-                     }
-                        listaProductos.add(producto);
-                   try {
-                       ArchivosXML.guardarProductos(listaProductos);
-                   } catch (JAXBException ex) {
-                      ex.printStackTrace();
-                   }
-                     
-               }
+                    if (listaProductos == null) {
+                        listaProductos = new ArrayList<>();
+                    }
+                    listaProductos.add(producto);
+                    
+                    actualizarProductos();
+                    } else
+                       gFacturar.notify("El codigo del producto pertenece al sistema");
+                }
             }
         });
 
@@ -100,54 +92,52 @@ public class ControllerProductos {
 
                     model.removeRow(productoSeleccionado);
 
-                    try {
-                        ArchivosXML.guardarProductos(listaProductos);
-                    } catch (JAXBException ex) {
-                        ex.printStackTrace();
-                        gFacturar.notify("Error al guardar los datos.");
-                    }
+                    actualizarProductos();
                 }
             }
         });
 
-
-        gFacturar.addLimpiarClientesBtn(new ActionListener(){
+        gFacturar.addLimpiarProductosBtn(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 gFacturar.setCodigoTf("");
                 gFacturar.setCategoriaTf("");
                 gFacturar.setUnidadTf("");
                 gFacturar.setPrecioTf("");
-                gFacturar.setDescProductoTf("");
+                gFacturar.setDescripcionTf("");
                 gFacturar.setExistenciasTf("");
                 gFacturar.setCategoriaTf("");
-            } 
-       });
-       
-       gFacturar.addBuscarProductoBtn(new ActionListener(){
-           
-           public void actionPerformed(ActionEvent e) {
-            String buscarNombre = gFacturar.getBusquedacCod();
-            
-               if(buscarNombre.isEmpty()){
-                   gFacturar.notify("Ingrese un Nombre");
-                   return;
-               }
-                producto = mercadito.buscarProducto_Descrip(buscarNombre);
+            }
+        });
 
-               if(producto != null){
-                   gFacturar.setCodigoTf(producto.getCodigo());
-                   gFacturar.setDescripcionTf(producto.getDescripcion());
-                   gFacturar.setUnidadTf(producto.getUnidad_m());
-                   gFacturar.setPrecioTf(String.valueOf(producto.getPrecio()));
-                   gFacturar.setDescProductoTf(String.valueOf(producto.getDescuento()));
-                   gFacturar.setExistenciasTf(String.valueOf(producto.getExistencia()));
-                   gFacturar.setCategoriaTf(String.valueOf(producto.getCategoria()));
-                   return;
-               }
-           }
-           
-       });
+        gFacturar.addBuscarProductoBtn(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e) {
+                String buscarNombre = gFacturar.getBusquedacCod();
+
+                if (buscarNombre.isEmpty()) {
+                    gFacturar.notify("Ingrese un Nombre");
+                    return;
+                }
+                producto = mercadito.buscarProducto(buscarNombre);
+
+                if (producto != null) {
+                    gFacturar.setCodigoTf(producto.getCodigo());
+                    gFacturar.setDescripcionTf(producto.getDescripcion());
+                    gFacturar.setUnidadTf(producto.getUnidad_m());
+                    gFacturar.setPrecioTf(String.valueOf(producto.getPrecio()));
+                    gFacturar.setDescProductoTf(String.valueOf(producto.getDescuento()));
+                    gFacturar.setExistenciasTf(String.valueOf(producto.getExistencia()));
+                    gFacturar.setCategoriaTf(String.valueOf(producto.getCategoria()));
+                    producto = null;
+                    return;
+                }
+                else{
+                    gFacturar.notify("No se encontro el producto");
+                }
+            }
+
+        });
     }
 
     public void actualizarProductoEnGUI(Producto producto) {
@@ -176,6 +166,7 @@ public class ControllerProductos {
             }
         }
     }
+
     public void actualizarProductoCantidad(Producto producto, int cantidad) {
         if (producto != null) {
             Producto productoActualizado = listaProductos.stream()
@@ -189,7 +180,7 @@ public class ControllerProductos {
 
                     actualizarListaProductos(productoActualizado);
 
-                    guardarProductos();
+                    actualizarProductos();
                 } else {
                     System.out.println("La cantidad sobrepasa la existencia del producto");
                 }
@@ -199,9 +190,12 @@ public class ControllerProductos {
         }
     }
 
-    private void guardarProductos() {
+    private void actualizarProductos() {
         try {
-            ArchivosXML.guardarProductos(listaProductos);
+             ArchivosXML.guardarProductos(listaProductos);
+             mercadito.restablecerProductos();
+             logProductos.actualizarLista();
+             logvBuscar.actualizarLista();
         } catch (JAXBException ex) {
             ex.printStackTrace();
             System.out.println("Error al guardar los datos.");
@@ -215,20 +209,20 @@ public class ControllerProductos {
 
             if (detalle.getCantidad() <= detalle.getProducto().getExistencia()) {
                 Object[] datos = {
-                        detalle.getProducto().getCodigo(),
-                        detalle.getProducto().getDescripcion(),
-                        detalle.getCategoria(),
-                        detalle.getCantidad(),
-                        detalle.getProducto().getPrecio(),
-                        detalle.getProducto().getDescuento(),
-                        detalle.precioNeto(),
-                        detalle.importe()
+                    detalle.getProducto().getCodigo(),
+                    detalle.getProducto().getDescripcion(),
+                    detalle.getCategoria(),
+                    detalle.getCantidad(),
+                    detalle.getProducto().getPrecio(),
+                    detalle.getProducto().getDescuento(),
+                    detalle.precioNeto(),
+                    detalle.importe()
                 };
 
                 model.insertRow(0, datos);
 
                 Producto productoActualizado = detalle.getProducto();
-                productoActualizado.venderProducto(detalle.getCantidad());
+                //productoActualizado.venderProducto(detalle.getCantidad());
 
                 gFacturar.setExistenciasTf(String.valueOf(productoActualizado.getExistencia()));
 
@@ -245,6 +239,58 @@ public class ControllerProductos {
             }
         }
     }
-    public List<Producto> getListaProductos(){return listaProductos;}
-}
+    
+    public void realizarCompra(List<DetalleVenta> detalles){
+        for(DetalleVenta d: detalles){
+            mercadito.buscarProducto(d.getProducto().getCodigo()).venderProducto(d.getCantidad());
+        }
+        listaProductos = mercadito.getListaProductos();
+        actualizarProductos();
+                 
+    }
 
+    public List<Producto> getListaProductos() {
+        return listaProductos;
+    }
+
+    public boolean productoComprado(String nom) {
+        JTable tablis = gFacturar.getTablaArticulos();
+        DefaultTableModel model = (DefaultTableModel) tablis.getModel();
+
+        for (int i = 0; i < model.getRowCount(); i++) {
+            if (model.getValueAt(i, 1).equals(nom) || model.getValueAt(i, 0).equals(nom)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    void cambiarValores(int fila, DetalleVenta detalle) {
+        if (detalle != null && detalle.getProducto() != null) {
+            JTable tablis = gFacturar.getTablaArticulos();
+            DefaultTableModel model = (DefaultTableModel) tablis.getModel();
+
+            if (detalle.getCantidad() <= detalle.getProducto().getExistencia()) {
+                Object[] datos = {
+                    detalle.getProducto().getCodigo(),
+                    detalle.getProducto().getDescripcion(),
+                    detalle.getCategoria(),
+                    detalle.getCantidad(),
+                    detalle.getProducto().getPrecio(),
+                    detalle.getProducto().getDescuento(),
+                    detalle.precioNeto(),
+                    detalle.importe()
+                };
+                for (int j = 0; j < model.getColumnCount(); j++) {
+                    model.setValueAt(datos[j], fila, j);
+                }
+            }
+        }
+    }
+
+    public LogicVBuscar getLogvBuscar() {
+        return logvBuscar;
+    }
+
+}

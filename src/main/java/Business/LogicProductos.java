@@ -5,62 +5,50 @@
 package Business;
 
 import Data.ArchivosXML;
-import Domain.Cliente;
 import Domain.Producto;
 import Presentation.GUIFacturar;
-import Presentation.VentanaBuscar;
 import jakarta.xml.bind.JAXBException;
 import java.util.List;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellEditor;
 
 /**
  *
  * @author angie
  */
-public class LogicVBuscar {
+public class LogicProductos {
     private List<Producto> list;
-    private VentanaBuscar vBuscar;
+    private GUIFacturar gFacturar;
     
-    public LogicVBuscar(List<Producto> l) throws JAXBException {
-        list = l;
-        vBuscar = new VentanaBuscar();
+    public LogicProductos(GUIFacturar fact, List<Producto> ps) throws JAXBException {
+        list = ps;
+        gFacturar = fact;
         EstablecerTabla();
         llenarTabla();
     }
     
     private void EstablecerTabla(){
-        DefaultTableModel model = (DefaultTableModel) vBuscar.getProductosTableView().getModel();
-        model.setRowCount(list.size()); //Tamaño de la lista más su caracteristicas
+        DefaultTableModel model = (DefaultTableModel) gFacturar.getTableProductosNuevos().getModel();
+        model.setRowCount(list.size()); //Tamaño de la lista 
     }
     
      private void llenarTabla(){
-        JTable tablis = vBuscar.getProductosTableView();
+        JTable tablis = gFacturar.getTableProductosNuevos();
+         
         for(int i = 0; i < tablis.getRowCount(); i++){
             Producto aux = list.get(i);
-            String[] datosPro = {aux.getCodigo(), aux.getDescripcion(),
-                aux.getUnidad_m(), String.valueOf(aux.getPrecio()),aux.getCategoria()};
+            Object[] datosPro = {aux.getCodigo(), aux.getDescripcion(),
+                aux.getUnidad_m(), aux.getPrecio(), aux.getDescuento(), aux.getExistencia(),aux.getCategoria()};
+            
             for(int j = 0; j < tablis.getColumnCount(); j++){
                     tablis.setValueAt(datosPro[j], i, j);
             }
         }
     }
 
-    public List<Producto> getList() {
-        return list;
-    }
-
-    public VentanaBuscar getvBuscar() {
-        return vBuscar;
-    }
-    
-    
+     
      public void actualizarLista(){
          EstablecerTabla();
         llenarTabla();
      }
-    
 }

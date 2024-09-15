@@ -37,10 +37,9 @@ public class VentanaCobrar extends javax.swing.JFrame {
         chequeTf = new javax.swing.JTextField();
         sinpeTf = new javax.swing.JTextField();
         totalPgar = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        totlPagar = new javax.swing.JLabel("Total: 0.00");
+        total_txt = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         okBtn.setText("OK");
 
@@ -106,7 +105,7 @@ public class VentanaCobrar extends javax.swing.JFrame {
 
         totalPgar.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Total"));
 
-        jLabel1.setText("0");
+        total_txt.setText("0");
 
         javax.swing.GroupLayout totalPgarLayout = new javax.swing.GroupLayout(totalPgar);
         totalPgar.setLayout(totalPgarLayout);
@@ -114,14 +113,14 @@ public class VentanaCobrar extends javax.swing.JFrame {
             totalPgarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, totalPgarLayout.createSequentialGroup()
                 .addContainerGap(90, Short.MAX_VALUE)
-                .addComponent(jLabel1)
+                .addComponent(total_txt)
                 .addGap(58, 58, 58))
         );
         totalPgarLayout.setVerticalGroup(
             totalPgarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(totalPgarLayout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addComponent(jLabel1)
+                .addComponent(total_txt)
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
@@ -159,13 +158,15 @@ public class VentanaCobrar extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(totalPagar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(totalPagar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(136, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(totalPagar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 9, Short.MAX_VALUE))
         );
 
         pack();
@@ -178,7 +179,6 @@ public class VentanaCobrar extends javax.swing.JFrame {
     private javax.swing.JTextField chequeTf;
     private javax.swing.JLabel efectivoLb;
     private javax.swing.JTextField efectivoTf;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel metodosPago;
     private javax.swing.JButton okBtn;
     private javax.swing.JLabel sinpeLb;
@@ -187,7 +187,7 @@ public class VentanaCobrar extends javax.swing.JFrame {
     private javax.swing.JTextField tarjetaTf;
     private javax.swing.JPanel totalPagar;
     private javax.swing.JPanel totalPgar;
-    private javax.swing.JLabel totlPagar;
+    private javax.swing.JLabel total_txt;
     // End of variables declaration//GEN-END:variables
 
     public void addOkBtn(ActionListener listener){
@@ -214,7 +214,15 @@ public class VentanaCobrar extends javax.swing.JFrame {
         return sinpeTf.getText();
     }
 
-    public void setTotal(double total) {totlPagar.setText("Total: " + String.format("%.2f", total));
+    public void setTotal(double total) {total_txt.setText("Total: " + String.format("%.2f", total));
     }
+    
+    public void setTotal(String t){
+        this.total_txt.setText(t);
+    }
+    
+    public String getTotal_txt(){
+        return this.total_txt.getText();
+    } 
 
 }

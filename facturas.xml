@@ -1,2 +1,89 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<listafacturas/>
+<listafacturas>
+    <factura numFactura="0">
+        <cajero cedula="2222">
+            <nombre>Marco</nombre>
+        </cajero>
+        <cliente cedula="11111">
+            <nombre>Marta</nombre>
+            <correo>allys34@gmail.com</correo>
+            <descuento>0.15</descuento>
+            <telefono>222222222</telefono>
+        </cliente>
+        <detalles>
+            <venta>
+                <cantidad>1</cantidad>
+                <categoria>bebidas</categoria>
+                <producto codigo="888">
+                    <categoria>bebidas</categoria>
+                    <descripcion>pepsi</descripcion>
+                    <descuento>0.0</descuento>
+                    <existencia>44</existencia>
+                    <precio>880.0</precio>
+                    <unidad_m>L</unidad_m>
+                </producto>
+            </venta>
+        </detalles>
+        <fecha>15/9/2024</fecha>
+        <hora>12:41:21</hora>
+        <pagos>
+            <metodo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="efectivo" metodo="Efectivo">
+                <monto>800.0</monto>
+                <cambio>0.0</cambio>
+                <pago>0.0</pago>
+            </metodo>
+            <metodo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="tarjeta" metodo="Targeta">
+                <monto>80.0</monto>
+            </metodo>
+        </pagos>
+    </factura>
+    <factura numFactura="1">
+        <cajero cedula="2222">
+            <nombre>Marco</nombre>
+        </cajero>
+        <cliente cedula="11111">
+            <nombre>Marta</nombre>
+            <correo>allys34@gmail.com</correo>
+            <descuento>0.15</descuento>
+            <telefono>222222222</telefono>
+        </cliente>
+        <detalles>
+            <venta>
+                <cantidad>2</cantidad>
+                <categoria>Dulces</categoria>
+                <producto codigo="3332">
+                    <categoria>Dulces</categoria>
+                    <descripcion>Miel</descripcion>
+                    <descuento>0.02</descuento>
+                    <existencia>24</existencia>
+                    <precio>1100.45</precio>
+                    <unidad_m>gramos</unidad_m>
+                </producto>
+            </venta>
+            <venta>
+                <cantidad>5</cantidad>
+                <categoria>utensilios</categoria>
+                <producto codigo="1eeew">
+                    <categoria>utensilios</categoria>
+                    <descripcion>vaso</descripcion>
+                    <descuento>0.05</descuento>
+                    <existencia>8</existencia>
+                    <precio>200.0</precio>
+                    <unidad_m>cm</unidad_m>
+                </producto>
+            </venta>
+        </detalles>
+        <fecha>15/9/2024</fecha>
+        <hora>12:43:12</hora>
+        <pagos>
+            <metodo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="efectivo" metodo="Efectivo">
+                <monto>3000.8818</monto>
+                <cambio>106.0</cambio>
+                <pago>3106.8818359375</pago>
+            </metodo>
+            <metodo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="sinpe" metodo="Sinpe">
+                <monto>106.0</monto>
+            </metodo>
+        </pagos>
+    </factura>
+</listafacturas>

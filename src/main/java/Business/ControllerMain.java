@@ -2,6 +2,7 @@
 package Business;
 
 import Data.ArchivosXML;
+import Data.MiniSuper;
 import Domain.Producto;
 import Presentation.GUIFacturar;
 import jakarta.xml.bind.JAXBException;
@@ -14,24 +15,29 @@ import java.util.Set;
 
 
 public class ControllerMain {
+    private MiniSuper mercado;
     private GUIFacturar gFacturar;
     private ControllerProductos controllerProductos;
     private ControllerFacturar controllerFacturar;
     private ControllerClientes controllerClientes;
     private ControllerCajeros controllerCajeros;
     private ControllerEstadisticas controllerEstadisticas;
+    private ControllerHistorico controllerHistorico;
 
     public ControllerMain(GUIFacturar gFacturar) throws JAXBException{
-        this.controllerProductos = new ControllerProductos(gFacturar);
-        this.controllerFacturar = new ControllerFacturar(gFacturar, controllerProductos);
-        this.controllerClientes = new ControllerClientes(gFacturar);
-        this.controllerCajeros = new ControllerCajeros(gFacturar);
+        this.gFacturar = gFacturar;
+        this.mercado = new MiniSuper();
+        this.controllerProductos = new ControllerProductos(gFacturar, mercado);
+        this.controllerFacturar = new ControllerFacturar(gFacturar, controllerProductos, mercado);
+        this.controllerClientes = new ControllerClientes(gFacturar, mercado);
+        this.controllerCajeros = new ControllerCajeros(gFacturar, mercado);
+        this.controllerHistorico = controllerFacturar.getControllerHistorico();
         this.controllerEstadisticas = new ControllerEstadisticas(
                 gFacturar.getVentanaEstadisticas(),
                 new GraficoEstadisticas(),
                 new ArchivosXML()
         );
-        this.gFacturar = gFacturar;
+        
     }
 
     private Set<String> obtenerCategoriasDisponibles() {
@@ -56,7 +62,7 @@ public class ControllerMain {
         controllerClientes.getVentanaClientes();
         controllerCajeros.getVentanaCajeros();
         controllerProductos.getVentanaProductos();
-
+        controllerHistorico.getControllerHistorico();
 
     }
 }

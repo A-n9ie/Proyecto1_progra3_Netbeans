@@ -24,17 +24,19 @@ import javax.swing.table.DefaultTableModel;
 public class ControllerClientes {
     private GUIFacturar gFacturar;
     private Cliente cliente;
+    private LogicClientes logCliente;
     private ArchivosXML guardaXMl;
     private List<Cliente> listaClientes;
     private MiniSuper mercadito;
     
     
-    public ControllerClientes(GUIFacturar gFacturar) throws JAXBException{
+    public ControllerClientes(GUIFacturar gFacturar, MiniSuper m) throws JAXBException{
         this.gFacturar = gFacturar;
         this.cliente = new Cliente();
+        this.mercadito = m;  
+        this.logCliente = new LogicClientes(gFacturar, m.getListaClientes());
         this.guardaXMl = new ArchivosXML();
         this.listaClientes = ArchivosXML.cargarClientes();
-        this.mercadito = new MiniSuper();        
     }
     
     public void getVentanaClientes(){
@@ -52,25 +54,22 @@ public class ControllerClientes {
                    gFacturar.notify("Ingrese toda la informacion solicitada");
                }
                else{
-                     Cliente cliente = new Cliente(email, telefono, Float.parseFloat(desc) , id, nombre);
+                    float descNum = Float.parseFloat(desc);
+                    if(descNum >= 1)
+                    descNum/=100;
+                    
+                   if(mercadito.buscarCajero(id) == null && mercadito.buscarCliente(id) == null){
+                     Cliente cliente = new Cliente(email, telefono, descNum , id, nombre);
                      
-                     JTable tablaClientes = gFacturar.getTableClientes();
-                     DefaultTableModel model = (DefaultTableModel) tablaClientes.getModel();
-                     tablaClientes.setRowSelectionAllowed(true);
-                     Object[] datosCliente = {cliente.getCedula(), cliente.getNombre(), cliente.getTelefono(), cliente.getCorreo(), cliente.getDescuento()};
-                     
-                     model.insertRow(0,datosCliente);
                                           
                      if(listaClientes == null){
                          listaClientes = new ArrayList<>();
                      }
                         listaClientes.add(cliente);
-                   try {
-                       ArchivosXML.guardarClientes(listaClientes);
-                   } catch (JAXBException ex) {
-                      ex.printStackTrace();
-                   }
-                     
+                   actualizarClientes();
+                 }
+                   else
+                       gFacturar.notify("La persona ya se encuentra registrada en el sistema");
                }
             }
         });
@@ -86,10 +85,13 @@ public class ControllerClientes {
             }else{
                   JTable tablaClientes = gFacturar.getTableClientes();
                   DefaultTableModel model = (DefaultTableModel) tablaClientes.getModel();
-                  String nombreSeleccionado = (String) model.getValueAt(clienteSeleccionado, 0);
-                  model.removeRow(clienteSeleccionado);
                   
-                  mercadito.eliminarPorNombreCliente(nombreSeleccionado);
+                  String cedula = (String) model.getValueAt(clienteSeleccionado, 0);
+                  model.removeRow(clienteSeleccionado);
+                  listaClientes.removeIf(cliente -> cliente.getCedula().equals(cedula));
+                    
+                  actualizarClientes();
+                  
                }
             }
             
@@ -115,7 +117,7 @@ public class ControllerClientes {
                    gFacturar.notify("Ingrese un Nombre");
                    return;
                }
-                cliente = mercadito.buscarCliente_Nom(buscarPorNombre);
+                cliente = mercadito.buscarCliente(buscarPorNombre);
 
                if(cliente != null){
                    gFacturar.setIDClienteTf(cliente.getCedula());
@@ -125,8 +127,24 @@ public class ControllerClientes {
                    gFacturar.setDescClienteTf(String.valueOf(cliente.getDescuento()));
                    return;
                }
+               else{
+                    gFacturar.notify("No se encontro al cliente");
+                }
+                   
            }
            
        });
     }
+    
+    private void actualizarClientes() {
+        try {
+           ArchivosXML.guardarClientes(listaClientes);
+            mercadito.restablecerClientes();
+            logCliente.actualizarLista();
+            gFacturar.cargarClientes(mercadito.getListaClientes());
+          } catch (JAXBException ex) {
+             ex.printStackTrace();
+            }
+    }
+    
 }

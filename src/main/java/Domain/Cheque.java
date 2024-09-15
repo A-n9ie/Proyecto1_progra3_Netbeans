@@ -8,21 +8,14 @@ import jakarta.xml.bind.annotation.*;
 
 @XmlRootElement
 public class Cheque extends MetodoPago {
-    private String numCheque;
 
-    public Cheque(String numCheque, double monto) {
+    public Cheque() {
+    }
+
+    public Cheque(float monto) {
         super(monto);
-        this.numCheque = numCheque;
     }
-@XmlAttribute
-    public String getNumCheque() {
-        return numCheque;
-    }
-
-    public void setNumCheque(String numCheque) {
-        this.numCheque = numCheque;
-    }
-
+    
     @Override
     public String[] getDatosPago() {
         String[] dataPago = {"metodo", "monto", "numcheque"};
@@ -32,14 +25,13 @@ public class Cheque extends MetodoPago {
     @Override
     public String[] getDatos() {
       String mo = String.valueOf(monto);
-      String[] dataPago = {metodo, mo, numCheque};
+      String[] dataPago = {metodo, mo};
         return dataPago;
     }
 
     @Override
     public String toString() {
         return "Metodo de pago -> " + metodo +
-                 "\nNumero de cheque: " + numCheque + 
                 "\nMonto pagado: " + monto + "\n";
     }
     

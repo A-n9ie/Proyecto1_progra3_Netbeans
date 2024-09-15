@@ -10,20 +10,13 @@ import jakarta.xml.bind.annotation.*;
 
 @XmlRootElement
 public class Sinpe extends MetodoPago {
-    private String telefono;
 
-    public Sinpe(String telefono, double monto) {
+    public Sinpe() {
+    }
+
+    public Sinpe(float monto) {
         super(monto);
         this.metodo = "Sinpe";
-        this.telefono = telefono;
-    }
-@XmlElement
-    public String getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
     }
     
     @Override
@@ -35,14 +28,13 @@ public class Sinpe extends MetodoPago {
     @Override
     public String[] getDatos() {
       String mo = String.valueOf(monto);
-      String[] dataPago = {metodo, mo, telefono};
+      String[] dataPago = {metodo, mo};
         return dataPago;
     }
 
     @Override
     public String toString() {
-        return "Metodo de pago -> " + metodo +
-                "\nTelefono: " + telefono + 
+        return "Metodo de pago -> " + metodo + 
                 "\nMonto pagado: " + monto + "\n"
                 ;}
     

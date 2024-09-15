@@ -27,7 +27,7 @@ public class Factura {
         this.fecha = "indefinids";
         this.cliente = null;
         this.cajero = null;
-        this.detalles = null;
+        this.detalles = new ArrayList();
         this.pagos = null;
     }
 
@@ -43,14 +43,25 @@ public class Factura {
     }
     
     public Factura(Cliente cliente, Cajero cajero, List<DetalleVenta> detalles) {
-        contFacturas++;
-        this.numFactura = String.valueOf(contFacturas);
-        this.hora = Fecha_Hora.horaActual();
-        this.fecha = Fecha_Hora.fechaActual();
+        
+        this.numFactura = "";
+        this.hora = "";
+        this.fecha = "";
+        this.detalles = detalles;
+        this.pagos = null;
         this.cliente = cliente;
         this.cajero = cajero;
+    }
+    
+     public Factura(List<DetalleVenta> detalles) {
+        
+        this.numFactura = "";
+        this.hora = "";
+        this.fecha = "";
+        this.cliente = null;
+        this.cajero = null;
         this.detalles = detalles;
-        this.pagos = new ArrayList<>();
+        this.pagos = null;
     }
 
     public static int getContFacturas() {
@@ -128,8 +139,8 @@ public class Factura {
     }
     
     public float montoTotal(){
-        float descuentoCliente = subtotal() * cliente.getDescuento();
-        float total = subtotal() - descuentoCliente;
+       // float descuentott = subtotal() * descuentos();
+        float total = subtotal();
         return total;
     }
     
@@ -138,6 +149,13 @@ public class Factura {
         for(DetalleVenta venta: detalles)
             cant += venta.getCantidad();
         return cant;
+    }
+    
+    public float descuentos(){
+        float des = 0;
+        for(DetalleVenta venta: detalles)
+            des += venta.getProducto().getDescuento();
+        return des;
     }
     
     public boolean pagado(){
@@ -162,17 +180,20 @@ public class Factura {
     @Override
     public String toString() {
         return """
-               -Factura-
-               NumFactura #""" + numFactura +  
-                "\nHora: " + hora + " \t\tFecha: " + fecha + 
-                "\nCliente:" + cliente.getCedula() + 
-                "\nCajero: " + cajero.getNombre() + 
-                "\n" + detalles.toString() +
-                "\n" + cantidadTotal() +
-                "\n" + subtotal() +
-                "\nDescuento del cliente: " + cliente.getDescuento() +
-                "\nTotal: " + montoTotal() + "\n" +
-                 /*pagos.toString() +*/ "\n";
+                        -Factura-
+                   Factura #""" + numFactura +  
+                "\n Hora: " + hora + " \t\tFecha: " + fecha + 
+                "\n Cliente:" + cliente.getCedula() + " \t\tNombre: " + cliente.getNombre() + 
+                "\n Cajero: " + cajero.getNombre() +
+                "\n -Metodos de pago-" +
+                "\n " + pagos.toString() +
+                "\n -Lista de detalles-"+
+                "\n " + detalles.toString() +
+                "\n Articulos: " + cantidadTotal() +
+                "\n Subtotal: " + subtotal() +
+                "\n Descuento del cliente: " + cliente.getDescuento() +
+                "\n Total: " + montoTotal() + "\n" +
+                 "\n";
     }
     
     public String getMes() {

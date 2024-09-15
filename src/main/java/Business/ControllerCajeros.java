@@ -5,14 +5,11 @@ import Data.ArchivosXML;
 import Data.MiniSuper;
 import Domain.Cajero;
 import Presentation.GUIFacturar;
-import Presentation.VentanaBuscar;
 import jakarta.xml.bind.JAXBException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -21,18 +18,19 @@ import javax.swing.table.DefaultTableModel;
 public class ControllerCajeros {
     private GUIFacturar gFacturar;
     private Cajero cajero;
-    private VentanaBuscar vBuscar;
     private ArchivosXML guardaXMl;
-    private List<Cajero> listaCajero;
+    private List<Cajero> listaCajeros;
     private MiniSuper mercadito;
+    private LogicCajeros logCajeros;
     
     
-    public ControllerCajeros(GUIFacturar gFacturar) throws JAXBException{
+    public ControllerCajeros(GUIFacturar gFacturar, MiniSuper m) throws JAXBException{
+        this.mercadito = m;
         this.gFacturar = gFacturar;
         this.cajero = new Cajero();
         this.guardaXMl = new ArchivosXML();
-        this.listaCajero = ArchivosXML.cargarCajeros();
-        this.mercadito = new MiniSuper();        
+        this.logCajeros = new LogicCajeros(gFacturar, m.getListaCajeros());
+        this.listaCajeros = m.getListaCajeros();
     }
     
     public void getVentanaCajeros(){
@@ -40,32 +38,24 @@ public class ControllerCajeros {
         gFacturar.addGuardarCajeroBtn(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-               String id = gFacturar.getIDClienteTf();
-               String nombre = gFacturar.getNombreClienteTf();
+               String id = gFacturar.getIDCajeroTf();
+               String nombre = gFacturar.getNombreCajeroTf();
                
                if(id.isEmpty() || nombre.isEmpty()){
                    gFacturar.notify("Ingrese toda la informacion solicitada");
                }
                else{
+                   if(mercadito.buscarCajero(id) == null && mercadito.buscarCliente(id) == null){
                      cajero = new Cajero(id, nombre);
-                     
-                     JTable tablaCajero = gFacturar.getTableCajeros();
-                     DefaultTableModel model = (DefaultTableModel) tablaCajero.getModel();
-                     tablaCajero.setRowSelectionAllowed(true);
-                     Object[] datosCajero = {cajero.getCedula(), cajero.getNombre()};
-                     
-                     model.insertRow(0,datosCajero);
                                           
-                     if(listaCajero == null){
-                         listaCajero = new ArrayList<>();
+                     if(listaCajeros == null){
+                         listaCajeros = new ArrayList<>();
                      }
-                        listaCajero.add(cajero);
-                   try {
-                       ArchivosXML.guardarCajeros(listaCajero);
-                   } catch (JAXBException ex) {
-                      ex.printStackTrace();
-                   }
-                     
+                        listaCajeros.add(cajero);
+                   actualizarCajeros();
+                  } 
+                   else
+                       gFacturar.notify("La persona ya se encuentra registrada en el sistema");
                }
             }
         });
@@ -81,15 +71,18 @@ public class ControllerCajeros {
             }else{
                   JTable tablaCajeros = gFacturar.getTableCajeros();
                   DefaultTableModel model = (DefaultTableModel) tablaCajeros.getModel();
-                  String nombreCajero = (String) model.getValueAt(cajeroSeleccionado, 0);
+                  
+                  String cedula = (String) model.getValueAt(cajeroSeleccionado, 0);
                   model.removeRow(cajeroSeleccionado);
-                  mercadito.eliminarPorNombreCajero(nombreCajero);
+                  listaCajeros.removeIf(cliente -> cliente.getCedula().equals(cedula));
+                    
+                  actualizarCajeros();
                }
             }
             
         });
         
-       gFacturar.addLimpiarClientesBtn(new ActionListener(){
+       gFacturar.addLimpiarCajeroBtn(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
                 gFacturar.setIDCajeroTf("");
@@ -100,21 +93,36 @@ public class ControllerCajeros {
        gFacturar.addBuscarNombreCajeroBtn(new ActionListener(){
            
            public void actionPerformed(ActionEvent e) {
-            String buscarPorNombre = gFacturar.getNombreBusq();
+            String buscarPorNombre = gFacturar.getNombreBusqCajeros();
             
                if(buscarPorNombre.isEmpty()){
                    gFacturar.notify("Ingrese un nombre");
                    return;
                }
-                cajero = mercadito.buscarCajero_Nom(buscarPorNombre);
+                cajero = mercadito.buscarCajero(buscarPorNombre);
 
                if(cajero != null){
-                   gFacturar.setIDClienteTf(cajero.getCedula());
-                   gFacturar.setNombreClienteTf(cajero.getNombre());
+                   gFacturar.setIDCajeroTf(cajero.getCedula());
+                   gFacturar.setNombreCajeroTf(cajero.getNombre());
                    return;
                }
+               else{
+                    gFacturar.notify("No se encontro el producto");
+                }
            }
            
        });
+    }
+    
+    
+     private void actualizarCajeros() {
+        try {
+           ArchivosXML.guardarCajeros(listaCajeros);
+            mercadito.restablecerCajeros();
+            logCajeros.actulizarLista();
+            gFacturar.cargarCajeros(mercadito.getListaCajeros());
+          } catch (JAXBException ex) {
+             ex.printStackTrace();
+            }
     }
 }

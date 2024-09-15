@@ -9,10 +9,13 @@ import jakarta.xml.bind.annotation.*;
 
 @XmlRootElement
 public class Efectivo extends MetodoPago {
-    private double pago;
-    private double cambio;
+    private float pago;
+    private float cambio;
 
-    public Efectivo(double pago, double monto) {
+    public Efectivo() {
+    }
+
+    public Efectivo(float pago, float monto) {
         super(monto);
         this.metodo = "Efectivo";
         this.pago = pago;
@@ -23,7 +26,7 @@ public class Efectivo extends MetodoPago {
         return pago;
     }
 
-    public void setPago(double pago) {
+    public void setPago(float pago) {
         this.pago = pago;
     }
 @XmlElement
@@ -31,7 +34,7 @@ public class Efectivo extends MetodoPago {
         return cambio;
     }
 
-    public void setCambio(double cambio) {
+    public void setCambio(float cambio) {
         this.cambio = cambio;
     }
     
@@ -53,7 +56,7 @@ public class Efectivo extends MetodoPago {
     @Override
     public String toString() {
         return "Metodo de pago -> " + metodo +
-                "\nPago: " + pago +
+                "\nPago: " + monto +
                 "\nCambio: "+ cambio + "\n";
     } 
     

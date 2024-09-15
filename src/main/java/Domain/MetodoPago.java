@@ -7,17 +7,17 @@ package Domain;
 import jakarta.xml.bind.annotation.*;
 
 
-@XmlRootElement
+@XmlSeeAlso({Tarjeta.class, Efectivo.class, Cheque.class, Sinpe.class})
 public abstract class MetodoPago {
     protected String metodo;
-    protected double monto;
+    protected float monto;
 
     public MetodoPago() {
         this.metodo = "indefinido";
-        this.monto = 0.0;
+        this.monto = 0.0f;
     }
 
-    public MetodoPago(double monto) {
+    public MetodoPago(float monto) {
         this.monto = monto;
     }
 @XmlAttribute
@@ -29,11 +29,11 @@ public abstract class MetodoPago {
         this.metodo = metodo;
     }
 @XmlElement
-    public double getMonto() {
+    public float getMonto() {
         return monto;
     }
 
-    public void setMonto(double monto) {
+    public void setMonto(float monto) {
         this.monto = monto;
     }
 

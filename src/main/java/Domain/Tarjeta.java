@@ -8,20 +8,13 @@ import jakarta.xml.bind.annotation.*;
 
 @XmlRootElement
 public class Tarjeta extends MetodoPago {
-    private String tipo;
 
-    public Tarjeta(String tipo, double monto) {
+    public Tarjeta() {
+    }
+    
+    public Tarjeta(float monto) {
         super(monto);
         this.metodo = "Targeta";
-        this.tipo = tipo;
-    }
-    @XmlElement
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
     }
 
     @Override
@@ -33,14 +26,13 @@ public class Tarjeta extends MetodoPago {
     @Override
     public String[] getDatos() {
       String mo = String.valueOf(monto);
-      String[] dataPago = {metodo, mo, tipo};
+      String[] dataPago = {metodo, mo};
         return dataPago;
     }
 
     @Override
     public String toString() {
         return "Metodo de pago -> " + metodo +
-                "\nTargeta de " + tipo +
                 "\nMonto pagado: " + monto + "\n";
     }
     

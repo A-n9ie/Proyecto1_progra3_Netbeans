@@ -24,52 +24,46 @@
         <descuento>12.0</descuento>
         <telefono>44444</telefono>
     </cliente>
-    <cliente cedula="222">
-        <nombre>zoe</nombre>
-        <correo>sss</correo>
-        <descuento>20.0</descuento>
-        <telefono>4444</telefono>
-    </cliente>
-    <cliente cedula="444">
-        <nombre>zoe</nombre>
-        <correo>sss</correo>
-        <descuento>10.0</descuento>
-        <telefono>3333</telefono>
-    </cliente>
     <cliente cedula="22222">
         <nombre>222</nombre>
         <correo>2222</correo>
         <descuento>30.0</descuento>
         <telefono>2222</telefono>
     </cliente>
-    <cliente cedula="444">
-        <nombre>444</nombre>
-        <correo>44</correo>
-        <descuento>2.0</descuento>
-        <telefono>444</telefono>
-    </cliente>
-    <cliente cedula="222">
-        <nombre>zoe</nombre>
-        <correo>4444</correo>
-        <descuento>20.0</descuento>
-        <telefono>4444</telefono>
-    </cliente>
-    <cliente cedula="222">
-        <nombre>zoe</nombre>
-        <correo>4444</correo>
-        <descuento>20.0</descuento>
-        <telefono>4444</telefono>
-    </cliente>
-    <cliente cedula="222">
-        <nombre>zoe</nombre>
-        <correo>4444</correo>
-        <descuento>20.0</descuento>
-        <telefono>4444</telefono>
-    </cliente>
     <cliente cedula="12345678">
         <nombre>Ana</nombre>
         <correo>test@gmail.com</correo>
         <descuento>10.0</descuento>
         <telefono>12121212</telefono>
+    </cliente>
+    <cliente cedula="7777888">
+        <nombre>Ana maria</nombre>
+        <correo>anaM4aa@gmail.com</correo>
+        <descuento>0.0</descuento>
+        <telefono>89564123</telefono>
+    </cliente>
+    <cliente cedula="00999">
+        <nombre>mac</nombre>
+        <correo>bubuinb</correo>
+        <descuento>0.0</descuento>
+        <telefono>4445856</telefono>
+    </cliente>
+    <cliente cedula="00999">
+        <nombre>mac</nombre>
+        <correo>4445856</correo>
+        <descuento>20.0</descuento>
+        <telefono>4445856</telefono>
+    </cliente>
+    <cliente cedula="ttt55">
+        <nombre>tttttttt</nombre>
+        <correo>ttttttttttttttttttttt</correo>
+        <descuento>1.0</descuento>
+        <telefono>ttttttttttt</telefono>
+    </cliente>
+    <cliente cedula="566">
+        <nombre>Llubi</nombre>
+        <correo>gsdfgg</correo>
+        <descuento>0.0</descuento>
+        <telefono>fafgag</telefono>
     </cliente>
 </listaclientes>

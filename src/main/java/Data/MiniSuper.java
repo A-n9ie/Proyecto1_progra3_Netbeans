@@ -25,12 +25,27 @@ public class MiniSuper {
     private List<Cajero> listaCajeros;
     private List<Producto> listaProductos;
     private List<Factura> listaFacturas;
-    //private FilesXML filesXML;
     
     public MiniSuper() throws JAXBException {
         this.listaClientes = ArchivosXML.cargarClientes();
         this.listaCajeros = ArchivosXML.cargarCajeros();
         this.listaProductos = ArchivosXML.cargarProductos();
+        this.listaFacturas = ArchivosXML.cargarFacturas();
+    }
+    
+    public void restablecerClientes() throws JAXBException{
+        this.listaClientes = ArchivosXML.cargarClientes();
+    }
+    
+    public void restablecerProductos() throws JAXBException{
+        this.listaProductos = ArchivosXML.cargarProductos();
+    }
+    
+     public void restablecerCajeros() throws JAXBException{
+       this.listaCajeros = ArchivosXML.cargarCajeros();
+    }
+    
+    public void restablecerFacturas() throws JAXBException{
         this.listaFacturas = ArchivosXML.cargarFacturas();
     }
 
@@ -66,17 +81,9 @@ public class MiniSuper {
         this.listaFacturas = listaFacturas;
     }
     
-    public Producto buscarProducto_Descrip(String des){
+    public Producto buscarProducto(String cod){
         for(Producto producto : listaProductos){
-            if(producto.getDescripcion().equalsIgnoreCase(des))
-                return producto;
-        }
-        return null;
-    }
-    
-    public Producto buscarProducto_Cod(String cod){
-        for(Producto producto : listaProductos){
-            if(producto.getCodigo().equals(cod))
+            if(producto.getDescripcion().equalsIgnoreCase(cod) || producto.getCodigo().equals(cod))
                 return producto;
         }
         return null;
@@ -110,33 +117,18 @@ public class MiniSuper {
     }
       
     
-    public Cliente buscarCliente_Nom(String nom){
+    public Cliente buscarCliente(String nom){
         for(Cliente cliente : listaClientes){
-            if(cliente.getNombre().equals(nom))
+            if(cliente.getNombre().equals(nom) ||cliente.getCedula().equals(nom))
                 return cliente;
         }
         return null;
     }
     
-    public Cliente buscarCliente_Ced(String id){
-        for(Cliente cliente : listaClientes){
-            if(cliente.getCedula().equals(id))
-                return cliente;
-        }
-        return null;
-    }
     
-    public Cajero buscarCajero_Nom(String nom){
+    public Cajero buscarCajero(String nom){
         for(Cajero cajero : listaCajeros){
-            if(cajero.getNombre().equals(nom))
-                return cajero;
-        }
-        return null;
-    }
-    
-    public Cajero buscarCajero_Ced(String id){
-        for(Cajero cajero : listaCajeros){
-            if(cajero.getCedula().equals(id))
+            if(cajero.getNombre().equals(nom) || cajero.getCedula().equals(nom))
                 return cajero;
         }
         return null;
@@ -149,6 +141,7 @@ public class MiniSuper {
         }
         return null;
     }
+    
     
     public Cliente recorrerListaCliente(){
         for(Cliente cliente : listaClientes){

@@ -50,7 +50,7 @@ public class VentanaCantidad extends javax.swing.JFrame {
         okBtn = new javax.swing.JButton();
         cancelBtn = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         smsCant.setText("Cantidad");
         smsCant.setToolTipText("");

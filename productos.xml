@@ -3,17 +3,105 @@
     <producto codigo="3332">
         <categoria>Dulces</categoria>
         <descripcion>Miel</descripcion>
-        <descuento>0.15</descuento>
-        <existencia>14</existencia>
+        <descuento>0.02</descuento>
+        <existencia>22</existencia>
         <precio>1100.45</precio>
         <unidad_m>gramos</unidad_m>
     </producto>
-    <producto codigo="1112">
-        <categoria>Carnes</categoria>
-        <descripcion>Salchicha</descripcion>
+    <producto codigo="44455">
+        <categoria>bebidas</categoria>
+        <descripcion>cocacola</descripcion>
         <descuento>0.15</descuento>
-        <existencia>30</existencia>
-        <precio>1222.36</precio>
+        <existencia>97</existencia>
+        <precio>950.0</precio>
+        <unidad_m>litros</unidad_m>
+    </producto>
+    <producto codigo="3322">
+        <categoria>vegetales</categoria>
+        <descripcion>cebolla</descripcion>
+        <descuento>0.15</descuento>
+        <existencia>16</existencia>
+        <precio>300.0</precio>
+        <unidad_m>kg</unidad_m>
+    </producto>
+    <producto codigo="8383">
+        <categoria>condimentos</categoria>
+        <descripcion>sal</descripcion>
+        <descuento>0.15</descuento>
+        <existencia>44</existencia>
+        <precio>350.0</precio>
         <unidad_m>gramos</unidad_m>
+    </producto>
+    <producto codigo="3883j">
+        <categoria>carnes</categoria>
+        <descripcion>pollo</descripcion>
+        <descuento>0.03</descuento>
+        <existencia>5</existencia>
+        <precio>1200.0</precio>
+        <unidad_m>kg</unidad_m>
+    </producto>
+    <producto codigo="9696">
+        <categoria>bebidas</categoria>
+        <descripcion>fanta naranja</descripcion>
+        <descuento>0.0</descuento>
+        <existencia>43</existencia>
+        <precio>1300.0</precio>
+        <unidad_m>l</unidad_m>
+    </producto>
+    <producto codigo="888">
+        <categoria>bebidas</categoria>
+        <descripcion>pepsi</descripcion>
+        <descuento>0.0</descuento>
+        <existencia>43</existencia>
+        <precio>880.0</precio>
+        <unidad_m>L</unidad_m>
+    </producto>
+    <producto codigo="777">
+        <categoria>fruta</categoria>
+        <descripcion>naranja</descripcion>
+        <descuento>1.0</descuento>
+        <existencia>33</existencia>
+        <precio>600.0</precio>
+        <unidad_m>kg</unidad_m>
+    </producto>
+    <producto codigo="rrrrrrr55">
+        <categoria>reposteria</categoria>
+        <descripcion>Dona</descripcion>
+        <descuento>1.0</descuento>
+        <existencia>15</existencia>
+        <precio>700.0</precio>
+        <unidad_m>g</unidad_m>
+    </producto>
+    <producto codigo="2eee">
+        <categoria>galletas</categoria>
+        <descripcion>galletaMaria</descripcion>
+        <descuento>0.0</descuento>
+        <existencia>15</existencia>
+        <precio>950.0</precio>
+        <unidad_m>g</unidad_m>
+    </producto>
+    <producto codigo="1eeew">
+        <categoria>utensilios</categoria>
+        <descripcion>vaso</descripcion>
+        <descuento>0.05</descuento>
+        <existencia>3</existencia>
+        <precio>200.0</precio>
+        <unidad_m>cm</unidad_m>
+    </producto>
+    <producto codigo="rrrre33">
+        <categoria>utensilios</categoria>
+        <descripcion>plato</descripcion>
+        <descuento>0.02</descuento>
+        <existencia>5</existencia>
+        <precio>600.0</precio>
+        <unidad_m>cm</unidad_m>
+    </producto>
+    <producto codigo="fgs">
+        <categoria>sgfgvsf</categoria>
+        <descripcion>gsfg</descripcion>
+        <descuento>0.2</descuento>
+        <existencia>4</existencia>
+        <precio>100.0</precio>
+        <unidad_m>gssbs</unidad_m>
     </producto>
 </listaproductos>

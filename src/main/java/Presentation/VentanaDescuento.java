@@ -27,7 +27,7 @@ public class VentanaDescuento extends javax.swing.JFrame {
         okBtn = new javax.swing.JButton();
         cancelBtn = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Descuento");
 
@@ -93,12 +93,17 @@ public class VentanaDescuento extends javax.swing.JFrame {
         okBtn.addActionListener(listener);
     }
     
-    public void addCancel(ActionListener listener){
+    public void addCancelBtn(ActionListener listener){
         cancelBtn.addActionListener(listener);
     }
 
     public String getDescuentoTf(){
         return descuentoTf.getText();
     }
+    
+    public void setDescuentoTf(String t){
+        descuentoTf.setText(t);
+    }
+    
     
 }

@@ -9,7 +9,6 @@ import Domain.Cajero;
 import Domain.Fecha_Hora;
 import Domain.Factura;
 import Domain.Producto;
-import Domain.Venta;
 import Exepciones.ExcepcionDescuento;
 import Exepciones.ExcepcionExiste;
 import Exepciones.ExcepcionNoExiste;
@@ -53,9 +52,7 @@ public class Main {
     List<Producto> listaProductos = ArchivosXML.cargarProductos();
     ArchivosXML.guardarProductos(listaProductos);
     
-    List<Factura> listaFacturas = new ArrayList<>();
-   // listaFacturas.add(fact2);
-    ArchivosXML.guardarFacturas(listaFacturas);
+    List<Factura> listaFacturas =  ArchivosXML.cargarFacturas();
     
     
    // List<Cliente> listaClientes = new ArrayList<>();
@@ -64,9 +61,7 @@ public class Main {
    // ArchivosXML.guardarClientes(listaClientes);
     
     System.out.println(listaProductos);
-     List<Cajero> listaCajeros = new ArrayList<>();
-    listaCajeros.add(cas);
-    listaCajeros.add(cas2);
+     List<Cajero> listaCajeros =  ArchivosXML.cargarCajeros();
     ArchivosXML.guardarCajeros(listaCajeros);
     
     

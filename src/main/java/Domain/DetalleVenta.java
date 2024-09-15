@@ -17,7 +17,7 @@ public class DetalleVenta {
 
     public DetalleVenta() {
         this.cantidad = 0;
-        this.producto = null;
+        this.producto = new Producto();
         //this.fecha = LocalDate.now();
     }
 
@@ -73,9 +73,9 @@ public class DetalleVenta {
 
     @Override
     public String toString() {
-        return producto.getDescripcion() + "  " + 
-               producto.getPrecio() + "  " + cantidad + "  " + 
-               precioNeto() + "  " + importe() + "\n";
+        return "\"Producto: \"" + producto.getDescripcion() + "   \"Precio: \"" + 
+               producto.getPrecio() + "   \"Cantidad: \"" + cantidad + "  \"Neto: \"" + 
+               precioNeto() + " \"Importe: \"" + importe() + "\n";
     }
     
 }
