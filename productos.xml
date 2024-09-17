@@ -3,7 +3,7 @@
     <producto codigo="3332">
         <categoria>Dulces</categoria>
         <descripcion>Miel</descripcion>
-        <descuento>0.35</descuento>
+        <descuento>0.15</descuento>
         <existencia>22</existencia>
         <precio>1100.45</precio>
         <unidad_m>gramos</unidad_m>

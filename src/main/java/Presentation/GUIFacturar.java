@@ -42,10 +42,9 @@ public class GUIFacturar extends javax.swing.JFrame {
         descuentoBtn = new javax.swing.JButton();
         cancelarBtn = new javax.swing.JButton();
         agregar = new javax.swing.JPanel();
-        agregarBtn = new javax.swing.JButton();
         codigoProducto = new javax.swing.JTextField();
-        codigoPng = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        agregarBtn = new javax.swing.JButton();
         comboBoxCliente = new javax.swing.JPanel();
         comboBoxClientes = new javax.swing.JComboBox<>();
         clientesPng = new javax.swing.JLabel();
@@ -221,14 +220,14 @@ public class GUIFacturar extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(cobrarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(cantidadBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(eliminarBtn)
-                .addGap(18, 18, 18)
-                .addComponent(descuentoBtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cantidadBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(eliminarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(descuentoBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cancelarBtn)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -248,16 +247,6 @@ public class GUIFacturar extends javax.swing.JFrame {
         agregar.setBackground(new java.awt.Color(255, 255, 255));
         agregar.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "PRODUCTO"));
 
-        agregarBtn.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 12)); // NOI18N
-        agregarBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/agregar-contacto.png"))); // NOI18N
-        agregarBtn.setText("AGREGAR");
-        agregarBtn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        agregarBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                agregarBtnActionPerformed(evt);
-            }
-        });
-
         codigoProducto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         codigoProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -265,41 +254,35 @@ public class GUIFacturar extends javax.swing.JFrame {
             }
         });
 
+        agregarBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/agregar-contacto.png"))); // NOI18N
+        agregarBtn.setText("AGREGAR");
+
         javax.swing.GroupLayout agregarLayout = new javax.swing.GroupLayout(agregar);
         agregar.setLayout(agregarLayout);
         agregarLayout.setHorizontalGroup(
             agregarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(agregarLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(codigoProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(codigoPng)
                 .addGroup(agregarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(agregarLayout.createSequentialGroup()
-                        .addGap(39, 39, 39)
+                        .addGap(315, 315, 315)
                         .addComponent(jLabel4))
                     .addGroup(agregarLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(agregarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(8, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addComponent(codigoProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(agregarBtn)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         agregarLayout.setVerticalGroup(
             agregarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(agregarLayout.createSequentialGroup()
-                .addGroup(agregarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(agregarLayout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGroup(agregarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(agregarLayout.createSequentialGroup()
-                                .addGap(8, 8, 8)
-                                .addComponent(codigoProducto))
-                            .addGroup(agregarLayout.createSequentialGroup()
-                                .addGap(3, 3, 3)
-                                .addComponent(agregarBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE))))
-                    .addGroup(agregarLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(codigoPng, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(11, 11, 11))
+                .addContainerGap()
+                .addGroup(agregarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(codigoProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(agregarBtn))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel4)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         comboBoxCliente.setBackground(new java.awt.Color(255, 255, 255));
@@ -333,10 +316,9 @@ public class GUIFacturar extends javax.swing.JFrame {
         );
         comboBoxClienteLayout.setVerticalGroup(
             comboBoxClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(comboBoxClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(comboBoxClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(iconoCliente)
-                .addComponent(jLabel2))
+            .addComponent(comboBoxClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(iconoCliente)
+            .addComponent(jLabel2)
             .addComponent(clientesPng)
         );
 
@@ -446,7 +428,7 @@ public class GUIFacturar extends javax.swing.JFrame {
                 .addComponent(totaltt_txt1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(totalTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(36, Short.MAX_VALUE))
         );
         TotalesLayout.setVerticalGroup(
             TotalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -472,12 +454,6 @@ public class GUIFacturar extends javax.swing.JFrame {
         panelFuncionesLayout.setHorizontalGroup(
             panelFuncionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelFuncionesLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelFuncionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(Totales, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(funciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 27, Short.MAX_VALUE))
-            .addGroup(panelFuncionesLayout.createSequentialGroup()
                 .addGroup(panelFuncionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelFuncionesLayout.createSequentialGroup()
                         .addGap(6, 6, 6)
@@ -491,6 +467,12 @@ public class GUIFacturar extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(agregar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(panelFuncionesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelFuncionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(funciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Totales, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 27, Short.MAX_VALUE))
         );
         panelFuncionesLayout.setVerticalGroup(
             panelFuncionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -501,13 +483,13 @@ public class GUIFacturar extends javax.swing.JFrame {
                     .addComponent(comboBoxCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(tableProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(agregar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(funciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Totales, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         jTableFacturar.addTab("FACTURAR", panelFunciones);
@@ -932,21 +914,18 @@ public class GUIFacturar extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(precioPTf, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(datosClientes11Layout.createSequentialGroup()
+                        .addComponent(Categoria)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(categoriaTf))
+                    .addGroup(datosClientes11Layout.createSequentialGroup()
                         .addGroup(datosClientes11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(datosClientes11Layout.createSequentialGroup()
-                                .addComponent(Categoria)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(categoriaTf))
-                            .addGroup(datosClientes11Layout.createSequentialGroup()
-                                .addGroup(datosClientes11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(descPLb))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(datosClientes11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(descPTf, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(existenciasPTF, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(precioProductoLB))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                            .addComponent(jLabel1)
+                            .addComponent(descPLb))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(datosClientes11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(descPTf, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(existenciasPTF, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(precioProductoLB))
                 .addContainerGap(32, Short.MAX_VALUE))
         );
         datosClientes11Layout.setVerticalGroup(
@@ -1369,10 +1348,6 @@ public class GUIFacturar extends javax.swing.JFrame {
 
     }//GEN-LAST:event_codigoProductoActionPerformed
 
-    private void agregarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarBtnActionPerformed
-
-    }//GEN-LAST:event_agregarBtnActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Categoria;
     private javax.swing.JScrollPane ScrollPaneClientes;
@@ -1408,7 +1383,6 @@ public class GUIFacturar extends javax.swing.JFrame {
     private javax.swing.JTable clientesTable;
     private javax.swing.JButton cobrarBtn;
     private javax.swing.JLabel codigoPLb;
-    private javax.swing.JLabel codigoPng;
     private javax.swing.JTextField codigoProducto;
     private javax.swing.JTextField codigoProductoTf;
     private javax.swing.JPanel comboBoxCajeros;
