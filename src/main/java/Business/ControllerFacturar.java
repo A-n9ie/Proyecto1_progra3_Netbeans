@@ -1,6 +1,6 @@
 package Business;
 
-import Business.LogicVBuscar;
+import Business.LogicBuscar;
 import Data.ArchivosXML;
 import Data.ListaClientes;
 import Data.ListaProductos;
@@ -58,7 +58,7 @@ public class ControllerFacturar {
         this.controllerProductos = controllerProductos;
         this.controllerHistorico = new ControllerHistorico(gFacturar, m);
 
-        LogicVBuscar ventBuscar = controllerProductos.getLogvBuscar();
+        LogicBuscar ventBuscar = controllerProductos.getLogvBuscar();
         this.vBuscar = ventBuscar.getvBuscar();
         this.vDescuento = new VentanaDescuento();
         

@@ -21,7 +21,7 @@ import javax.swing.table.DefaultTableModel;
 public class ControllerProductos {
 
     private GUIFacturar gFacturar;
-    private LogicVBuscar logvBuscar;
+    private LogicBuscar logvBuscar;
     private LogicProductos logProductos;
     private Producto producto;
     private ArchivosXML guardaXMl;
@@ -33,7 +33,7 @@ public class ControllerProductos {
         this.mercadito = m;
         this.listaProductos = m.getListaProductos();
         this.logProductos = new LogicProductos(gFacturar, listaProductos);
-        this.logvBuscar = new LogicVBuscar(listaProductos);
+        this.logvBuscar = new LogicBuscar(listaProductos);
         this.producto = new Producto();
         this.guardaXMl = new ArchivosXML();
     }
@@ -289,7 +289,7 @@ public class ControllerProductos {
         }
     }
 
-    public LogicVBuscar getLogvBuscar() {
+    public LogicBuscar getLogvBuscar() {
         return logvBuscar;
     }
 
