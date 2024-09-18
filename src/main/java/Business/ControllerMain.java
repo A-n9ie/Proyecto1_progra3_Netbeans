@@ -23,6 +23,7 @@ public class ControllerMain {
     private ControllerCajeros controllerCajeros;
     private ControllerEstadisticas controllerEstadisticas;
     private ControllerHistorico controllerHistorico;
+    private MiniSuper miniSuper;
 
     public ControllerMain(GUIFacturar gFacturar) throws JAXBException{
         this.gFacturar = gFacturar;
@@ -35,7 +36,7 @@ public class ControllerMain {
         this.controllerEstadisticas = new ControllerEstadisticas(
                 gFacturar.getVentanaEstadisticas(),
                 new GraficoEstadisticas(),
-                new ArchivosXML()
+                miniSuper
         );
         
     }

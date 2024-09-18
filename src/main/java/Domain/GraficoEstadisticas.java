@@ -16,23 +16,36 @@ public class GraficoEstadisticas {
 
     public JPanel crearGraficoEstadisticas(List<Factura> facturas) {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        Map<String, Double> totalVentasPorCategoria = new HashMap<>();
+        Map<String, Map<String, Double>> ventasPorMesYCategoria = new HashMap<>();
         
+        System.out.println("Facturas recibidas: " + facturas.size());
         for (Factura factura : facturas) {
+            String mes = factura.getMes();  // Obtener el mes de la factura
+            System.out.println("Procesando factura del mes: " + mes);
+
             for (DetalleVenta detalle : factura.getDetalles()) {
                 String categoria = detalle.getProducto().getCategoria();
                 double totalVenta = detalle.importe();
+                System.out.println("Categoría: " + categoria + ", Total Venta: " + totalVenta);
 
-                // Sumar las ventas por categoría
-                totalVentasPorCategoria.merge(categoria, totalVenta, Double::sum);
+                ventasPorMesYCategoria.computeIfAbsent(mes, k -> new HashMap<>()).merge(categoria, totalVenta, Double::sum);
             }
         }
         
-        // Agregar los totales al dataset por categoría y mes
-        for (Map.Entry<String, Double> entry : totalVentasPorCategoria.entrySet()) {
-            dataset.addValue(entry.getValue(), entry.getKey(), "Mes");
+        System.out.println("Datos procesados: " + ventasPorMesYCategoria);
+
+        for (Map.Entry<String, Map<String, Double>> entryMes : ventasPorMesYCategoria.entrySet()) {
+            String mes = entryMes.getKey();
+            for (Map.Entry<String, Double> entryCategoria : entryMes.getValue().entrySet()) {
+                System.out.println("Añadiendo al dataset: Mes = " + mes + ", Categoría = " + entryCategoria.getKey() + ", Total = " + entryCategoria.getValue());
+                dataset.addValue(entryCategoria.getValue(), entryCategoria.getKey(), mes);
+            }
         }
         
+        if (dataset.getRowCount() == 0) {
+            System.out.println("El dataset está vacío. Verificar los datos de entrada.");
+        }
+
         JFreeChart barChart = ChartFactory.createBarChart(
                 "Ventas Mensuales",        // Título del gráfico
                 "Categoría",               // Etiqueta del eje X

@@ -1,4 +1,3 @@
-
 package Domain;
 
 import jakarta.xml.bind.annotation.*;
@@ -49,6 +48,5 @@ public class EstadisticasVenta {
     public void setTotalVentas(double totalVentas) {
         this.totalVentas = totalVentas;
     }
-    
-    
+      
 }
