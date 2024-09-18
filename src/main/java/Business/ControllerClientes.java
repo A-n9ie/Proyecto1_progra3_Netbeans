@@ -36,7 +36,7 @@ public class ControllerClientes {
         this.mercadito = m;  
         this.logCliente = new LogicClientes(gFacturar, m.getListaClientes());
         this.guardaXMl = new ArchivosXML();
-        this.listaClientes = ArchivosXML.cargarClientes();
+        this.listaClientes = m.getListaClientes();
     }
     
     public void getVentanaClientes(){
@@ -74,6 +74,42 @@ public class ControllerClientes {
             }
         });
         
+        gFacturar.addModificarClienteBtn(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               String id = gFacturar.getIDClienteTf();
+               String nombre = gFacturar.getNombreClienteTf();
+               String telefono = gFacturar.getTelefonoClienteTf();
+               String email = gFacturar.getEmailClienteTf();
+               String desc = gFacturar.getDescClienteTf();
+               
+               String buscarPorNombre = gFacturar.getNombreBusq();
+                    cliente = mercadito.buscarCliente(buscarPorNombre);
+                    
+               if(cliente != null){
+                if(id.isEmpty() || nombre.isEmpty() || telefono.isEmpty() || email.isEmpty() || desc.isEmpty()){
+                    gFacturar.notify("Ingrese toda la informacion");
+                }
+                else{
+                     float descNum = Float.parseFloat(desc);
+                     if(descNum >= 1)
+                     descNum/=100;
+                      cliente.setCedula(id);
+                      cliente.setNombre(nombre);
+                      cliente.setCorreo(email);
+                      cliente.setTelefono(telefono);
+                      cliente.setDescuento(descNum);
+
+                    actualizarClientes();
+
+                }
+               }
+               else{
+                    gFacturar.notify("No se encontro al cliente");
+                }
+            }
+        });
+        
         gFacturar.addEliminarClienteBtn(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -89,7 +125,8 @@ public class ControllerClientes {
                   String cedula = (String) model.getValueAt(clienteSeleccionado, 0);
                   model.removeRow(clienteSeleccionado);
                   listaClientes.removeIf(cliente -> cliente.getCedula().equals(cedula));
-                    
+                     
+                     
                   actualizarClientes();
                   
                }
@@ -125,6 +162,29 @@ public class ControllerClientes {
                    gFacturar.setTelefonoClienteTf(cliente.getTelefono());
                    gFacturar.setEmailClienteTf(cliente.getTelefono());
                    gFacturar.setDescClienteTf(String.valueOf(cliente.getDescuento()));
+                   return;
+               }
+               else{
+                    gFacturar.notify("No se encontro al cliente");
+                }
+                   
+           }
+           
+       });
+       
+       gFacturar.addReporteClienteBtn(new ActionListener(){
+           
+           public void actionPerformed(ActionEvent e) {
+            String buscarPorNombre = gFacturar.getNombreBusq();
+            
+               if(buscarPorNombre.isEmpty()){
+                   gFacturar.notify("Ingrese un Nombre");
+                   return;
+               }
+                cliente = mercadito.buscarCliente(buscarPorNombre);
+
+               if(cliente != null){
+                   gFacturar.notify(cliente.toString());
                    return;
                }
                else{

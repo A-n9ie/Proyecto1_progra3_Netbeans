@@ -88,6 +88,7 @@ public class GUIFacturar extends javax.swing.JFrame {
         reporteClientesBtn = new javax.swing.JButton();
         ScrollPaneClientes = new javax.swing.JScrollPane();
         clientesTable = new javax.swing.JTable();
+        modificarCliente_btn = new javax.swing.JButton();
         panelCajeros = new javax.swing.JPanel();
         cajereos = new javax.swing.JPanel();
         datosClientes1 = new javax.swing.JPanel();
@@ -105,6 +106,7 @@ public class GUIFacturar extends javax.swing.JFrame {
         reporteCajeroBtn = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tableCajeros = new javax.swing.JTable();
+        modificarCajero_btn = new javax.swing.JButton();
         panelProductos = new javax.swing.JPanel();
         productos = new javax.swing.JPanel();
         datosClientes11 = new javax.swing.JPanel();
@@ -132,6 +134,7 @@ public class GUIFacturar extends javax.swing.JFrame {
         rerporteProductoBtn = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         tableProductosNuevos = new javax.swing.JTable();
+        modificarProducto_btn = new javax.swing.JButton();
         panelEstadistica = new javax.swing.JPanel();
         datosLb = new javax.swing.JPanel();
         desdeAnioCb = new javax.swing.JComboBox<>();
@@ -641,6 +644,8 @@ public class GUIFacturar extends javax.swing.JFrame {
         });
         ScrollPaneClientes.setViewportView(clientesTable);
 
+        modificarCliente_btn.setText("Modificar");
+
         javax.swing.GroupLayout clientesLayout = new javax.swing.GroupLayout(clientes);
         clientes.setLayout(clientesLayout);
         clientesLayout.setHorizontalGroup(
@@ -657,8 +662,9 @@ public class GUIFacturar extends javax.swing.JFrame {
                         .addGroup(clientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(guardarClientesBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(limpiarClientesBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(borrarClientesBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(borrarClientesBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
+                            .addComponent(modificarCliente_btn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(168, Short.MAX_VALUE))
         );
         clientesLayout.setVerticalGroup(
             clientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -670,9 +676,11 @@ public class GUIFacturar extends javax.swing.JFrame {
                     .addGroup(clientesLayout.createSequentialGroup()
                         .addGap(28, 28, 28)
                         .addComponent(guardarClientesBtn)
-                        .addGap(39, 39, 39)
+                        .addGap(18, 18, 18)
                         .addComponent(limpiarClientesBtn)
-                        .addGap(44, 44, 44)
+                        .addGap(18, 18, 18)
+                        .addComponent(modificarCliente_btn)
+                        .addGap(24, 24, 24)
                         .addComponent(borrarClientesBtn)))
                 .addGap(18, 18, 18)
                 .addComponent(busquedaClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -802,6 +810,8 @@ public class GUIFacturar extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tableCajeros);
 
+        modificarCajero_btn.setText("Modificar");
+
         javax.swing.GroupLayout cajereosLayout = new javax.swing.GroupLayout(cajereos);
         cajereos.setLayout(cajereosLayout);
         cajereosLayout.setHorizontalGroup(
@@ -818,7 +828,8 @@ public class GUIFacturar extends javax.swing.JFrame {
                         .addGroup(cajereosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(guardarCajeroBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(limpiarCajeroBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(borrarCajeroBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE))))
+                            .addComponent(borrarCajeroBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
+                            .addComponent(modificarCajero_btn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(168, Short.MAX_VALUE))
         );
         cajereosLayout.setVerticalGroup(
@@ -831,9 +842,11 @@ public class GUIFacturar extends javax.swing.JFrame {
                     .addGroup(cajereosLayout.createSequentialGroup()
                         .addGap(28, 28, 28)
                         .addComponent(guardarCajeroBtn)
-                        .addGap(39, 39, 39)
+                        .addGap(18, 18, 18)
                         .addComponent(limpiarCajeroBtn)
-                        .addGap(44, 44, 44)
+                        .addGap(18, 18, 18)
+                        .addComponent(modificarCajero_btn)
+                        .addGap(24, 24, 24)
                         .addComponent(borrarCajeroBtn)))
                 .addGap(18, 18, 18)
                 .addComponent(busquedaCajeros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1030,6 +1043,13 @@ public class GUIFacturar extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(tableProductosNuevos);
 
+        modificarProducto_btn.setText("Modificar");
+        modificarProducto_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                modificarProducto_btnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout productosLayout = new javax.swing.GroupLayout(productos);
         productos.setLayout(productosLayout);
         productosLayout.setHorizontalGroup(
@@ -1046,7 +1066,8 @@ public class GUIFacturar extends javax.swing.JFrame {
                         .addGroup(productosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(guardarProductoBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(limpiarProductoBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(borrarProductoBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE))))
+                            .addComponent(borrarProductoBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
+                            .addComponent(modificarProducto_btn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(155, Short.MAX_VALUE))
         );
         productosLayout.setVerticalGroup(
@@ -1059,9 +1080,11 @@ public class GUIFacturar extends javax.swing.JFrame {
                     .addGroup(productosLayout.createSequentialGroup()
                         .addGap(28, 28, 28)
                         .addComponent(guardarProductoBtn)
-                        .addGap(39, 39, 39)
+                        .addGap(18, 18, 18)
                         .addComponent(limpiarProductoBtn)
-                        .addGap(44, 44, 44)
+                        .addGap(24, 24, 24)
+                        .addComponent(modificarProducto_btn)
+                        .addGap(18, 18, 18)
                         .addComponent(borrarProductoBtn)))
                 .addGap(18, 18, 18)
                 .addComponent(busquedaClientes1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1348,6 +1371,10 @@ public class GUIFacturar extends javax.swing.JFrame {
 
     }//GEN-LAST:event_codigoProductoActionPerformed
 
+    private void modificarProducto_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarProducto_btnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_modificarProducto_btnActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Categoria;
     private javax.swing.JScrollPane ScrollPaneClientes;
@@ -1440,6 +1467,9 @@ public class GUIFacturar extends javax.swing.JFrame {
     private javax.swing.JButton limpiarClientesBtn;
     private javax.swing.JButton limpiarProductoBtn;
     private javax.swing.JTextArea listFacturas;
+    private javax.swing.JButton modificarCajero_btn;
+    private javax.swing.JButton modificarCliente_btn;
+    private javax.swing.JButton modificarProducto_btn;
     private javax.swing.JLabel nombreBudqClientesLb;
     private javax.swing.JTextField nombreBusqClientesTf;
     private javax.swing.JLabel nombreCajeroLb;
@@ -1796,6 +1826,18 @@ public class GUIFacturar extends javax.swing.JFrame {
     
     public void addBuscarFacturaBtn(ActionListener listener){
         this.buscarFacturaBtn.addActionListener(listener);
+    }
+    
+    public void addModificarProductoBtn(ActionListener listener){
+        this.modificarProducto_btn.addActionListener(listener);
+    }
+    
+    public void addModificarClienteBtn(ActionListener listener){
+        this.modificarCliente_btn.addActionListener(listener);
+    }
+    
+    public void addModificarCajeroBtn(ActionListener listener){
+        this.modificarCajero_btn.addActionListener(listener);
     }
     
     //-------Estadisticas----

@@ -39,6 +39,11 @@
         <exec.mainClass>Principal.Main</exec.mainClass>
     </properties>
     <build>
+    <resources>
+        <resource>
+            <directory>src/main/resources</directory>
+        </resource>
+    </resources>
     <plugins>
         <plugin>
             <groupId>org.codehaus.mojo</groupId>

@@ -74,6 +74,50 @@ public class ControllerProductos {
                 }
             }
         });
+        
+         
+        gFacturar.addModificarProductoBtn(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String codigo = gFacturar.getCodigoTf();
+                String descripcion = gFacturar.getDescripcionTf();
+                String unidad = gFacturar.getUnidadTf();
+                String precio = gFacturar.getPrecioTf();
+                String desc = gFacturar.getDescProductoTf();
+                String existencias = gFacturar.getExistenciasTf();
+                String categoria = gFacturar.getCategoriaTf();
+                
+                String buscarNombre = gFacturar.getBusquedacCod();
+
+                if (buscarNombre.isEmpty()) {
+                    gFacturar.notify("Ingrese un Nombre");
+                    return;
+                }
+                producto = mercadito.buscarProducto(buscarNombre);
+                if (producto != null){
+                    if (codigo.isEmpty() || descripcion.isEmpty() || unidad.isEmpty() || precio.isEmpty() || desc.isEmpty() || existencias.isEmpty() || categoria.isEmpty()) {
+                        gFacturar.notify("Ingrese toda la informacion solicitada");
+                    } else {
+                        float descNum = Float.parseFloat(desc);
+                         float pre = Float.parseFloat(precio);
+                        if(descNum >= 1)
+                        descNum/=100;
+
+                        producto.setCodigo(codigo);
+                        producto.setDescripcion(descripcion);
+                        producto.setDescuento(descNum);
+                        producto.setCategoria(categoria);
+                        producto.setExistencia(Integer.parseInt(existencias));
+                        producto.setPrecio(pre);
+                        producto.setUnidad_m(unidad);
+
+                        actualizarProductos();
+                    }
+                }else{
+                    gFacturar.notify("No se encontro el producto");
+                }
+            }
+        });
 
         gFacturar.addBorrarProductosBtn(new ActionListener() {
             @Override
@@ -138,6 +182,31 @@ public class ControllerProductos {
             }
 
         });
+        
+         gFacturar.addReporteProductosBtn(new ActionListener(){
+           
+           @Override
+           public void actionPerformed(ActionEvent e) {
+             String buscarNombre = gFacturar.getBusquedacCod();
+            
+               if(buscarNombre.isEmpty()){
+                   gFacturar.notify("Ingrese un Nombre");
+                   return;
+               }
+                producto = mercadito.buscarProducto(buscarNombre);
+
+               if(producto != null){
+                   gFacturar.notify(producto.toString());
+                   return;
+               }
+               else{
+                    gFacturar.notify("No se encontro el producto");
+                }
+                   
+           }
+           
+       });
+        
     }
 
     public void actualizarProductoEnGUI(Producto producto) {

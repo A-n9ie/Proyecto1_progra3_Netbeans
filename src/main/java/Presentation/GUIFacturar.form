@@ -744,10 +744,11 @@
                                       <Component id="guardarClientesBtn" alignment="0" max="32767" attributes="0"/>
                                       <Component id="limpiarClientesBtn" alignment="0" max="32767" attributes="0"/>
                                       <Component id="borrarClientesBtn" alignment="0" pref="146" max="32767" attributes="0"/>
+                                      <Component id="modificarCliente_btn" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace pref="168" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -762,9 +763,11 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                                   <Component id="guardarClientesBtn" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="limpiarClientesBtn" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="modificarCliente_btn" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                                   <Component id="borrarClientesBtn" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -1060,6 +1063,11 @@
                     </Component>
                   </SubComponents>
                 </Container>
+                <Component class="javax.swing.JButton" name="modificarCliente_btn">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Modificar"/>
+                  </Properties>
+                </Component>
               </SubComponents>
             </Container>
           </SubComponents>
@@ -1110,6 +1118,7 @@
                                       <Component id="guardarCajeroBtn" alignment="0" max="32767" attributes="0"/>
                                       <Component id="limpiarCajeroBtn" alignment="0" max="32767" attributes="0"/>
                                       <Component id="borrarCajeroBtn" alignment="0" pref="146" max="32767" attributes="0"/>
+                                      <Component id="modificarCajero_btn" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -1128,9 +1137,11 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                                   <Component id="guardarCajeroBtn" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="limpiarCajeroBtn" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="modificarCajero_btn" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                                   <Component id="borrarCajeroBtn" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -1347,6 +1358,11 @@
                     </Component>
                   </SubComponents>
                 </Container>
+                <Component class="javax.swing.JButton" name="modificarCajero_btn">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Modificar"/>
+                  </Properties>
+                </Component>
               </SubComponents>
             </Container>
           </SubComponents>
@@ -1397,6 +1413,7 @@
                                       <Component id="guardarProductoBtn" alignment="0" max="32767" attributes="0"/>
                                       <Component id="limpiarProductoBtn" alignment="0" max="32767" attributes="0"/>
                                       <Component id="borrarProductoBtn" alignment="0" pref="146" max="32767" attributes="0"/>
+                                      <Component id="modificarProducto_btn" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -1415,9 +1432,11 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                                   <Component id="guardarProductoBtn" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="limpiarProductoBtn" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                                  <Component id="modificarProducto_btn" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="borrarProductoBtn" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -1760,6 +1779,14 @@
                     </Component>
                   </SubComponents>
                 </Container>
+                <Component class="javax.swing.JButton" name="modificarProducto_btn">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Modificar"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="modificarProducto_btnActionPerformed"/>
+                  </Events>
+                </Component>
               </SubComponents>
             </Container>
           </SubComponents>

@@ -96,12 +96,4 @@
         <precio>600.0</precio>
         <unidad_m>cm</unidad_m>
     </producto>
-    <producto codigo="fgs">
-        <categoria>sgfgvsf</categoria>
-        <descripcion>gsfg</descripcion>
-        <descuento>0.2</descuento>
-        <existencia>4</existencia>
-        <precio>100.0</precio>
-        <unidad_m>gssbs</unidad_m>
-    </producto>
 </listaproductos>

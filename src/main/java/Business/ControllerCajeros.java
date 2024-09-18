@@ -60,6 +60,34 @@ public class ControllerCajeros {
             }
         });
         
+         
+        gFacturar.addModificarCajeroBtn(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               String id = gFacturar.getIDCajeroTf();
+               String nombre = gFacturar.getNombreCajeroTf();
+               
+               String buscarPorNombre = gFacturar.getNombreBusqCajeros();
+                    cajero = mercadito.buscarCajero(buscarPorNombre);
+               if(cajero != null){
+                if(id.isEmpty() || nombre.isEmpty()){
+                    gFacturar.notify("Ingrese toda la informacion");
+                }
+                else{
+                      cajero.setCedula(id);
+                      cajero.setNombre(nombre);
+
+                    actualizarCajeros();
+
+                }
+               }
+               else{
+                    gFacturar.notify("No se encontro al cajero");
+                }
+            }
+        });
+        
+        
         gFacturar.addEliminarCajeroBtn(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -74,7 +102,7 @@ public class ControllerCajeros {
                   
                   String cedula = (String) model.getValueAt(cajeroSeleccionado, 0);
                   model.removeRow(cajeroSeleccionado);
-                  listaCajeros.removeIf(cliente -> cliente.getCedula().equals(cedula));
+                  listaCajeros.removeIf(cajero -> cajero.getCedula().equals(cedula));
                     
                   actualizarCajeros();
                }
@@ -107,8 +135,32 @@ public class ControllerCajeros {
                    return;
                }
                else{
-                    gFacturar.notify("No se encontro el producto");
+                    gFacturar.notify("No se encontro el cajero");
                 }
+           }
+           
+       });
+       
+       gFacturar.addReporteCajeroBtn(new ActionListener(){
+           
+           @Override
+           public void actionPerformed(ActionEvent e) {
+            String buscarPorNombre = gFacturar.getNombreBusqCajeros();
+            
+               if(buscarPorNombre.isEmpty()){
+                   gFacturar.notify("Ingrese un Nombre");
+                   return;
+               }
+                cajero = mercadito.buscarCajero(buscarPorNombre);
+
+               if(cajero != null){
+                   gFacturar.notify(cajero.toString());
+                   return;
+               }
+               else{
+                    gFacturar.notify("No se encontro al cajero");
+                }
+                   
            }
            
        });
