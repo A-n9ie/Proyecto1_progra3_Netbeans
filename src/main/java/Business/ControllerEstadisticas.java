@@ -17,13 +17,14 @@ import jakarta.xml.bind.JAXBException;
 public class ControllerEstadisticas {
     private VentanaEstadisticas ventana;
     private GraficoEstadisticas grafico;
-    private ArchivosXML filesXML;
+    private LogicEstadistica log;
 
     public ControllerEstadisticas(VentanaEstadisticas ventana, GraficoEstadisticas grafico, ArchivosXML filesXML) {
         this.ventana = ventana;
         this.grafico = grafico;
-        this.filesXML = filesXML;
-
+  }
+    
+    private void generarGraficaCategorias(){
         Set<String> categoriasDinamicas = obtenerCategorias();
         ventana.setCategoriasDisponibles(categoriasDinamicas);
 
@@ -43,7 +44,7 @@ public class ControllerEstadisticas {
                 }
             }
         });
-  }
+    }
 
     
     private Set<String> obtenerCategorias() {
@@ -51,7 +52,7 @@ public class ControllerEstadisticas {
         try {
             List<Producto> productos = ArchivosXML.cargarProductos();
             for (Producto producto : productos) {
-                categorias.add(producto.getCategoria()); // Agrega la categoría al Set
+                categorias.add(producto.getCategoria().getNombre()); // Agrega la categoría al Set
             }
         } catch (Exception e) {
             e.printStackTrace();

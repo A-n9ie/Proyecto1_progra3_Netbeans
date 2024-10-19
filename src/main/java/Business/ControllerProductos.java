@@ -3,7 +3,7 @@ package Business;
 import Data.ArchivosXML;
 import Data.ListaProductos;
 import Data.MiniSuper;
-import Domain.Cliente;
+import Domain.Categoria;
 import Domain.DetalleVenta;
 import Domain.Producto;
 import Presentation.GUIFacturar;
@@ -19,27 +19,47 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 public class ControllerProductos {
-
     private GUIFacturar gFacturar;
     private LogicBuscar logvBuscar;
     private LogicProductos logProductos;
+    private LogicEstadistica logEsta;
     private Producto producto;
     private ArchivosXML guardaXMl;
     private List<Producto> listaProductos;
+    private List<Categoria> listaCategorias;
     private MiniSuper mercadito;
+    private ControllerPDF contPDF;
 
     public ControllerProductos(GUIFacturar gFacturar, MiniSuper m) throws JAXBException {
         this.gFacturar = gFacturar;
         this.mercadito = m;
         this.listaProductos = m.getListaProductos();
+        this.listaCategorias = m.getListaCategorias();
         this.logProductos = new LogicProductos(gFacturar, listaProductos);
+        this.logEsta = new LogicEstadistica(mercadito.getListaFacturas(), gFacturar, mercadito.getListaCategorias());
         this.logvBuscar = new LogicBuscar(listaProductos);
         this.producto = new Producto();
         this.guardaXMl = new ArchivosXML();
+        this.contPDF = new ControllerPDF();
     }
 
     public void getVentanaProductos() {
-
+        guardar();
+        modificar();
+        limpiar();
+        buscar();
+        reporte();
+        eliminar();
+    }
+    
+    private void guardarCategoria(Producto producto){
+        if(mercadito.buscarCategoria(producto.getCategoria().getNombre()) == false){
+            listaCategorias.add(producto.getCategoria());
+        actualizarCategorias();
+        }
+    }
+    
+    private void guardar(){
         gFacturar.addGuardarProductoBtn(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -67,15 +87,16 @@ public class ControllerProductos {
                         listaProductos = new ArrayList<>();
                     }
                     listaProductos.add(producto);
-                    
+                    guardarCategoria(producto);
                     actualizarProductos();
                     } else
                        gFacturar.notify("El codigo del producto pertenece al sistema");
                 }
             }
         });
-        
-         
+    }
+    
+    private void modificar(){
         gFacturar.addModificarProductoBtn(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -86,7 +107,6 @@ public class ControllerProductos {
                 String desc = gFacturar.getDescProductoTf();
                 String existencias = gFacturar.getExistenciasTf();
                 String categoria = gFacturar.getCategoriaTf();
-                
                 String buscarNombre = gFacturar.getBusquedacCod();
 
                 if (buscarNombre.isEmpty()) {
@@ -106,7 +126,7 @@ public class ControllerProductos {
                         producto.setCodigo(codigo);
                         producto.setDescripcion(descripcion);
                         producto.setDescuento(descNum);
-                        producto.setCategoria(categoria);
+                        producto.setCategoria(new Categoria(categoria));
                         producto.setExistencia(Integer.parseInt(existencias));
                         producto.setPrecio(pre);
                         producto.setUnidad_m(unidad);
@@ -119,28 +139,9 @@ public class ControllerProductos {
             }
         });
 
-        gFacturar.addBorrarProductosBtn(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int productoSeleccionado = gFacturar.getTableProductosNuevos().getSelectedRow();
-
-                if (productoSeleccionado < 0) {
-                    gFacturar.notify("Seleccione el producto que desea eliminar");
-                } else {
-                    JTable tablaProductos = gFacturar.getTableProductosNuevos();
-                    DefaultTableModel model = (DefaultTableModel) tablaProductos.getModel();
-
-                    String codigoProducto = (String) model.getValueAt(productoSeleccionado, 0);
-
-                    listaProductos.removeIf(producto -> producto.getCodigo().equals(codigoProducto));
-
-                    model.removeRow(productoSeleccionado);
-
-                    actualizarProductos();
-                }
-            }
-        });
-
+    }
+    
+    private void limpiar(){
         gFacturar.addLimpiarProductosBtn(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -153,8 +154,10 @@ public class ControllerProductos {
                 gFacturar.setCategoriaTf("");
             }
         });
-
-        gFacturar.addBuscarProductoBtn(new ActionListener() {
+    }
+    
+    private void buscar(){
+         gFacturar.addBuscarProductoBtn(new ActionListener() {
 
             public void actionPerformed(ActionEvent e) {
                 String buscarNombre = gFacturar.getBusquedacCod();
@@ -182,8 +185,10 @@ public class ControllerProductos {
             }
 
         });
-        
-         gFacturar.addReporteProductosBtn(new ActionListener(){
+    }
+    
+    private void reporte(){
+        gFacturar.addReporteProductosBtn(new ActionListener(){
            
            @Override
            public void actionPerformed(ActionEvent e) {
@@ -196,8 +201,8 @@ public class ControllerProductos {
                 producto = mercadito.buscarProducto(buscarNombre);
 
                if(producto != null){
-                   gFacturar.notify(producto.toString());
-                   return;
+                   contPDF.mostrarProductoPDF(producto);
+                   contPDF.getvPDF().setVisible(true);
                }
                else{
                     gFacturar.notify("No se encontro el producto");
@@ -206,7 +211,30 @@ public class ControllerProductos {
            }
            
        });
-        
+    }
+    
+    private void eliminar(){
+        gFacturar.addBorrarProductosBtn(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int productoSeleccionado = gFacturar.getTableProductosNuevos().getSelectedRow();
+
+                if (productoSeleccionado < 0) {
+                    gFacturar.notify("Seleccione el producto que desea eliminar");
+                } else {
+                    JTable tablaProductos = gFacturar.getTableProductosNuevos();
+                    DefaultTableModel model = (DefaultTableModel) tablaProductos.getModel();
+
+                    String codigoProducto = (String) model.getValueAt(productoSeleccionado, 0);
+
+                    listaProductos.removeIf(producto -> producto.getCodigo().equals(codigoProducto));
+
+                    model.removeRow(productoSeleccionado);
+
+                    actualizarProductos();
+                }
+            }
+        });
     }
 
     public void actualizarProductoEnGUI(Producto producto) {
@@ -265,6 +293,17 @@ public class ControllerProductos {
              mercadito.restablecerProductos();
              logProductos.actualizarLista();
              logvBuscar.actualizarLista();
+        } catch (JAXBException ex) {
+            ex.printStackTrace();
+            System.out.println("Error al guardar los datos.");
+        }
+    }
+    
+    private void actualizarCategorias() {
+        try {
+             ArchivosXML.guardarCategorias(listaCategorias);
+             mercadito.restablecerCategorias();
+             logEsta.llenarCategorias();
         } catch (JAXBException ex) {
             ex.printStackTrace();
             System.out.println("Error al guardar los datos.");

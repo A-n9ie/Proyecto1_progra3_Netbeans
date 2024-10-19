@@ -1,33 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <listaclientes>
-    <cliente cedula="22222">
-        <nombre>Roger</nombre>
-        <correo>rogelo934@gmail.com</correo>
-        <descuento>0.35</descuento>
-        <telefono>44488884</telefono>
-    </cliente>
-    <cliente cedula="33333">
-        <nombre>Zoe Martina Solis</nombre>
-        <correo>zoe@gmail.com</correo>
-        <descuento>10.0</descuento>
-        <telefono>44444444</telefono>
-    </cliente>
-    <cliente cedula="22222">
-        <nombre>222</nombre>
-        <correo>2222</correo>
-        <descuento>30.0</descuento>
-        <telefono>2222</telefono>
-    </cliente>
-    <cliente cedula="12345678">
-        <nombre>Ana</nombre>
-        <correo>anitaSuper@gmail.com</correo>
+    <cliente cedula="1111">
+        <nombre>Julia</nombre>
+        <correo>juliHernandezZ@gmail.com</correo>
         <descuento>0.1</descuento>
-        <telefono>12121212</telefono>
-    </cliente>
-    <cliente cedula="7777888">
-        <nombre>Ana maria</nombre>
-        <correo>anaM4aa@gmail.com</correo>
-        <descuento>0.0</descuento>
-        <telefono>89564123</telefono>
+        <telefono>22222222</telefono>
     </cliente>
 </listaclientes>

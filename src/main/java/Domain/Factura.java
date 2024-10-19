@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.xml.bind.annotation.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 
 @XmlRootElement
@@ -15,7 +17,7 @@ public class Factura {
     static int contFacturas = 0; 
     private String numFactura;
     private String hora;
-    private String fecha;
+    private LocalDate fecha;  // Campo LocalDate
     private Cliente cliente;
     private Cajero cajero;
     private List<DetalleVenta> detalles;
@@ -24,7 +26,7 @@ public class Factura {
     public Factura() {
         this.numFactura = "0";
         this.hora = "indefinida";
-        this.fecha = "indefinids";
+        this.fecha = LocalDate.now();
         this.cliente = null;
         this.cajero = null;
         this.detalles = new ArrayList();
@@ -35,7 +37,7 @@ public class Factura {
         contFacturas++;
         this.numFactura = String.valueOf(contFacturas);
         this.hora = Fecha_Hora.horaActual();
-        this.fecha = Fecha_Hora.fechaActual();
+        this.fecha =  LocalDate.now();
         this.cliente = cliente;
         this.cajero = cajero;
         this.detalles = detalles;
@@ -46,7 +48,7 @@ public class Factura {
         
         this.numFactura = "";
         this.hora = "";
-        this.fecha = "";
+        this.fecha = LocalDate.now();
         this.detalles = detalles;
         this.pagos = null;
         this.cliente = cliente;
@@ -57,7 +59,7 @@ public class Factura {
         
         this.numFactura = "";
         this.hora = "";
-        this.fecha = "";
+        this.fecha = LocalDate.now();
         this.cliente = null;
         this.cajero = null;
         this.detalles = detalles;
@@ -89,11 +91,17 @@ public class Factura {
     }
 @XmlElement
     public String getFecha() {
+         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return fecha.format(formatter);
+    }
+    
+    public LocalDate getLocalFecha(){
         return fecha;
     }
 
     public void setFecha(String fecha) {
-        this.fecha = fecha;
+         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        this.fecha = LocalDate.parse(fecha, formatter);
     }
 @XmlElement(name = "cliente")
     public Cliente getCliente() {
@@ -166,16 +174,6 @@ public class Factura {
         return totalpagado == 0;
     }
     
-     public String[] getDatosFactura(){
-     String[] dataFactura = {"num_factura", "hora", "fecha"};
-     return dataFactura;
-    }
-    
-    public String[] getDatos(){
-        String tt = String.valueOf(montoTotal());
-        String[] data = {numFactura, hora, fecha};
-        return data;
-    }
 
     @Override
     public String toString() {
@@ -197,7 +195,7 @@ public class Factura {
     }
     
     public String getMes() {
-        String[] partesFecha = fecha.split("/"); // Divide la fecha por "/"
-        return partesFecha[1]; // Retorna el mes, que está en la posición 1 del array
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM");
+        return fecha.format(formatter);
     }
 }

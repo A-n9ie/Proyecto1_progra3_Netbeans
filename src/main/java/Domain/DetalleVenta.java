@@ -59,7 +59,7 @@ public class DetalleVenta {
     */
     @XmlElement
     public String getCategoria(){
-        return producto.getCategoria();
+        return producto.getCategoria().getNombre();
     }
     
     public float importe(){

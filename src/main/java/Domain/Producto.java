@@ -11,7 +11,7 @@ public class Producto {
     private float precio;
     private float descuento;
     private int existencia;
-    private String categoria;
+    private Categoria categoria;
     
     public Producto() {
         this.codigo = "indefinido";
@@ -20,7 +20,7 @@ public class Producto {
         this.precio = 0.0f;
         this.descuento = 0.0f;
         this.existencia = 0;
-        this.categoria = "indefinida";
+        this.categoria = new Categoria();
     }
 
     public Producto(String codigo, String descripcion, String unidad_m, float precio, float descuento, int existencia, String categoria) {
@@ -30,7 +30,7 @@ public class Producto {
         this.precio = precio;
         this.descuento = descuento;
         this.existencia = existencia;
-        this.categoria = categoria;
+        this.categoria = new Categoria(categoria);
     }
 @XmlAttribute
     public String getCodigo() {
@@ -72,12 +72,12 @@ public class Producto {
     public void setExistencia(int existencia) {
         this.existencia = existencia;
     }
-@XmlElement
-    public String getCategoria() {
+@XmlElement (name = "categoria")
+    public Categoria getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(String categoria) {
+    public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
     }
 @XmlElement
@@ -102,7 +102,7 @@ public class Producto {
         String price = String.valueOf(precio);
         String discount = String.valueOf(descuento);
         String existence = String.valueOf(existencia);
-        String[] data = {codigo, descripcion, unidad_m, price, discount, existence, categoria};
+        String[] data = {codigo, descripcion, unidad_m, price, discount, existence, categoria.getNombre()};
         return data;
     }
 

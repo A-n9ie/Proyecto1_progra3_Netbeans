@@ -5,6 +5,7 @@
 package Data;
 
 import Domain.Cajero;
+import Domain.Categoria;
 import Domain.Cliente;
 import Domain.Factura;
 import Domain.Producto;
@@ -19,7 +20,43 @@ import java.io.StringReader;
 import java.io.StringWriter;
 
 public class ArchivosXML {
+    private static String fileCategorias = "categorias.xml";
+    private static String fileProductos = "productos.xml";
+    private static String fileCajeros = "cajeros.xml";
+    private static String fileClientes = "clientes.xml";
+    private static String fileFacturas = "facturas.xml";
+
+    public static String getFileCategorias() {
+        return fileCategorias;
+    }
+
+    public static String getFileProductos() {
+        return fileProductos;
+    }
+
+    public static String getFileCajeros() {
+        return fileCajeros;
+    }
+
+    public static String getFileClientes() {
+        return fileClientes;
+    }
+
+    public static String getFileFacturas() {
+        return fileFacturas;
+    }
     
+    public static void guardarCategorias(List<Categoria> categorias) throws JAXBException {
+    JAXBContext context = JAXBContext.newInstance(ListaCategorias.class);
+    Marshaller marshaller = context.createMarshaller();
+    marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+
+    ListaCategorias categoriasWrapper = new ListaCategorias();
+    categoriasWrapper.setListaCategorias(categorias);
+
+    marshaller.marshal(categoriasWrapper, new File(fileCategorias));
+    }
+
     public static void guardarProductos(List<Producto> productos) throws JAXBException {
         JAXBContext context = JAXBContext.newInstance(ListaProductos.class);
         Marshaller marshaller = context.createMarshaller();
@@ -28,7 +65,7 @@ public class ArchivosXML {
         ListaProductos productosWrapper = new ListaProductos();
         productosWrapper.setListaProductos(productos);
 
-        marshaller.marshal(productosWrapper, new File("productos.xml"));
+        marshaller.marshal(productosWrapper, new File(fileProductos));
     }
     
     public static void guardarClientes(List<Cliente> clientes) throws JAXBException {
@@ -50,7 +87,7 @@ public class ArchivosXML {
     ListaCajeros cajerosWrapper = new ListaCajeros();
     cajerosWrapper.setListaCajeros(cajeros);
 
-    marshaller.marshal(cajerosWrapper, new File("cajeros.xml"));
+    marshaller.marshal(cajerosWrapper, new File(fileCajeros));
     }
     
     public static void guardarFacturas(List<Factura> facturas) throws JAXBException {
@@ -61,14 +98,23 @@ public class ArchivosXML {
     ListaFacturas facturasWrapper = new ListaFacturas();
     facturasWrapper.setListaFacturas(facturas);
 
-    marshaller.marshal(facturasWrapper, new File("facturas.xml"));
+    marshaller.marshal(facturasWrapper, new File(fileFacturas));
     }
+    
+    public static List<Categoria> cargarCategorias() throws JAXBException {
+    JAXBContext context = JAXBContext.newInstance(ListaCategorias.class);
+    Unmarshaller unmarshaller = context.createUnmarshaller();
 
+    ListaCategorias categoriasWrapper = (ListaCategorias) unmarshaller.unmarshal(new File(fileCategorias));
+
+    return categoriasWrapper.getListaCategorias();
+    }
+    
     public static List<Producto> cargarProductos() throws JAXBException {
          JAXBContext context = JAXBContext.newInstance(ListaProductos.class);
         Unmarshaller unmarshaller = context.createUnmarshaller();
         
-        ListaProductos productosWrapper = (ListaProductos) unmarshaller.unmarshal(new File("productos.xml"));
+        ListaProductos productosWrapper = (ListaProductos) unmarshaller.unmarshal(new File(fileProductos));
         
         return productosWrapper.getListaProductos();
     }
@@ -77,7 +123,7 @@ public class ArchivosXML {
         JAXBContext context = JAXBContext.newInstance(ListaClientes.class);
         Unmarshaller unmarshaller = context.createUnmarshaller();
         
-        ListaClientes clientesWrapper = (ListaClientes) unmarshaller.unmarshal(new File("clientes.xml"));
+        ListaClientes clientesWrapper = (ListaClientes) unmarshaller.unmarshal(new File(fileClientes));
         
         return clientesWrapper.getListaClientes();
     }
@@ -86,7 +132,7 @@ public class ArchivosXML {
         JAXBContext context = JAXBContext.newInstance(ListaCajeros.class);
         Unmarshaller unmarshaller = context.createUnmarshaller();
         
-        ListaCajeros cajerosWrapper = (ListaCajeros) unmarshaller.unmarshal(new File("cajeros.xml"));
+        ListaCajeros cajerosWrapper = (ListaCajeros) unmarshaller.unmarshal(new File(fileCajeros));
         
         return cajerosWrapper.getListaCajeros();
     }
@@ -95,7 +141,7 @@ public class ArchivosXML {
          JAXBContext context = JAXBContext.newInstance(ListaFacturas.class);
         Unmarshaller unmarshaller = context.createUnmarshaller();
         
-       ListaFacturas facturasWrapper = (ListaFacturas) unmarshaller.unmarshal(new File("facturas.xml"));
+       ListaFacturas facturasWrapper = (ListaFacturas) unmarshaller.unmarshal(new File(fileFacturas));
         
         return facturasWrapper.getListaFacturas();
     }

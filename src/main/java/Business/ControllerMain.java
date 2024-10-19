@@ -3,6 +3,7 @@ package Business;
 
 import Data.ArchivosXML;
 import Data.MiniSuper;
+import Domain.Categoria;
 import Domain.Producto;
 import Presentation.GUIFacturar;
 import jakarta.xml.bind.JAXBException;
@@ -21,8 +22,9 @@ public class ControllerMain {
     private ControllerFacturar controllerFacturar;
     private ControllerClientes controllerClientes;
     private ControllerCajeros controllerCajeros;
-    private ControllerEstadisticas controllerEstadisticas;
+    //private ControladoraEsta controllerEstadisticas;
     private ControllerHistorico controllerHistorico;
+    private GraficasVentasController controllerGrafica;
 
     public ControllerMain(GUIFacturar gFacturar) throws JAXBException{
         this.gFacturar = gFacturar;
@@ -32,14 +34,12 @@ public class ControllerMain {
         this.controllerClientes = new ControllerClientes(gFacturar, mercado);
         this.controllerCajeros = new ControllerCajeros(gFacturar, mercado);
         this.controllerHistorico = controllerFacturar.getControllerHistorico();
-        this.controllerEstadisticas = new ControllerEstadisticas(
-                gFacturar.getVentanaEstadisticas(),
-                new GraficoEstadisticas(),
-                new ArchivosXML()
-        );
+        //this.controllerEstadisticas = new ControladoraEsta(gFacturar);
+        this.controllerGrafica = new GraficasVentasController(gFacturar, mercado);
+        
         
     }
-
+/*
     private Set<String> obtenerCategoriasDisponibles() {
         Set<String> categorias = new HashSet<>();
         try {
@@ -51,7 +51,7 @@ public class ControllerMain {
             e.printStackTrace();
         }
         return categorias;
-    }
+    }*/
 
     public void getControllerMain(){
         gFacturar.setVisible(true);
@@ -63,6 +63,8 @@ public class ControllerMain {
         controllerCajeros.getVentanaCajeros();
         controllerProductos.getVentanaProductos();
         controllerHistorico.getControllerHistorico();
-
+//        controllerEstadisticas.generarGraficaConFacturas(mercado);
+        this.controllerGrafica.mostrarGrafica();
+        
     }
 }

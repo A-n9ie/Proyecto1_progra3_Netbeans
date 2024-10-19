@@ -42,7 +42,7 @@ public class LogicBuscar {
         for(int i = 0; i < tablis.getRowCount(); i++){
             Producto aux = list.get(i);
             String[] datosPro = {aux.getCodigo(), aux.getDescripcion(),
-                aux.getUnidad_m(), String.valueOf(aux.getPrecio()),aux.getCategoria()};
+                aux.getUnidad_m(), String.valueOf(aux.getPrecio()), aux.getCategoria().getNombre()};
             for(int j = 0; j < tablis.getColumnCount(); j++){
                     tablis.setValueAt(datosPro[j], i, j);
             }

@@ -22,7 +22,7 @@ public class ControllerCajeros {
     private List<Cajero> listaCajeros;
     private MiniSuper mercadito;
     private LogicCajeros logCajeros;
-    
+    private ControllerPDF contPDF;
     
     public ControllerCajeros(GUIFacturar gFacturar, MiniSuper m) throws JAXBException{
         this.mercadito = m;
@@ -31,11 +31,20 @@ public class ControllerCajeros {
         this.guardaXMl = new ArchivosXML();
         this.logCajeros = new LogicCajeros(gFacturar, m.getListaCajeros());
         this.listaCajeros = m.getListaCajeros();
+        this.contPDF = new ControllerPDF();
     }
     
     public void getVentanaCajeros(){
-        
-        gFacturar.addGuardarCajeroBtn(new ActionListener(){
+        guardar();
+        modificar();
+        limpiar();
+        buscar();
+        reporte();
+        eliminar();
+    }
+    
+    private void guardar(){
+         gFacturar.addGuardarCajeroBtn(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
                String id = gFacturar.getIDCajeroTf();
@@ -59,15 +68,16 @@ public class ControllerCajeros {
                }
             }
         });
-        
-         
+    }
+    
+    private void modificar(){
         gFacturar.addModificarCajeroBtn(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
                String id = gFacturar.getIDCajeroTf();
                String nombre = gFacturar.getNombreCajeroTf();
                
-               String buscarPorNombre = gFacturar.getNombreBusqCajeros();
+               String buscarPorNombre = id;
                     cajero = mercadito.buscarCajero(buscarPorNombre);
                if(cajero != null){
                 if(id.isEmpty() || nombre.isEmpty()){
@@ -86,39 +96,20 @@ public class ControllerCajeros {
                 }
             }
         });
-        
-        
-        gFacturar.addEliminarCajeroBtn(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-               int cajeroSeleccionado = gFacturar.getTableCajeros().getSelectedRow();
-               
-               if(cajeroSeleccionado < 0){
-                gFacturar.notify("Seleccione el cajero que desea elimnar");
-            }else{
-                  JTable tablaCajeros = gFacturar.getTableCajeros();
-                  DefaultTableModel model = (DefaultTableModel) tablaCajeros.getModel();
-                  
-                  String cedula = (String) model.getValueAt(cajeroSeleccionado, 0);
-                  model.removeRow(cajeroSeleccionado);
-                  listaCajeros.removeIf(cajero -> cajero.getCedula().equals(cedula));
-                    
-                  actualizarCajeros();
-               }
-            }
-            
-        });
-        
-       gFacturar.addLimpiarCajeroBtn(new ActionListener(){
+    }
+    
+    private void limpiar(){
+        gFacturar.addLimpiarCajeroBtn(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
                 gFacturar.setIDCajeroTf("");
                 gFacturar.setNombreCajeroTf("");
             } 
        });
-       
-       gFacturar.addBuscarNombreCajeroBtn(new ActionListener(){
+    }
+    
+    private void buscar(){
+        gFacturar.addBuscarNombreCajeroBtn(new ActionListener(){
            
            public void actionPerformed(ActionEvent e) {
             String buscarPorNombre = gFacturar.getNombreBusqCajeros();
@@ -140,8 +131,10 @@ public class ControllerCajeros {
            }
            
        });
-       
-       gFacturar.addReporteCajeroBtn(new ActionListener(){
+    }
+    
+    private void reporte(){
+        gFacturar.addReporteCajeroBtn(new ActionListener(){
            
            @Override
            public void actionPerformed(ActionEvent e) {
@@ -154,8 +147,8 @@ public class ControllerCajeros {
                 cajero = mercadito.buscarCajero(buscarPorNombre);
 
                if(cajero != null){
-                   gFacturar.notify(cajero.toString());
-                   return;
+                   contPDF.mostrarCajeroPDF(cajero);
+                   contPDF.getvPDF().setVisible(true);
                }
                else{
                     gFacturar.notify("No se encontro al cajero");
@@ -166,6 +159,29 @@ public class ControllerCajeros {
        });
     }
     
+    private void eliminar(){
+        gFacturar.addEliminarCajeroBtn(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+               int cajeroSeleccionado = gFacturar.getTableCajeros().getSelectedRow();
+               
+               if(cajeroSeleccionado < 0){
+                gFacturar.notify("Seleccione el cajero que desea elimnar");
+            }else{
+                  JTable tablaCajeros = gFacturar.getTableCajeros();
+                  DefaultTableModel model = (DefaultTableModel) tablaCajeros.getModel();
+                  
+                  String cedula = (String) model.getValueAt(cajeroSeleccionado, 0);
+                  model.removeRow(cajeroSeleccionado);
+                  listaCajeros.removeIf(cajero -> cajero.getCedula().equals(cedula));
+                    
+                  actualizarCajeros();
+               }
+            }
+            
+        });
+    }
     
      private void actualizarCajeros() {
         try {

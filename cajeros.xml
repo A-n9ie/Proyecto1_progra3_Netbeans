@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <listacajeros>
-    <cajero cedula="33333">
-        <nombre>Luisiana</nombre>
-    </cajero>
-    <cajero cedula="7777000">
-        <nombre>Marco</nombre>
+    <cajero cedula="1111C">
+        <nombre>Carlos</nombre>
     </cajero>
 </listacajeros>

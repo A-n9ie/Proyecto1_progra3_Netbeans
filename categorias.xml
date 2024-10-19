@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<listacategorias>
+    <categoria nombre="Bebidas"/>
+    <categoria nombre="Cereales"/>
+    <categoria nombre="Dulces"/>
+    <categoria nombre="Frutas y Vegetales"/>
+</listacategorias>

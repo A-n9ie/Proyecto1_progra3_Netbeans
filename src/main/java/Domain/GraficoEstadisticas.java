@@ -20,7 +20,7 @@ public class GraficoEstadisticas {
         
         for (Factura factura : facturas) {
             for (DetalleVenta detalle : factura.getDetalles()) {
-                String categoria = detalle.getProducto().getCategoria();
+                String categoria = detalle.getProducto().getCategoria().getNombre();
                 double totalVenta = detalle.importe();
 
                 // Sumar las ventas por categoría

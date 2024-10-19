@@ -1,9 +1,6 @@
 package Business;
 
-import Business.LogicBuscar;
 import Data.ArchivosXML;
-import Data.ListaClientes;
-import Data.ListaProductos;
 //import Data.LogicProductoXML;
 import Data.MiniSuper;
 import Domain.Cajero;
@@ -49,6 +46,7 @@ public class ControllerFacturar {
     private List<Factura> listaFacturas;
     private ControllerProductos controllerProductos;
     private ControllerHistorico controllerHistorico;
+    private GraficasVentasController controllerGrafica;
 
     public ControllerFacturar(GUIFacturar gFacturar, ControllerProductos controllerProductos, MiniSuper m) throws JAXBException {
         
@@ -57,6 +55,7 @@ public class ControllerFacturar {
         this.vCantidad = new VentanaCantidad();
         this.controllerProductos = controllerProductos;
         this.controllerHistorico = new ControllerHistorico(gFacturar, m);
+        this.controllerGrafica = new GraficasVentasController(gFacturar, m);
 
         LogicBuscar ventBuscar = controllerProductos.getLogvBuscar();
         this.vBuscar = ventBuscar.getvBuscar();
@@ -69,6 +68,7 @@ public class ControllerFacturar {
         this.detalles = new ArrayList<>();
         this.pagos = new ArrayList<>();
         this.listaFacturas = m.getListaFacturas();
+        
 
     }
 
@@ -88,16 +88,62 @@ public class ControllerFacturar {
 
     public void getControllerFacturar() {
        
-        //--------------------BUSCAR---------------------------------------------
-        gFacturar.addBuscarBtn(new ActionListener() {
+//----------------------------BUSCAR--------------------------------------------
+        buscar();
+        
+//----------------------------AGREGAR-------------------------------------------
+        agregar();
+
+//----------------------------CANTIDAD------------------------------------------
+        cantidad();
+        
+//----------------------------ELIMINAR------------------------------------------
+        eliminar();
+        //Salir del programa (CANCELAR)
+        gFacturar.addCancelarBtm(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                gFacturar.notify("Gracias por usar nuestro sistema");
+                gFacturar.dispose();
+            }
+
+        });
+//------------------------------DESCUENTO---------------------------------------
+       descuento();
+
+//------------------------------COBRAR------------------------------------------
+       cobrar();
+
+    }
+        public double calcularTotal() {
+            JTable tablaArticulos = gFacturar.getTablaArticulos();
+            DefaultTableModel model = (DefaultTableModel) tablaArticulos.getModel();
+            double total = 0;
+
+            for (int i = 0; i < model.getRowCount(); i++) {
+                Object cantidadObj = model.getValueAt(i, 3);
+                Object precioObj = model.getValueAt(i, 4);
+                Object descuentoObj = model.getValueAt(i, 5);
+
+                double cantidad = (cantidadObj instanceof Number) ? ((Number) cantidadObj).doubleValue() : 0.0;
+                double precio = (precioObj instanceof Number) ? ((Number) precioObj).doubleValue() : 0.0;
+                double descuento = (descuentoObj instanceof Number) ? ((Number) descuentoObj).doubleValue() : 0.0;
+
+                double precioConDescuento = precio * (1 - descuento / 100);
+                total += cantidad * precioConDescuento;
+            }
+            return total;
+        }
+        
+        private void buscar(){
+            gFacturar.addBuscarBtn(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 vBuscar.setVisible(true);
                 vBuscar.setLocationRelativeTo(null);
             }
         });
-
-
+            
         //Buscar cancelar
         vBuscar.addCancelBtn(new ActionListener() {//me devuelvo
             @Override
@@ -105,7 +151,8 @@ public class ControllerFacturar {
                 vBuscar.dispose();
             }
         });
-
+        
+        //Buscar ok
         vBuscar.addOkBtn(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -128,10 +175,10 @@ public class ControllerFacturar {
                     gFacturar.notify("No se encontro el producto");
             }
         });
-
+        }
         
-//----------------------------AGREGAR-------------------------------------------
-        gFacturar.addAgregarBtn(new ActionListener() {
+        private void agregar(){
+            gFacturar.addAgregarBtn(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //List<Producto> listaProductos = controllerProductos.getListaProductos();
@@ -175,9 +222,36 @@ public class ControllerFacturar {
                 }
             }
         });
+        }
+        
+        private void eliminar(){
+            gFacturar.addEliminarBtn(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JTable tablaProductos = gFacturar.getTableClientes();
+                int productoSeleccionado = gFacturar.getTablaArticulos().getSelectedRow();
+               
+                if (productoSeleccionado < 0) {
+                    gFacturar.notify("Seleccione el producto que desea eliminar");
+                } else {
+                    producto = obtenerProducto_Fila(productoSeleccionado);
+                    for (DetalleVenta d: detalles)
+                        if(d.getProducto().getCodigo().equals(producto.getCodigo())){
+                            detalles.remove(d);
+                            break;
+                        }
+                    setearTotales(); 
+                    JTable tablaArticulos = gFacturar.getTablaArticulos();
+                    DefaultTableModel model = (DefaultTableModel) tablaArticulos.getModel();
+                    model.removeRow(productoSeleccionado);
+                }
+            }
+        });
 
-
-        gFacturar.addCantidadBtn(new ActionListener() {
+        }
+        
+        private void cantidad(){
+             gFacturar.addCantidadBtn(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                  int productoSeleccionado = gFacturar.getTablaArticulos().getSelectedRow();
@@ -192,8 +266,11 @@ public class ControllerFacturar {
             }
 
         });
-//-----------Actualiza Existencias------
-        vCantidad.addOkBtn(new ActionListener() {
+             actualizarExistencias();
+        }
+        
+        private void actualizarExistencias(){
+             vCantidad.addOkBtn(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (!vCantidad.getIngCantidad().isEmpty()) {
@@ -245,50 +322,18 @@ public class ControllerFacturar {
                 }
             }
         });
-
-
+             
         vCantidad.addCancelBtn(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 vCantidad.dispose();
             }
         });
-
-
-        //-------------ELIMINAR--------------
-        gFacturar.addEliminarBtn(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JTable tablaProductos = gFacturar.getTableClientes();
-                int productoSeleccionado = gFacturar.getTablaArticulos().getSelectedRow();
-               
-                if (productoSeleccionado < 0) {
-                    gFacturar.notify("Seleccione el producto que desea eliminar");
-                } else {
-                    producto = obtenerProducto_Fila(productoSeleccionado);
-                    for (DetalleVenta d: detalles)
-                        if(d.getProducto().getCodigo().equals(producto.getCodigo())){
-                            detalles.remove(d);
-                            break;
-                        }
-                    setearTotales(); 
-                    JTable tablaArticulos = gFacturar.getTablaArticulos();
-                    DefaultTableModel model = (DefaultTableModel) tablaArticulos.getModel();
-                    model.removeRow(productoSeleccionado);
-                }
-            }
-        });
-
-        gFacturar.addCancelarBtm(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                gFacturar.notify("Gracias por usar nuestro sistema");
-                gFacturar.dispose();
-            }
-
-        });
-//------------------------------DESCUENTO---------------------------------------------
-        gFacturar.addDescuentoBtn(new ActionListener() {
+        
+        }
+        
+        private void descuento(){
+            gFacturar.addDescuentoBtn(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
             int productoSeleccionado = gFacturar.getTablaArticulos().getSelectedRow();
@@ -344,7 +389,6 @@ public class ControllerFacturar {
                     }
             }
          });
-                
             
             vDescuento.addCancelBtn(new ActionListener() {
             @Override
@@ -352,10 +396,10 @@ public class ControllerFacturar {
                 vDescuento.dispose();
             }
         });
-
-        //------------------------------COBRAR----------------------------------------------------
-         //Cobrar
-        gFacturar.addCobrarBtn(new ActionListener() {
+        }
+        
+        private void cobrar(){
+             gFacturar.addCobrarBtn(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 
@@ -450,33 +494,11 @@ public class ControllerFacturar {
                 }
             }
         });
-
-    }
-        public double calcularTotal() {
-            JTable tablaArticulos = gFacturar.getTablaArticulos();
-            DefaultTableModel model = (DefaultTableModel) tablaArticulos.getModel();
-            double total = 0;
-
-            for (int i = 0; i < model.getRowCount(); i++) {
-                Object cantidadObj = model.getValueAt(i, 3);
-                Object precioObj = model.getValueAt(i, 4);
-                Object descuentoObj = model.getValueAt(i, 5);
-
-                double cantidad = (cantidadObj instanceof Number) ? ((Number) cantidadObj).doubleValue() : 0.0;
-                double precio = (precioObj instanceof Number) ? ((Number) precioObj).doubleValue() : 0.0;
-                double descuento = (descuentoObj instanceof Number) ? ((Number) descuentoObj).doubleValue() : 0.0;
-
-                double precioConDescuento = precio * (1 - descuento / 100);
-                total += cantidad * precioConDescuento;
-            }
-            return total;
         }
         
          public ControllerHistorico getControllerHistorico() {
             return controllerHistorico;
          }
-
-        
 
         //-----------Historico-----------
 
@@ -498,17 +520,6 @@ public class ControllerFacturar {
             gFacturar.setDesTotal(String.valueOf(factura.descuentos()));
             gFacturar.setSubTotal(String.valueOf(factura.subtotal()));
             gFacturar.setTotalTotal(String.valueOf(factura.montoTotal()));
-        }
-        
-        private void limpiarTodo(){
-            JTable tablis = gFacturar.getTablaArticulos();
-            DefaultTableModel model = (DefaultTableModel) tablis.getModel();
-            model.setRowCount(0);
-             producto = null;
-             detalles = null;
-             pagos = null;
-             cant = 0;
-             factura = null;
         }
         
         private void iniciarTodo(){

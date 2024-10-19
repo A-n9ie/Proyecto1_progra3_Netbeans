@@ -14,7 +14,7 @@ public class Tarjeta extends MetodoPago {
     
     public Tarjeta(float monto) {
         super(monto);
-        this.metodo = "Targeta";
+        this.metodo = "Tarjeta";
     }
 
     @Override

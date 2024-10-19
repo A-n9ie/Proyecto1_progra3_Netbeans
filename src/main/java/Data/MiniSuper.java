@@ -7,6 +7,7 @@ package Data;
 import Data.ArchivosXML;
 import Domain.Cajero;
 import Domain.Cajero;
+import Domain.Categoria;
 import Domain.Cliente;
 import Domain.Cliente;
 import Domain.Factura;
@@ -25,12 +26,44 @@ public class MiniSuper {
     private List<Cajero> listaCajeros;
     private List<Producto> listaProductos;
     private List<Factura> listaFacturas;
+    private List<Categoria> listaCategorias;
     
     public MiniSuper() throws JAXBException {
-        this.listaClientes = ArchivosXML.cargarClientes();
-        this.listaCajeros = ArchivosXML.cargarCajeros();
-        this.listaProductos = ArchivosXML.cargarProductos();
-        this.listaFacturas = ArchivosXML.cargarFacturas();
+        try{
+            File archivoProductos = new File(ArchivosXML.getFileProductos());
+            File archivoCategorias = new File(ArchivosXML.getFileCategorias());
+            File archivoClientes = new File(ArchivosXML.getFileClientes());
+            File archivoCajeros = new File(ArchivosXML.getFileCajeros());
+            File archivoFacturas = new File(ArchivosXML.getFileFacturas());
+            
+            if(archivoProductos.exists())
+                this.listaProductos = ArchivosXML.cargarProductos();
+            else
+                this.listaProductos = new ArrayList<>();
+            
+            if(archivoCategorias.exists())
+                this.listaCategorias = ArchivosXML.cargarCategorias();
+            else
+                this.listaCategorias = new ArrayList<>();
+            
+            if(archivoCajeros.exists())
+                this.listaCajeros = ArchivosXML.cargarCajeros();
+            else
+                this.listaCajeros = new ArrayList<>();
+            
+            if(archivoClientes.exists())
+                this.listaClientes = ArchivosXML.cargarClientes();
+            else
+                this.listaClientes = new ArrayList<>();
+            
+            if(archivoFacturas.exists())
+                this.listaFacturas = ArchivosXML.cargarFacturas();
+            else
+                this.listaFacturas = new ArrayList<>();
+        }
+        catch(JAXBException e){
+            e.printStackTrace();
+        }
     }
     
     public void restablecerClientes() throws JAXBException{
@@ -47,6 +80,18 @@ public class MiniSuper {
     
     public void restablecerFacturas() throws JAXBException{
         this.listaFacturas = ArchivosXML.cargarFacturas();
+    }
+    
+    public void restablecerCategorias() throws JAXBException{
+        this.listaCategorias = ArchivosXML.cargarCategorias();
+    }
+
+    public List<Categoria> getListaCategorias() {
+        return listaCategorias;
+    }
+
+    public void setListaCategorias(List<Categoria> listaCategorias) {
+        this.listaCategorias = listaCategorias;
     }
 
     public List<Cliente> getListaClientes() {
@@ -79,6 +124,14 @@ public class MiniSuper {
 
     public void setListaFacturas(List<Factura> listaFacturas) {
         this.listaFacturas = listaFacturas;
+    }
+    
+    public boolean buscarCategoria(String nombre){
+        for(Categoria categoria : listaCategorias){
+            if(categoria.getNombre().equals(nombre))
+                return true;
+        }
+        return false;
     }
     
     public Producto buscarProducto(String cod){

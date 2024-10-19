@@ -28,6 +28,7 @@ public class ControllerClientes {
     private ArchivosXML guardaXMl;
     private List<Cliente> listaClientes;
     private MiniSuper mercadito;
+    private ControllerPDF contPDF;
     
     
     public ControllerClientes(GUIFacturar gFacturar, MiniSuper m) throws JAXBException{
@@ -37,10 +38,19 @@ public class ControllerClientes {
         this.logCliente = new LogicClientes(gFacturar, m.getListaClientes());
         this.guardaXMl = new ArchivosXML();
         this.listaClientes = m.getListaClientes();
+        this.contPDF = new ControllerPDF();
     }
     
     public void getVentanaClientes(){
-        
+        guardar();
+        modificar();
+        limpiar();
+        buscar();
+        reporte();
+        eliminar();
+    }
+    
+    private void guardar(){
         gFacturar.addGuardarClienteBtn(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -73,8 +83,10 @@ public class ControllerClientes {
                }
             }
         });
-        
-        gFacturar.addModificarClienteBtn(new ActionListener(){
+    }
+    
+    private void modificar(){
+         gFacturar.addModificarClienteBtn(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
                String id = gFacturar.getIDClienteTf();
@@ -109,32 +121,10 @@ public class ControllerClientes {
                 }
             }
         });
-        
-        gFacturar.addEliminarClienteBtn(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-               int clienteSeleccionado = gFacturar.getTableClientes().getSelectedRow();
-               
-               if(clienteSeleccionado < 0){
-                gFacturar.notify("Seleccione el cliente que desea elimnar");
-            }else{
-                  JTable tablaClientes = gFacturar.getTableClientes();
-                  DefaultTableModel model = (DefaultTableModel) tablaClientes.getModel();
-                  
-                  String cedula = (String) model.getValueAt(clienteSeleccionado, 0);
-                  model.removeRow(clienteSeleccionado);
-                  listaClientes.removeIf(cliente -> cliente.getCedula().equals(cedula));
-                     
-                     
-                  actualizarClientes();
-                  
-               }
-            }
-            
-        });
-        
-       gFacturar.addLimpiarClientesBtn(new ActionListener(){
+    }
+    
+    private void limpiar(){
+         gFacturar.addLimpiarClientesBtn(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
                 gFacturar.setIDClienteTf("");
@@ -144,8 +134,10 @@ public class ControllerClientes {
                 gFacturar.setDescClienteTf("");
             } 
        });
-       
-       gFacturar.addBuscarClienteBtn(new ActionListener(){
+    }
+    
+    private void buscar(){
+        gFacturar.addBuscarClienteBtn(new ActionListener(){
            
            public void actionPerformed(ActionEvent e) {
             String buscarPorNombre = gFacturar.getNombreBusq();
@@ -171,8 +163,10 @@ public class ControllerClientes {
            }
            
        });
-       
-       gFacturar.addReporteClienteBtn(new ActionListener(){
+    }
+    
+    private void reporte(){
+        gFacturar.addReporteClienteBtn(new ActionListener(){
            
            public void actionPerformed(ActionEvent e) {
             String buscarPorNombre = gFacturar.getNombreBusq();
@@ -184,8 +178,8 @@ public class ControllerClientes {
                 cliente = mercadito.buscarCliente(buscarPorNombre);
 
                if(cliente != null){
-                   gFacturar.notify(cliente.toString());
-                   return;
+                   contPDF.mostrarClientePDF(cliente);
+                   contPDF.getvPDF().setVisible(true);
                }
                else{
                     gFacturar.notify("No se encontro al cliente");
@@ -194,6 +188,32 @@ public class ControllerClientes {
            }
            
        });
+    }
+    
+    private void eliminar(){
+        gFacturar.addEliminarClienteBtn(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+               int clienteSeleccionado = gFacturar.getTableClientes().getSelectedRow();
+               
+               if(clienteSeleccionado < 0){
+                gFacturar.notify("Seleccione el cliente que desea elimnar");
+            }else{
+                  JTable tablaClientes = gFacturar.getTableClientes();
+                  DefaultTableModel model = (DefaultTableModel) tablaClientes.getModel();
+                  
+                  String cedula = (String) model.getValueAt(clienteSeleccionado, 0);
+                  model.removeRow(clienteSeleccionado);
+                  listaClientes.removeIf(cliente -> cliente.getCedula().equals(cedula));
+                     
+                     
+                  actualizarClientes();
+                  
+               }
+            }
+            
+        });
     }
     
     private void actualizarClientes() {
