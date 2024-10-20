@@ -4,6 +4,8 @@
  */
 package Presentation;
 
+import java.awt.event.ActionListener;
+
 /**
  *
  * @author sharo
@@ -115,4 +117,17 @@ public class VentanaLogin extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JButton loginBtn;
     // End of variables declaration//GEN-END:variables
+    
+    public String getId(){
+       return idTf.getText();
+    }
+    
+    public String getContra(){
+        return contrasenaTf.getText();
+    }
+    
+    public void loginBtn(ActionListener listener){
+        loginBtn.addActionListener(listener);
+    }
+
 }

@@ -153,7 +153,7 @@ public class ControllerPDF {
             vPDF.getPanelPDF().repaint();
         
             pdfDocument.close();  
-        } catch (DocumentException | IOException ex) {
+        } catch (DocumentException ex) {
             ex.printStackTrace();
         }
     }
